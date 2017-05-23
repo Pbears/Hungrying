@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta http-equiv="imagetoolbar" content="no" />
-<link href="../css/contents.css" rel="stylesheet" type="text/css" />
+<link href="/Bears/css/contents.css" rel="stylesheet" type="text/css" />
 <script>
 	Date.prototype.getKorDay = function() {
 		var result = null;
@@ -40,7 +40,7 @@
 		return result;
 	}
 	function sendOut() {
-		document.location.href = 'logout.jsp';
+		document.location.href = 'AdminLogout.jsp';
 
 	}
 
@@ -74,8 +74,6 @@
 </script>
 </head>
 <body onload="datePro()">
-
-
 	<div id="wrapper">
 		<div id="header">
 			<div class="topInfoWrap">
@@ -85,8 +83,8 @@
 						<span id="clock"></span> 
 						<span id="time"></span> 
 						<span><%=session.getAttribute("name") %>님<em> 
-						</em> 좋은 하루 되세요</span> <a href="logout.jsp" class="btnLogout"> <img
-							src="../img/common/btn_logout.gif" alt="로그아웃" /></a>
+						</em> 좋은 하루 되세요</span> <a href="AdminLogout.jsp" class="btnLogout"> <img
+							src="/Bears/img/common/btn_logout.gif" alt="로그아웃" /></a>
 					</div>
 				</div>
 			</div>
@@ -171,14 +169,14 @@
 					</table>
 
 					<div class="paging">
-						<a href="#"><img src="../img/button/btn_first.gif" alt="처음페이지" /></a>
-						<a href="#"><img src="../img/button/btn_prev.gif" alt="이전" /></a>
+						<a href="#"><img src="/Bears/img/button/btn_first.gif" alt="처음페이지" /></a>
+						<a href="#"><img src="/Bears/img/button/btn_prev.gif" alt="이전" /></a>
 
 						<span> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
 							<strong>4</strong> <a href="#">5</a> <a href="#">6</a> <a
 							href="#">7</a> <a href="#">8</a> <a href="#">9</a>
-						</span> <a href="#"><img src="../img/button/btn_next.gif" alt="다음" /></a>
-						<a href="#"><img src="../img/button/btn_last.gif" alt="마지막페이지" /></a>
+						</span> <a href="#"><img src="/Bears/img/button/btn_next.gif" alt="다음" /></a>
+						<a href="#"><img src="/Bears/img/button/btn_last.gif" alt="마지막페이지" /></a>
 
 					</div>
 				</div>

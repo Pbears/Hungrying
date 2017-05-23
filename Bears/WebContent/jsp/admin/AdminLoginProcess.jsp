@@ -18,7 +18,7 @@
 		session.setMaxInactiveInterval(60);
 		response.sendRedirect("editList.jsp");
 	}else{
-		response.sendRedirect("adminLogin.jsp");
+		response.sendRedirect("AdminPage.jsp");
 	}
 	
 
