@@ -26,7 +26,7 @@
 </script>
 </head>
 <body>
-
+이야이야이야아아아~
 <form name="login" method="post" action="/Bears/jsp/LoginPro.jsp">
  <div id="loginWrapper">
   <div class="loginForm">
