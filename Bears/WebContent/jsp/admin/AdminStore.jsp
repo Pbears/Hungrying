@@ -92,7 +92,7 @@
 		<div id="container">
 			<div id="contentsWrap" class="contentsWrap">
 				<div class="contents">
-					<h1 class="title">게시판 리스트</h1>
+					<h1 class="title">음식점 리스트</h1>
 					<div class="btnSet clfix mgb15">
 						<span class="fr"> <span class="button"><a
 								href="editList.jsp">새로고침</a></span> <span class="button"><a

@@ -13,6 +13,7 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <link href="/Bears/css/contents.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="/Bears/jsp/css/bootstrap.css"/>
+
 <script>
 	Date.prototype.getKorDay = function() {
 		var result = null;
@@ -71,7 +72,16 @@
 	}
 	function menuClick(obj){
 		alert(obj.id);
-
+		if(obj.id=='store'){
+			$(document).ready(function(){
+			    $("#board").load("/Bears/jsp/admin/AdminStore.jsp");
+			});			
+		}
+		if(obj.id=='menu'){
+			$(document).ready(function(){
+		    	$("#board").load("/Bears/jsp/admin/AdminMenu.jsp");
+			});			
+		}
 	}
 
 </script>
@@ -92,13 +102,21 @@
 				</div>
 			</div>
 <ul class="nav nav-pills" id="menu" >
-  <li role="presentation" id="home" onclick="menuClick(this)" data-toggle="pill"><a href="#">home</a></li>
-  <li role="presentation" id="profile" onclick="menuClick(this)" data-toggle="pill"><a href="#">profile</a></li>
-  <li role="presentation" id="messages" onclick="menuClick(this)" data-toggle="pill"><a href="#">messages</a></li>
+  <li role="presentation" id="home" onclick="menuClick(this)" data-toggle="pill"><a href="#">홈</a></li>
+  <li role="presentation" id="store" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
+  <li role="presentation" id="menu" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminMenu.jsp">메뉴</a></li>
+  <li role="presentation" id="brand" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminBrand.jsp">브랜드</a></li>
+  <li role="presentation" id="order" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminOrder.jsp">주문</a></li>
+  <li role="presentation" id="member" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminMember.jsp">회원</a></li>
+  <li role="presentation" id="master" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminMaster.jsp">사장님</a></li>
 </ul>
+<div id="board">
 
+</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="/Bears/jsp/js/bootstrap.js"></script>
+	
+	
+	<!-- "/Bears/jsp/js/bootstrap.js" -->
 </body>
 </html>
