@@ -7,12 +7,9 @@
 <sqlMap namespace="admin">
 	<typeAlias alias="vo" type="food.vo.AdminVo"/>
 	<select id="idCheck" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT PW FROM ADMINS WHERE ID=#value#
+		SELECT PW FROM admins WHERE ID=#value#
 	</select>
 	<select id="getName" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT NAME FROM ADMINS WHERE ID=#value#
+		SELECT NAME FROM admins WHERE ID=#value#
 	</select>
-	
-	
-	
 </sqlMap>

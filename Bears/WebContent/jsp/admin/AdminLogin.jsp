@@ -10,7 +10,7 @@
 <meta name="copyright" content="Copyright 2009 @ high1 all rights reserved" />
 <link href="/Bears/css/contents.css" rel="stylesheet" type="text/css" />
 <script>
-	//로그인체크
+	// 로그인체크
 	function loginCheck(){
 		var obj = document.login;
 		if(!obj.user_id.value||!obj.user_passwd.value){
@@ -22,7 +22,6 @@
 			obj.submit();
 		}
 	} 
-	
 </script>
 </head>
 <body>
@@ -33,17 +32,13 @@
     <legend>관리자 시스템 로그인</legend>
     <dl>
      <dt><img src="/Bears/img/common/th_id.gif" alt="아이디" /></dt>
-     <dd><input type="text" name="user_id" class="text" id="user_id" /></dd>
+     <dd><input type="text" name="id" class="text" id="user_id" /></dd>
 
      <dt><img src="/Bears/img/common/th_pw.gif" alt="비밀번호" /></dt>
-     <dd><input type="password" name="user_passwd" class="text" id="user_passwd" /></dd>
+     <dd><input type="password" name="pw" class="text" id="user_passwd" /></dd>
     </dl>
     <div class="btn">
 	    <input id="btnSubmit" type="image" src="/Bears/img/button/btn_login.gif" alt="LOGIN" title="LOGIN" onclick="loginCheck()">
-    </div>
-    
-    <div class="saveId"><input type="checkbox" id="checker" name="checker" /> 
-     <img src="/Bears/img/common/save_id.gif" alt="아이디 저장" />
     </div>
    </fieldset>
   </div>
