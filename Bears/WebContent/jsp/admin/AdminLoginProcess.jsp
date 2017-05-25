@@ -9,8 +9,8 @@
 </head>
 <body>
 <%
-	String id=request.getParameter("user_id");
-	String pw=request.getParameter("user_passwd");
+	String id=request.getParameter("id");
+	String pw=request.getParameter("pw");
 	if(MemberDao.idCheck(id).equals(pw)){
 		session.setAttribute("name",MemberDao.getName(id));
 		session.setAttribute("id", id);
@@ -18,7 +18,8 @@
 		session.setMaxInactiveInterval(60);
 		response.sendRedirect("editList.jsp");
 	}else{
-		response.sendRedirect("AdminPage.jsp");
+		// 경고창을 띄우세요 ~ ㅋㅋㅋㅋㅋ
+		response.sendRedirect("AdminLogin.jsp");
 	}
 	
 
