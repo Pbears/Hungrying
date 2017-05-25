@@ -33,7 +33,6 @@
     <dl>
      <dt><img src="/Bears/img/common/th_id.gif" alt="아이디" /></dt>
      <dd><input type="text" name="id" class="text" id="user_id" /></dd>
-
      <dt><img src="/Bears/img/common/th_pw.gif" alt="비밀번호" /></dt>
      <dd><input type="password" name="pw" class="text" id="user_passwd" /></dd>
     </dl>
