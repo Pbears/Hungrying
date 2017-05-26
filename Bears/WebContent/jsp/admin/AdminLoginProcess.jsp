@@ -16,7 +16,7 @@
 		session.setAttribute("id", id);
 		session.setAttribute("pw", pw);
 		session.setMaxInactiveInterval(60);
-		response.sendRedirect("editList.jsp");
+		response.sendRedirect("AdminMain.jsp");
 	}else{
 		// 경고창을 띄우세요 ~ ㅋㅋㅋㅋㅋ
 		response.sendRedirect("AdminLogin.jsp");
