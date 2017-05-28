@@ -1,5 +1,6 @@
 package food.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import food.util.ServiceUtil;
@@ -14,4 +15,8 @@ public class StoreDao {
 	public static List<StoreVo> selectStore() throws Exception{
 		return sqlMapper.queryForList("store.selectStore");
 	}
+	
+	public static List<StoreVo> searchStore(HashMap<String,Object>map)throws Exception{
+        return sqlMapper.queryForList("store.searchStore",map);
+}
 }

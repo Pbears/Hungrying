@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="food.dao.StoreDao"%>
 <%@page import="food.vo.StoreVo"%>
 <%@page import="java.util.List"%>
@@ -10,7 +11,9 @@
 <link rel="stylesheet" href="/Bears/jsp/css/bootstrap.css" />
 <title>관리자-음식점</title>
 <style>
-
+	tr:NTH-CHILD(even) {
+	background-color: #f2f2f2;
+}
 </style>
 <script>
 	Date.prototype.getKorDay = function() {
@@ -31,7 +34,7 @@
 		case 4:
 			result = "thr";
 			break;
-		case 5:
+		case 5:	
 			result = "fri";
 			break;
 		default:
@@ -62,10 +65,11 @@
 	}
 
 	function sendCheck() {
-		var obj = document.frm; //form까지의 주소
+		var obj = document.ast; //form까지의 주소
 		if (obj.query.name == 'empty' || !obj.data.value) {
 			alert('Not Search!');
 			obj.query.selectedIndex = 0;
+			
 			obj.data.value = '';
 			obj.data.focus();
 		} else {
@@ -76,13 +80,34 @@
 </head>
 <body onload="datePro()">
 	<%
-		List<StoreVo> list = StoreDao.selectStore();
+		request.setCharacterEncoding("EUC-KR");
+		List<StoreVo> list = null;
+	
+		HashMap<String, Object>map=new HashMap<String, Object>();
+		
+		String query = request.getParameter("query");
+		String data = request.getParameter("data");
+		
+		
+		if (query != null && data != null) {
+			map.put("query", query);
+			map.put("data", data);
+			list = StoreDao.searchStore(map);
+		} else {
+			list = StoreDao.searchStore(null);
+		}
 	%>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container">
+	<div class="container" align="right" style="padding-right: 10px;
+								margin-right: 10px;">
 		<span id="clock"></span> <span id="time"></span>
-		<p class="navbar-text">관리자님 환영합니다.</p>
+		<p class="navbar-text" style="
+					position: absolute;
+					right: 0px; 
+					top: 0px;
+					margin-bottom: 5px;
+					margin-top: 20px;">관리자님 환영합니다.</p>
 	</div>
 	</nav>
 
@@ -102,37 +127,69 @@
 	<!-- 검색바 -->
 	<div id="searcher" class="row">
 		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Search for..."><span
-				class="input-group-btn">
-				<button class="btn btn-default" type="button">Search</button>
-			</span>
+		
+			<form action="AdminStore.jsp" name="ast" method="post">
+					<table class="bbsWrite mgb35" align="center">
+							
+						<colgroup>
+							<col width="30" />
+							<col width="400" />
+							<col width="50" />
+						</colgroup>
+
+					<tbody>
+						<tr>
+							<td height="50"><select name="query" size="1" style="height: 34px;">
+								<option value="empty" selected="selected">선택하세요</option>
+								<option value="storename">음식점명</option>
+								<option value="brandno">브랜드번호</option>
+								<option value="location">위치</option>
+
+							</select> 
+						</td>
+					
+						<td>
+							<input type="text" class="form-control" placeholder="Search for..." name="data" >
+						</td>
+					
+						<td>
+							<span class="input-group-btn" >
+								<button class="btn btn-default" type="button"><a href="javascript:sendCheck()"> Search</a></button>
+							</span>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</form>
 		</div>
 		<!-- /input-group -->
 	</div>
+	
 	<!-- /.row -->
 
-
 	<div id="data_table">
-		<table class="bbsList">
+		<table class="bbsList" style="border-collapse: collapse;">
 			<colgroup>
-				<col width="150" />
-				<col width="150" />
-				<col width="100" />
-				<col width="150" />
-				<col width="150" />
-				<col width="150" />
-				<col width="150" />
 				<col width="200" />
+				<col width="150" />
+				<col width="60" />
+				<col width="350" />
+				<col width="150" />
+				<col width="250" />
+				<col width="180" />
+				<col width="350" />
 			</colgroup>
 			<tr>
-				<th scope="col">음식점명</th>
-				<th scope="col">브랜드번호</th>
-				<th scope="col">평점</th>
-				<th scope="col">위치</th>
-				<th scope="col">영업시간</th>
-				<th scope="col">전화번호</th>
-				<th scope="col">배달최저가격</th>
-				<th scope="col">소개</th>
+				<th scope="col" style="text-align: center;">음식점명</th>
+				<th scope="col" style="text-align: center;">브랜드번호</th>
+				<th scope="col" style="text-align: center;
+				                       padding-left: 5px;">평점</th>
+				<th scope="col" style="text-align: center;">위치</th>
+				<th scope="col" style="text-align: center;">영업시간</th>
+				<th scope="col" style="text-align: center;">전화번호</th>
+				<th scope="col" style="text-align: center;">배달최저가격</th>
+				<th scope="col" style="text-align: center;">소개</th>
 			</tr>
 			<tbody>
 				<%
@@ -140,14 +197,18 @@
 						StoreVo vo = list.get(i);
 				%>
 				<tr>
-					<td><%=vo.getStorename()%></td>
+					<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
 					<td><%=vo.getBrandno()%></td>
 					<td><%=vo.getGpa()%></td>
-					<td><%=vo.getLocation()%></td>
+					<td style="padding-left: 5px;
+								padding-right: 5px;">
+						<%=vo.getLocation()%></td>
 					<td><%=vo.getHours()%></td>
 					<td><%=vo.getTel()%></td>
 					<td><%=vo.getMinprice()%></td>
-					<td><%=vo.getInfo()%></td>
+					<td style="padding-top: 10px;
+							padding-bottom: 10px;
+				  			"><%=vo.getInfo()%></td>
 				</tr>
 				<%
 					}

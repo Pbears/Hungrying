@@ -91,9 +91,15 @@
 <body onload="datePro()">
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container">
+	<div class="container" align="right" style="padding-right: 10px;
+								margin-right: 10px;">
 		<span id="clock"></span> <span id="time"></span>
-		<p class="navbar-text">관리자님 환영합니다.</p>
+		<p class="navbar-text" style="
+					position: absolute;
+					right: 0px; 
+					top: 0px;
+					margin-bottom: 5px;
+					margin-top: 20px;">관리자님 환영합니다.</p>
 	</div>
 	</nav>
 
