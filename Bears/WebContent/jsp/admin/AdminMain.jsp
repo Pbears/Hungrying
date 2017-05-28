@@ -1,4 +1,3 @@
-<%@page import="food.dao.MemberDao"%>
 <%@page import="food.vo.AdminVo"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
@@ -7,12 +6,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>관리자</title>
+<title>관리자-메인</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta http-equiv="imagetoolbar" content="no" />
 <link href="/Bears/css/contents.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="/Bears/jsp/css/bootstrap.css"/>
+<link rel="stylesheet" href="/Bears/jsp/css/bootstrap.css" />
 
 <script>
 	Date.prototype.getKorDay = function() {
@@ -49,10 +48,14 @@
 		var clock = "";
 		var time = "";
 		var date = new Date();
-		clock = date.getFullYear() + "/" + (parseInt(date.getMonth()) + 1) + '/' + date.getDate() + '/' + date.getKorDay();
-		time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-		document.getElementById("clock").innerHTML = "<font color=white> " + clock + "</font>";
-		document.getElementById("time").innerHTML = "<font color=white> " + time + "</font>";
+		clock = date.getFullYear() + "/" + (parseInt(date.getMonth()) + 1)
+				+ '/' + date.getDate() + '/' + date.getKorDay();
+		time = date.getHours() + ':' + date.getMinutes() + ':'
+				+ date.getSeconds();
+		document.getElementById("clock").innerHTML = "<font color=white> "
+				+ clock + "</font>";
+		document.getElementById("time").innerHTML = "<font color=white> "
+				+ time + "</font>";
 		var intervalID = function() {
 			setInterval('datePro()', 1000);
 		}
@@ -70,53 +73,41 @@
 			obj.submit();
 		}
 	}
-	function menuClick(obj){
+	function menuClick(obj) {
 		alert(obj.id);
-		if(obj.id=='store'){
-			$(document).ready(function(){
-			    $("#board").load("/Bears/jsp/admin/AdminStore.jsp");
-			});			
+		if (obj.id == 'store') {
+			$(document).ready(function() {
+				$("#board").load("/Bears/jsp/admin/AdminStore.jsp");
+			});
 		}
-		if(obj.id=='menu'){
-			$(document).ready(function(){
-		    	$("#board").load("/Bears/jsp/admin/AdminMenu.jsp");
-			});			
+		if (obj.id == 'menu') {
+			$(document).ready(function() {
+				$("#board").load("/Bears/jsp/admin/AdminMenu.jsp");
+			});
 		}
 	}
-
 </script>
 </head>
 <body onload="datePro()">
-	<div id="wrapper">
-		<div id="header">
-			<div class="topInfoWrap">
-				<div class="topInfoArea clfix">
-					<div class="loginWrap">
-						<span class="fir"> </span> 
-						<span id="clock"></span> 
-						<span id="time"></span> 
-						<span><%=session.getAttribute("name") %>님<em> 
-						</em> 좋은 하루 되세요</span> <a href="AdminLogout.jsp" class="btnLogout"> <img
-							src="/Bears/img/common/btn_logout.gif" alt="로그아웃" /></a>
-					</div>
-				</div>
-			</div>
-<ul class="nav nav-pills" id="menu" >
-  <li role="presentation" id="home" onclick="menuClick(this)" data-toggle="pill"><a href="#">홈</a></li>
-  <li role="presentation" id="store" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
-  <li role="presentation" id="menu" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminMenu.jsp">메뉴</a></li>
-  <li role="presentation" id="brand" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminBrand.jsp">브랜드</a></li>
-  <li role="presentation" id="order" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminOrder.jsp">주문</a></li>
-  <li role="presentation" id="member" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminMember.jsp">회원</a></li>
-  <li role="presentation" id="master" onclick="menuClick(this)" data-toggle="pill"><a href="/Bears/jsp/admin/AdminMaster.jsp">사장님</a></li>
-</ul>
-<div id="board">
-
-</div>
-		</div>
+	<!-- Top 메뉴 -->
+	<nav class="navbar navbar-fixed-top navbar-inverse">
+	<div class="container">
+		<span id="clock"></span> <span id="time"></span>
+		<p class="navbar-text">관리자님 환영합니다.</p>
 	</div>
-	
-	
-	<!-- "/Bears/jsp/js/bootstrap.js" -->
+	</nav>
+
+	<!-- 네이게이션바 -->
+	<div id="top-menu">
+		<ul class="nav nav-pills">
+			<li role="presentation" id="home"><a href="/Bears/jsp/admin/AdminMain.jsp"">홈 </a></li>
+			<li role="presentation" id="brand"><a href="#">브랜드</a></li>
+			<li role="presentation" id="store"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
+			<li role="presentation" id="menu"><a href="#">메뉴</a></li>
+			<li role="presentation" id="order"><a href="#">주문</a></li>
+			<li role="presentation" id="member"><a href="#">회원</a></li>
+			<li role="presentation" id="master"><a href="#">사장</a></li>
+		</ul>
+	</div>
 </body>
 </html>

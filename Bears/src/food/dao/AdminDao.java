@@ -5,7 +5,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 
 import food.util.ServiceUtil;
 
-public class MemberDao {
+public class AdminDao {
 	private static SqlMapClient sqlMapper;
 	static {
 		sqlMapper = ServiceUtil.getSqlMap();

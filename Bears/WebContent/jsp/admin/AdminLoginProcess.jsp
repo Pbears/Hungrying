@@ -1,4 +1,4 @@
-<%@page import="food.dao.MemberDao"%>
+<%@page import="food.dao.AdminDao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,8 +11,8 @@
 <%
 	String id=request.getParameter("id");
 	String pw=request.getParameter("pw");
-	if(MemberDao.idCheck(id).equals(pw)){
-		session.setAttribute("name",MemberDao.getName(id));
+	if(AdminDao.idCheck(id).equals(pw)){
+		session.setAttribute("name",AdminDao.getName(id));
 		session.setAttribute("id", id);
 		session.setAttribute("pw", pw);
 		session.setMaxInactiveInterval(60);

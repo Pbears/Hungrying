@@ -16,5 +16,6 @@
 	</transactionManager>
 	
 	<sqlMap resource="food/dao/Admin.xml" />
+	<sqlMap resource="food/dao/Store.xml"/>
 	
 </sqlMapConfig>
