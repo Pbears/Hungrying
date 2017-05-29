@@ -76,9 +76,25 @@ tr:NTH-CHILD(even) {
 			obj.submit();
 		}
 	}
-	function selectStore(obj) {
-
+	
+	var checkedValue = null;
+	
+	function checkedStore() {
+		
+		var check = document.getElementById('checkbox').checked;
+		
+		if(check == true){
+			var checkedValue = document.querySelector('.CheckBox:checked').value;
+			alert(checkedValue);
+		}
 	}
+	
+	function deleteStore() {
+		
+	}
+	
+
+	
 </script>
 </head>
 <body onload="datePro()">
@@ -127,6 +143,13 @@ tr:NTH-CHILD(even) {
 		} else {
 			list = StoreDao.searchStore(map);
 		}
+		
+		if(request.getParameter("deleteButton") != null){
+			String storeName = "<script>document.writeln(checkedValue)</script>";			
+			StoreDao.deleteStore(storeName);	
+			response.sendRedirect("AdminStore.jsp");
+		}
+		
 	%>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -190,7 +213,7 @@ tr:NTH-CHILD(even) {
 									<button type="button" class="btn btn-default">추가</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-default">삭제</button>
+									<button type="submit" class="btn btn-default" value="deleteButton" name="deleteButton" >삭제</button>
 								</td>
 							</div>
 						</tr>
@@ -236,10 +259,9 @@ tr:NTH-CHILD(even) {
 						StoreVo vo = list.get(i);
 				%>
 				<tr>
-					<div id="select">
-						<td><input type="checkbox" aria-label="..."
-							onclick="selectStore(this)"></td>
-						<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
+					<div id="checkboxContainer">
+						<td><input type="checkbox" aria-label="..." id="checkbox" class="CheckBox" value="<%=vo.getStorename()%>" onclick="checkedStore()"></td>
+						<td style="padding-bottom: 10px;" id="storename"><%=vo.getStorename()%></td>
 						<td><%=vo.getBrandno()%></td>
 						<td><%=vo.getGpa()%></td>
 						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
