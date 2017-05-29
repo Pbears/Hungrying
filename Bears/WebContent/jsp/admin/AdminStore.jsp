@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/Bears/jsp/css/bootstrap.css" />
 <title>관리자-음식점</title>
 <style>
-	tr:NTH-CHILD(even) {
+tr:NTH-CHILD(even) {
 	background-color: #f2f2f2;
 }
 </style>
@@ -34,7 +34,7 @@
 		case 4:
 			result = "thr";
 			break;
-		case 5:	
+		case 5:
 			result = "fri";
 			break;
 		default:
@@ -69,12 +69,15 @@
 		if (obj.query.name == 'empty' || !obj.data.value) {
 			alert('Not Search!');
 			obj.query.selectedIndex = 0;
-			
+
 			obj.data.value = '';
 			obj.data.focus();
 		} else {
 			obj.submit();
 		}
+	}
+	function selectStore(obj) {
+
 	}
 </script>
 </head>
@@ -82,13 +85,12 @@
 	<%
 		request.setCharacterEncoding("EUC-KR");
 		List<StoreVo> list = null;
-	
-		HashMap<String, Object>map=new HashMap<String, Object>();
-		
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
-		
-		
+
 		if (query != null && data != null) {
 			map.put("query", query);
 			map.put("data", data);
@@ -99,24 +101,23 @@
 	%>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container" align="right" style="padding-right: 10px;
-								margin-right: 10px;">
+	<div class="container" align="right"
+		style="padding-right: 10px; margin-right: 10px;">
 		<span id="clock"></span> <span id="time"></span>
-		<p class="navbar-text" style="
-					position: absolute;
-					right: 0px; 
-					top: 0px;
-					margin-bottom: 5px;
-					margin-top: 20px;">관리자님 환영합니다.</p>
+		<p class="navbar-text"
+			style="position: absolute; right: 0px; top: 0px; margin-bottom: 5px; margin-top: 20px;">관리자님
+			환영합니다.</p>
 	</div>
 	</nav>
 
 	<!-- 네이게이션바 -->
 	<div id="top-menu">
 		<ul class="nav nav-pills">
-			<li role="presentation" id="home"><a href="/Bears/jsp/admin/AdminMain.jsp"">홈 </a></li>
+			<li role="presentation" id="home"><a
+				href="/Bears/jsp/admin/AdminMain.jsp"">홈 </a></li>
 			<li role="presentation" id="brand"><a href="#">브랜드</a></li>
-			<li role="presentation" id="store"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
+			<li role="presentation" id="store"><a
+				href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
 			<li role="presentation" id="menu"><a href="#">메뉴</a></li>
 			<li role="presentation" id="order"><a href="#">주문</a></li>
 			<li role="presentation" id="member"><a href="#">회원</a></li>
@@ -127,50 +128,59 @@
 	<!-- 검색바 -->
 	<div id="searcher" class="row">
 		<div class="input-group">
-		
-			<form action="AdminStore.jsp" name="ast" method="post">
-					<table class="bbsWrite mgb35" align="center">
-							
-						<colgroup>
-							<col width="30" />
-							<col width="400" />
-							<col width="50" />
-						</colgroup>
 
+			<form action="AdminStore.jsp" name="ast" method="post">
+				<table class="bbsWrite mgb35" align="center">
+					<colgroup>
+						<col width="30" />
+						<col width="400" />
+						<col width="50" />
+					</colgroup>
 					<tbody>
 						<tr>
-							<td height="50"><select name="query" size="1" style="height: 34px;">
-								<option value="empty" selected="selected">선택하세요</option>
-								<option value="storename">음식점명</option>
-								<option value="brandno">브랜드번호</option>
-								<option value="location">위치</option>
-
-							</select> 
-						</td>
-					
-						<td>
-							<input type="text" class="form-control" placeholder="Search for..." name="data" >
-						</td>
-					
-						<td>
-							<span class="input-group-btn" >
-								<button class="btn btn-default" type="button"><a href="javascript:sendCheck()"> Search</a></button>
-							</span>
-						</td>
-					</tr>
-					
-				</tbody>
-			</table>
-		</form>
+							<td height="50">
+								<select name="query" size="1" style="height: 34px;">
+									<option value="empty" selected="selected">선택하세요</option>
+									<option value="storename">음식점명</option>
+									<option value="brandno">브랜드번호</option>
+									<option value="location">위치</option>
+								</select>
+							</td>
+							<td>
+								<input type="text" class="form-control"	placeholder="Search for..." name="data">
+							</td>
+							<td>
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button">
+										<a href="javascript:sendCheck()"> Search</a>
+									</button>
+								</span>
+							</td>
+							<div style=" postion:relative; left: 100px;">
+								<td>
+									<button type="button" class="btn btn-default">추가</button>
+								</td>
+								<td>
+									<button type="button" class="btn btn-default">삭제</button>
+								</td>
+							</div>
+						</tr>
+					</tbody>
+				</table>
+			</form>
 		</div>
 		<!-- /input-group -->
 	</div>
-	
+
 	<!-- /.row -->
 
+
+
 	<div id="data_table">
-		<table class="bbsList" style="border-collapse: collapse;">
+		<table class="bbsList" style="border-collapse: collapse;"
+			border="1px solid black">
 			<colgroup>
+				<col width="50" />
 				<col width="200" />
 				<col width="150" />
 				<col width="60" />
@@ -181,10 +191,10 @@
 				<col width="350" />
 			</colgroup>
 			<tr>
+				<th scope="col" style="text-align: center;"></th>
 				<th scope="col" style="text-align: center;">음식점명</th>
 				<th scope="col" style="text-align: center;">브랜드번호</th>
-				<th scope="col" style="text-align: center;
-				                       padding-left: 5px;">평점</th>
+				<th scope="col" style="text-align: center; padding-left: 5px;">평점</th>
 				<th scope="col" style="text-align: center;">위치</th>
 				<th scope="col" style="text-align: center;">영업시간</th>
 				<th scope="col" style="text-align: center;">전화번호</th>
@@ -197,18 +207,18 @@
 						StoreVo vo = list.get(i);
 				%>
 				<tr>
-					<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
-					<td><%=vo.getBrandno()%></td>
-					<td><%=vo.getGpa()%></td>
-					<td style="padding-left: 5px;
-								padding-right: 5px;">
-						<%=vo.getLocation()%></td>
-					<td><%=vo.getHours()%></td>
-					<td><%=vo.getTel()%></td>
-					<td><%=vo.getMinprice()%></td>
-					<td style="padding-top: 10px;
-							padding-bottom: 10px;
-				  			"><%=vo.getInfo()%></td>
+					<div id="select">
+						<td><input type="checkbox" aria-label="..."
+							onclick="selectStore(this)"></td>
+						<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
+						<td><%=vo.getBrandno()%></td>
+						<td><%=vo.getGpa()%></td>
+						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
+						<td><%=vo.getHours()%></td>
+						<td><%=vo.getTel()%></td>
+						<td><%=vo.getMinprice()%></td>
+						<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
+					</div>
 				</tr>
 				<%
 					}

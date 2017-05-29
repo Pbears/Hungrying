@@ -73,19 +73,7 @@
 			obj.submit();
 		}
 	}
-	function menuClick(obj) {
-		alert(obj.id);
-		if (obj.id == 'store') {
-			$(document).ready(function() {
-				$("#board").load("/Bears/jsp/admin/AdminStore.jsp");
-			});
-		}
-		if (obj.id == 'menu') {
-			$(document).ready(function() {
-				$("#board").load("/Bears/jsp/admin/AdminMenu.jsp");
-			});
-		}
-	}
+	
 </script>
 </head>
 <body onload="datePro()">
