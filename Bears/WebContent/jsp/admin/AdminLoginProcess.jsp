@@ -21,8 +21,6 @@
 		// 경고창을 띄우세요 ~ ㅋㅋㅋㅋㅋ
 		response.sendRedirect("AdminLogin.jsp");
 	}
-	
-
 %>
 </body>
 </html>

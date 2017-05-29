@@ -10,9 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta http-equiv="imagetoolbar" content="no" />
-<link href="/Bears/css/contents.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="/Bears/jsp/css/bootstrap.css" />
-
+<link rel="stylesheet" href="/Bears/css/bootstrap.css" />
 <script>
 	Date.prototype.getKorDay = function() {
 		var result = null;

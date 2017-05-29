@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" href="/Bears/jsp/css/bootstrap.css" />
+<link rel="stylesheet" href="/Bears/css/bootstrap.css" />
 <title>관리자-음식점</title>
 <style>
 tr:NTH-CHILD(even) {
