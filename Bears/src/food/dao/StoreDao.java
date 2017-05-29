@@ -18,5 +18,9 @@ public class StoreDao {
 	
 	public static List<StoreVo> searchStore(HashMap<String,Object>map)throws Exception{
         return sqlMapper.queryForList("store.searchStore",map);
-}
+	}
+	
+	public static int getTotalRow(HashMap<String, Object>map) throws Exception{
+	      return (Integer)sqlMapper.queryForObject("store.getTotalRow", map);
+	   }
 }

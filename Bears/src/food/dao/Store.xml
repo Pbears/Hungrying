@@ -10,23 +10,32 @@
 		SELECT * FROM STORE
 	</select>
 	<select id="searchStore" resultClass="store" parameterClass="java.util.HashMap">
-		SELECT STORENAME,BRANDNO,LOCATION,GPA,HOURS,TEL,MINPRICE,INFO
-		FROM STORE
-		<!-- SELECT STORENAME,BRANDNO,LOCATION,GPA,HOURS,
+		<!-- SELECT STORENAME,BRANDNO,LOCATION,GPA,HOURS,TEL,MINPRICE,INFO
+		FROM STORE -->
+		SELECT RM, STORENAME,BRANDNO,LOCATION,GPA,HOURS,
 		TEL,MINPRICE,INFO
 		FROM(
 			SELECT ROW_NUMBER( ) OVER(ORDER BY BRANDNO
 		DESC)RM,STORENAME,BRANDNO,LOCATION,GPA,HOURS,
 		TEL,MINPRICE,INFO
-		FROM STORE) -->
+		FROM STORE
 		<dynamic prepend="where">
 			<isNotNull property="query">
 				$query$ LIKE '%'||#data#||'%'
 			</isNotNull>
 		</dynamic> 
-		
-		<!-- WHERE RM BETWEEN #start# AND #end#
-		ORDER BY STORENO -->
+		)
+		WHERE RM BETWEEN #start# AND #end#
+		ORDER BY BRANDNO
 		
 	</select>
+	
+	<select id="getTotalRow"  resultClass="java.lang.Integer" parameterClass="java.util.HashMap">
+      SELECT COUNT(*) FROM STORE
+      <dynamic prepend="where">
+       <isNotNull property="Q">
+         $Q$ LIKE '%'||#D#||'%'
+       </isNotNull>     
+     </dynamic>
+   </select>
 </sqlMap>

@@ -90,13 +90,42 @@ tr:NTH-CHILD(even) {
 
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
+		
+		int pageScale = 10;
+		
+		map.put("Q", query);
+		map.put("D", data);
+		int totalRow = StoreDao.getTotalRow(map);
 
+		int currentPage = 0;
+		
+		try {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		} catch (Exception e) {
+			currentPage = 1;
+		}
+		
+		int totalPage = totalRow % pageScale == 0 ? totalRow / pageScale : totalRow / pageScale + 1;
+		if (totalRow == 0)
+			totalPage = 1;
+		int start = 1 + (currentPage - 1) * pageScale;
+		int end = pageScale + (currentPage - 1) * pageScale;
+
+		int currentBlock = currentPage % pageScale == 0 ? (currentPage / pageScale) : (currentPage / pageScale) + 1;
+		int startPage = 1 + (currentBlock - 1) * pageScale;
+		int endPage = pageScale + (currentBlock - 1) * pageScale;
+		if (totalPage <= endPage)
+			endPage = totalPage;
+
+		map.put("start", start);
+		map.put("end", end);
+		
 		if (query != null && data != null) {
 			map.put("query", query);
 			map.put("data", data);
 			list = StoreDao.searchStore(map);
 		} else {
-			list = StoreDao.searchStore(null);
+			list = StoreDao.searchStore(map);
 		}
 	%>
 	<!-- Top ¸Þ´º -->
@@ -239,15 +268,27 @@ tr:NTH-CHILD(even) {
 	<div style="text-align: center;">
 		<nav>
 		<ul class="pagination">
-			<li><a href="#" aria-label="Previous"> <span
+			<li><a href="AdminStore.jsp?page=1" aria-label="Previous"> <span
 					aria-hidden="true">&laquo;</span>
 			</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			<span>
+			<%
+				for(int i = startPage; i <= endPage; i++ ){
+					if(i == currentPage){	
+				
+			%>
+			<a href="AdminStore.jsp?page=<%=i%>"><strong>[<%=i %>]</strong></a>
+			<%
+					}else {
+			%>
+			<a href="AdminStore.jsp?page=<%=i%>">[<%=i %>]</a>
+			<%
+					}
+				}
+			%>
+			</span>
+			
+			<li><a href="AdminStore.jsp?page=<%=totalPage%>" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
 		</nav>
