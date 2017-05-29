@@ -91,7 +91,7 @@ tr:NTH-CHILD(even) {
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
 		
-		int pageScale = 10;
+		int pageScale = 5;
 		
 		map.put("Q", query);
 		map.put("D", data);
@@ -256,37 +256,39 @@ tr:NTH-CHILD(even) {
 		</table>
 	</div>
 
-	<!-- 세부페이징 -->
+	<!-- 블럭이동페이징 -->
 	<nav>
 	<ul class="pager">
-		<li><a href="#">Previous</a></li>
-		<li><a href="#">Next</a></li>
+		<%
+		if(currentBlock>1){
+		%>
+		<li><a href="AdminStore.jsp?page=<%=startPage-1%>">Previous</a></li>
+		<%
+		}
+		if(totalPage>endPage){
+		%>
+		<li><a href="AdminStore.jsp?page=<%=endPage+1%>">Next</a></li>
+		<%
+		}
+		%>
 	</ul>
 	</nav>
 
-	<!-- 페이징 -->
+	<!-- 페이지이동페이징 -->
 	<div style="text-align: center;">
 		<nav>
 		<ul class="pagination">
 			<li><a href="AdminStore.jsp?page=1" aria-label="Previous"> <span
 					aria-hidden="true">&laquo;</span>
 			</a></li>
-			<span>
 			<%
 				for(int i = startPage; i <= endPage; i++ ){
-					if(i == currentPage){	
 				
 			%>
-			<a href="AdminStore.jsp?page=<%=i%>"><strong>[<%=i %>]</strong></a>
+			<li><a href="AdminStore.jsp?page=<%=i%>"><%=i %></a></li>
 			<%
-					}else {
-			%>
-			<a href="AdminStore.jsp?page=<%=i%>">[<%=i %>]</a>
-			<%
-					}
 				}
 			%>
-			</span>
 			
 			<li><a href="AdminStore.jsp?page=<%=totalPage%>" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
