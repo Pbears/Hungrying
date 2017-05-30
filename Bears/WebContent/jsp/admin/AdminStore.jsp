@@ -77,24 +77,14 @@ tr:NTH-CHILD(even) {
 		}
 	}
 	
-	var checkedValue = null;
-	
-	function checkedStore() {
-		
-		var check = document.getElementById('checkbox').checked;
-		
-		if(check == true){
-			var checkedValue = document.querySelector('.CheckBox:checked').value;
-			alert(checkedValue);
-		}
+	function checkStore() {
+		var location = "DeleteProcess.jsp?storeName=";
+		var checkedValue = document.querySelector('.CheckBox:checked').value;
+		var encodedValue = encodeURIComponent(checkedValue);
+		location.href=location+encodedValue;
+		document.write('<a href="'+location+encodedValue+'">삭제하시겠습니까?</a>');	
 	}
-	
-	function deleteStore() {
-		
-	}
-	
-
-	
+				
 </script>
 </head>
 <body onload="datePro()">
@@ -144,11 +134,8 @@ tr:NTH-CHILD(even) {
 			list = StoreDao.searchStore(map);
 		}
 		
-		if(request.getParameter("deleteButton") != null){
+	
 			String storeName = "<script>document.writeln(checkedValue)</script>";			
-			StoreDao.deleteStore(storeName);	
-			response.sendRedirect("AdminStore.jsp");
-		}
 		
 	%>
 	<!-- Top 메뉴 -->
@@ -213,7 +200,7 @@ tr:NTH-CHILD(even) {
 									<button type="button" class="btn btn-default">추가</button>
 								</td>
 								<td>
-									<button type="submit" class="btn btn-default" value="deleteButton" name="deleteButton" >삭제</button>
+									<a href="DeleteProcess.jsp" onclick="location.href=this.href+'?storeName='+checkedValue;"><button type="button" class="btn btn-default" value="deleteButton" name="deleteButton" >삭제</button></a>
 								</td>
 							</div>
 						</tr>
@@ -260,7 +247,7 @@ tr:NTH-CHILD(even) {
 				%>
 				<tr>
 					<div id="checkboxContainer">
-						<td><input type="checkbox" aria-label="..." id="checkbox" class="CheckBox" value="<%=vo.getStorename()%>" onclick="checkedStore()"></td>
+						<td><input type="checkbox" id="checkbox+<%=i %>" class="CheckBox" value="<%=vo.getStorename()%>" onclick="checkStore()"></td>
 						<td style="padding-bottom: 10px;" id="storename"><%=vo.getStorename()%></td>
 						<td><%=vo.getBrandno()%></td>
 						<td><%=vo.getGpa()%></td>

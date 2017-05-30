@@ -11,6 +11,19 @@
 <%
 	String id=request.getParameter("id");
 	String pw=request.getParameter("pw");
+	String checker=request.getParameter("checker");
+	
+	Cookie cookie=null;
+    if(checker!=null){
+     	cookie=new Cookie("id",id);
+     	cookie.setMaxAge(30);
+     	response.addCookie(cookie);
+    }else{
+    	cookie=new Cookie("id",id);
+     	cookie.setMaxAge(0);
+     	response.addCookie(cookie);
+    }
+	
 	if(AdminDao.idCheck(id).equals(pw)){
 		session.setAttribute("name",AdminDao.getName(id));
 		session.setAttribute("id", id);
