@@ -79,6 +79,9 @@ tr:NTH-CHILD(even) {
 	function selectStore(obj) {
 
 	}
+	function refreshPage(){
+		
+	}
 </script>
 </head>
 <body onload="datePro()">
@@ -91,7 +94,7 @@ tr:NTH-CHILD(even) {
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
 		
-		int pageScale = 5;
+		int pageScale = 10;
 		
 		map.put("Q", query);
 		map.put("D", data);
@@ -186,6 +189,9 @@ tr:NTH-CHILD(even) {
 								</span>
 							</td>
 							<div style=" postion:relative; left: 100px;">
+								<td>
+									<a href="AdminStore.jsp?page=1"><button type="button" class="btn btn-default" >새로고침</button></a>
+								</td>
 								<td>
 									<button type="button" class="btn btn-default">추가</button>
 								</td>

@@ -9,8 +9,7 @@
 <body>
 	<%
 	 session.invalidate();//세션종료
-	 response.sendRedirect("adminLogin.jsp");
+	 response.sendRedirect("AdminLogin.jsp");
 	%>
-
 </body>
 </html>
