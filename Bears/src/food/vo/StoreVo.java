@@ -10,23 +10,6 @@ public class StoreVo {
 	private int minprice;
 	private String info;
 
-	public StoreVo() {
-		super();
-	}
-
-	public StoreVo(String storename, int brandno, String location, int gpa, String hours, String tel, int minprice,
-			String info) {
-		super();
-		this.storename = storename;
-		this.brandno = brandno;
-		this.location = location;
-		this.gpa = gpa;
-		this.hours = hours;
-		this.tel = tel;
-		this.minprice = minprice;
-		this.info = info;
-	}
-
 	public String getStorename() {
 		return storename;
 	}
