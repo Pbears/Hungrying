@@ -12,7 +12,7 @@
 		String storeName = request.getParameter("storeName");
 		out.println(storeName);
 		StoreDao.deleteStore(storeName);
-		response.sendRedirect("AdminStore.jsp");
+		response.sendRedirect("AdminStore.jsp"); 
 	%>
 </body>
 </html>

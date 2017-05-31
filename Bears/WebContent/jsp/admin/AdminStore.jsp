@@ -168,8 +168,8 @@ tr:NTH-CHILD(even) {
 	<div id="searcher" class="row">
 		<div class="input-group">
 
-			<form action="AdminStore.jsp" name="ast" method="post">
-				<table class="bbsWrite mgb35" align="center">
+			<form action="AdminStore.jsp" name="ast" method="post" target="_blank">
+				<table class="bbsWrite mgb35" align="center" >
 					<colgroup>
 						<col width="30" />
 						<col width="400" />

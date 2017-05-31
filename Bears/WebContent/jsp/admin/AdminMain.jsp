@@ -389,7 +389,7 @@
 
 </script>
 	
-<script src="/Bears/assets/script/canvasjs.min.js"></script>
+<script src="/Bears/jsp/js/canvasjs.min.js"></script>
 </head>
 <body>
 	<!-- Top ¸Þ´º -->
