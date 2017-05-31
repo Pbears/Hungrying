@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta http-equiv="imagetoolbar" content="no" />
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
+<script src="/Bears/js/canvasjs.min.js"></script>
 <script>
 	Date.prototype.getKorDay = function() {
 		var result = null;
@@ -72,9 +73,44 @@
 		}
 	}
 	
+		
+		window.onload = function () {
+			datePro();
+			var chart = new CanvasJS.Chart("chartContainer", {
+				title: {
+					text: "Stripline on  Axis X"
+				},
+				axisX:{
+					stripLines:[
+					{
+						value:1940,
+						color: "red"
+					}
+					]
+				},
+				data: [
+				{
+					type: "line",
+					dataPoints: [
+						{ x: 1910, y: 5 },
+						{ x: 1920, y: 9 },
+						{ x: 1930, y: 17},
+						{ x: 1940, y: 32},
+						{ x: 1950, y: 22},
+						{ x: 1960, y: 14},
+						{ x: 1970, y: 25},
+						{ x: 1980, y: 18},
+						{ x: 1990, y: 20}
+					]
+				}
+				]
+			});
+			chart.render();
+		  }
+
 </script>
 </head>
-<body onload="datePro()">
+<body>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container" align="right" style="padding-right: 10px;
@@ -103,5 +139,8 @@
 			<li role="presentation" id="master"><a href="/Bears/jsp/admin/AdminMaster.jsp">사장</a></li>
 		</ul>
 	</div>
+	
+	<!-- 그래프 -->
+	<div id="chartContainer" style="height: 400px; width: 300px;"></div>
 </body>
 </html>
