@@ -395,6 +395,7 @@
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container" align="right" style="padding-right: 10px;
 								margin-right: 10px;">
+		<img src="/Bears/logo/logoLong.png" style="width:200px;height:50px;margin-right:600px;" alt="¹è°íÆÎ" />
 		<span id="clock"></span> <span id="time" style="margin-right:10px;"></span>
 		<p class="navbar-text" style="
 					position: absolute;

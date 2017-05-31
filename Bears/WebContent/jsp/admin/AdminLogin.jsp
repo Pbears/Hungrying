@@ -29,6 +29,8 @@
 	<form name="login" method="post"
 		action="/Bears/jsp/admin/AdminLoginProcess.jsp">
 		<div id="loginWrapper">
+		
+					<img src="/Bears/logo/logoCircle.png" alt="메인로고"/>
 			<div class="loginForm">
 				<fieldset>
 					<legend>관리자 시스템 로그인</legend>
