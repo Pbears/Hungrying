@@ -130,12 +130,17 @@ tr:NTH-CHILD(even) {
 	%>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container" align="right"
-		style="padding-right: 10px; margin-right: 10px;">
-		<span id="clock"></span> <span id="time"></span>
-		<p class="navbar-text"
-			style="position: absolute; right: 0px; top: 0px; margin-bottom: 5px; margin-top: 20px;">관리자님
-			환영합니다.</p>
+	<div class="container" align="right" style="padding-right: 10px;
+								margin-right: 10px;">
+		<span id="clock"></span> <span id="time" style="margin-right:10px;"></span>
+		<p class="navbar-text" style="
+					position: absolute;
+					right: 0px; 
+					top: 0px;
+					margin-bottom: 5px;
+					margin-top: 26px;
+					margin-right:100px;">"<%=session.getAttribute("name") %>"님 환영합니다.</p>
+		<button type="button" class="btn btn-default" style="margin-top:10px;" onclick="sendOut()">Logout</button>
 	</div>
 	</nav>
 

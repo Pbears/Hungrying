@@ -133,27 +133,30 @@ tr:NTH-CHILD(even) {
 	%>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container" align="right"
-		style="padding-right: 10px; margin-right: 10px;">
-		<span id="clock"></span> <span id="time"></span>
-		<p class="navbar-text"
-			style="position: absolute; right: 0px; top: 0px; margin-bottom: 5px; margin-top: 20px;">관리자님
-			환영합니다.</p>
+	<div class="container" align="right" style="padding-right: 10px;
+								margin-right: 10px;">
+		<span id="clock"></span> <span id="time" style="margin-right:10px;"></span>
+		<p class="navbar-text" style="
+					position: absolute;
+					right: 0px; 
+					top: 0px;
+					margin-bottom: 5px;
+					margin-top: 26px;
+					margin-right:100px;">"<%=session.getAttribute("name") %>"님 환영합니다.</p>
+		<button type="button" class="btn btn-default" style="margin-top:10px;" onclick="sendOut()">Logout</button>
 	</div>
 	</nav>
 
 	<!-- 네이게이션바 -->
 	<div id="top-menu">
 		<ul class="nav nav-pills">
-			<li role="presentation" id="home"><a
-				href="/Bears/jsp/admin/AdminMain.jsp"">홈 </a></li>
-			<li role="presentation" id="brand"><a href="#">브랜드</a></li>
-			<li role="presentation" id="store"><a
-				href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
-			<li role="presentation" id="menu"><a href="#">메뉴</a></li>
-			<li role="presentation" id="order"><a href="#">주문</a></li>
-			<li role="presentation" id="member"><a href="#">회원</a></li>
-			<li role="presentation" id="master"><a href="#">사장</a></li>
+			<li role="presentation" id="home"><a href="/Bears/jsp/admin/AdminMain.jsp"">홈 </a></li>
+			<li role="presentation" id="brand"><a href="/Bears/jsp/admin/AdminBrand.jsp">브랜드</a></li>
+			<li role="presentation" id="store"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
+			<li role="presentation" id="menu"><a href="/Bears/jsp/admin/AdminMenu.jsp">메뉴</a></li>
+			<li role="presentation" id="order"><a href="/Bears/jsp/admin/AdminOrder.jsp">주문</a></li>
+			<li role="presentation" id="member"><a href="/Bears/jsp/admin/AdminMember.jsp">회원</a></li>
+			<li role="presentation" id="master"><a href="/Bears/jsp/admin/AdminMaster.jsp">사장</a></li>
 		</ul>
 	</div>
 
