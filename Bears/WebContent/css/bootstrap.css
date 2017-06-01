@@ -11,22 +11,7 @@ html {
       -ms-text-size-adjust: 100%;
 }
 
-#mainDiv{
-	width: 80%;
-	height : 80%;
-	margin: 0 auto;
-}
-#innerDiv {
-	width : 20%;
-	margin : 0 auto;
-	vertical-align: middle;
-}
-#buttonDiv{
-	width : 50%;
-	margin : 0 auto;
-	vertical-align: middle;
-	text-align: center;
-}
+
 
 #top-menu {
 	padding-top: 8px;

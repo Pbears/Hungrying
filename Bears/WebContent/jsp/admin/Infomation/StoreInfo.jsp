@@ -7,7 +7,22 @@
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
 <title>음식점 세부 정보</title>
 <style type="text/css">
-
+#mainDiv{
+	width: 80%;
+	height : 80%;
+	margin: 0 auto;
+}
+#innerDiv {
+	width : 20%;
+	margin : 0 auto;
+	vertical-align: middle;
+}
+#buttonDiv{
+	width : 50%;
+	margin : 0 auto;
+	vertical-align: middle;
+	text-align: center;
+}
 </style>
 </head>
 <body>
