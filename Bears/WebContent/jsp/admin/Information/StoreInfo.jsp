@@ -26,7 +26,7 @@
 </style>
 </head>
 <body>
-	<h2 align="center"> 음식점 추가 </h2><br><br>
+	<h2 align="center"> 상세정보 </h2><br><br>
 	
 	<div id="mainDiv">
 		<div id="innerDiv">

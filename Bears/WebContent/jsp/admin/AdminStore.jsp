@@ -76,12 +76,11 @@ tr:NTH-CHILD(even) {
 			obj.submit();
 		}
 	}
-	function selectStore(obj) {
 
+	function StoreInsert(){
+		response.sendRedirect("/Bears/jsp/admin/Insert/StoreInsert.jsp");
 	}
-	function refreshPage(){
-		
-	}
+
 </script>
 </head>
 <body onload="datePro()">
@@ -196,7 +195,7 @@ tr:NTH-CHILD(even) {
 									<a href="AdminStore.jsp?page=1"><button type="button" class="btn btn-default" >새로고침</button></a>
 								</td>
 								<td>
-									<button type="button" class="btn btn-default">추가</button>
+									<button type="button" class="btn btn-default" onclick="StoreInsert()">추가</button>
 								</td>
 								<td>
 									<button type="button" class="btn btn-default">삭제</button>
@@ -244,11 +243,11 @@ tr:NTH-CHILD(even) {
 					for (int i = 0; i < list.size(); i++) {
 						StoreVo vo = list.get(i);
 				%>
+				
 				<tr>
 					<div id="select">
-						<a href="/Bears/">
 						<td><input type="checkbox" onclick="selectStore(this)"></td>
-						<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
+						<td style="padding-bottom: 10px;"><a href="/Bears/jsp/admin/Information/StoreInfo.jsp"><%=vo.getStorename()%></a></td>
 						<td><%=vo.getBrandno()%></td>
 						<td><%=vo.getGpa()%></td>
 						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
@@ -256,9 +255,9 @@ tr:NTH-CHILD(even) {
 						<td><%=vo.getTel()%></td>
 						<td><%=vo.getMinprice()%></td>
 						<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
-						</a>
 					</div>
 				</tr>
+				
 				<%
 					}
 				%>
