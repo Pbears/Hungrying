@@ -246,8 +246,8 @@ tr:NTH-CHILD(even) {
 				%>
 				<tr>
 					<div id="select">
-						<td><input type="checkbox" aria-label="..."
-							onclick="selectStore(this)"></td>
+						<a href="/Bears/">
+						<td><input type="checkbox" onclick="selectStore(this)"></td>
 						<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
 						<td><%=vo.getBrandno()%></td>
 						<td><%=vo.getGpa()%></td>
@@ -256,6 +256,7 @@ tr:NTH-CHILD(even) {
 						<td><%=vo.getTel()%></td>
 						<td><%=vo.getMinprice()%></td>
 						<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
+						</a>
 					</div>
 				</tr>
 				<%

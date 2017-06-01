@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
 <title>음식점 세부 정보</title>
 <style type="text/css">
-
 </style>
 </head>
 <body>
