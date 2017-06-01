@@ -411,7 +411,7 @@
 	<!-- 네이게이션바 -->
 	<div id="top-menu">
 		<ul class="nav nav-pills">
-			<li role="presentation" id="home"><a href="/Bears/jsp/admin/AdminMain.jsp"">홈 </a></li>
+			<li role="presentation" id="home" class="active"><a href="/Bears/jsp/admin/AdminMain.jsp">홈 </a></li>
 			<li role="presentation" id="brand"><a href="/Bears/jsp/admin/AdminBrand.jsp">브랜드</a></li>
 			<li role="presentation" id="store"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
 			<li role="presentation" id="menu"><a href="/Bears/jsp/admin/AdminMenu.jsp">메뉴</a></li>

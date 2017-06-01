@@ -81,6 +81,9 @@ tr:NTH-CHILD(even) {
 		response.sendRedirect("/Bears/jsp/admin/Insert/StoreInsert.jsp");
 	}
 
+	function storeInfo(){
+		window.open("/Bears/jsp/admin/Information/StoreInfo.jsp","stin","left=100,top=50,width=700,height=650");
+	}
 </script>
 </head>
 <body onload="datePro()">
@@ -93,7 +96,7 @@ tr:NTH-CHILD(even) {
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
 		
-		int pageScale = 10;
+		int pageScale = 8;
 		
 		map.put("Q", query);
 		map.put("D", data);
@@ -134,6 +137,7 @@ tr:NTH-CHILD(even) {
 	<nav class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container" align="right" style="padding-right: 10px;
 								margin-right: 10px;">
+								<img src="/Bears/logo/logoLong.png" style="width:200px;height:50px;margin-right:600px;" alt="배고팡" />
 		<span id="clock"></span> <span id="time" style="margin-right:10px;"></span>
 		<p class="navbar-text" style="
 					position: absolute;
@@ -149,9 +153,9 @@ tr:NTH-CHILD(even) {
 	<!-- 네이게이션바 -->
 	<div id="top-menu">
 		<ul class="nav nav-pills">
-			<li role="presentation" id="home"><a href="/Bears/jsp/admin/AdminMain.jsp"">홈 </a></li>
+			<li role="presentation" id="home"><a href="/Bears/jsp/admin/AdminMain.jsp">홈 </a></li>
 			<li role="presentation" id="brand"><a href="/Bears/jsp/admin/AdminBrand.jsp">브랜드</a></li>
-			<li role="presentation" id="store"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
+			<li role="presentation" id="store" class="active"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
 			<li role="presentation" id="menu"><a href="/Bears/jsp/admin/AdminMenu.jsp">메뉴</a></li>
 			<li role="presentation" id="order"><a href="/Bears/jsp/admin/AdminOrder.jsp">주문</a></li>
 			<li role="presentation" id="member"><a href="/Bears/jsp/admin/AdminMember.jsp">회원</a></li>
@@ -247,7 +251,7 @@ tr:NTH-CHILD(even) {
 				<tr>
 					<div id="select">
 						<td><input type="checkbox" onclick="selectStore(this)"></td>
-						<td style="padding-bottom: 10px;"><a href="/Bears/jsp/admin/Information/StoreInfo.jsp"><%=vo.getStorename()%></a></td>
+						<td style="padding-bottom: 10px;"><a href="javascript:storeInfo()"><%=vo.getStorename()%></a></td>
 						<td><%=vo.getBrandno()%></td>
 						<td><%=vo.getGpa()%></td>
 						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>

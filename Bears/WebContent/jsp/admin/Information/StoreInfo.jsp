@@ -26,7 +26,7 @@
 </style>
 </head>
 <body>
-	<h2 align="center"> 상세정보 </h2><br><br>
+	<h2 align="center"> 상세정보 </h2><br>
 	
 	<div id="mainDiv">
 		<div id="innerDiv">
@@ -47,9 +47,9 @@
 			<h4>음식점정보</h4> <input type="text" class="form-control"
 			placeholder="info" aria-describedby="basic-addon2">
 		</div>
-		<br><br><br>
+		<br>
 		<div id="buttonDiv">
-			<button type="button" class="btn btn-default">추가</button>
+			<button type="button" class="btn btn-default">수정</button>
 			<button type="button" class="btn btn-default">뒤로</button>
 		</div>
 	</div>

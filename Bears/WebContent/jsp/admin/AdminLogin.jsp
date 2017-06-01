@@ -24,15 +24,27 @@
 		}
 	}
 </script>
+<style>
+.logo {
+	padding-right: 30px;
+}
+</style>
 </head>
 <body>
 	<form name="login" method="post"
 		action="/Bears/jsp/admin/AdminLoginProcess.jsp">
 		<div id="loginWrapper">
-		
-					<img src="/Bears/logo/logoCircle.png" width="100px" height="100px" alt="메인로고"/>
-			<div class="loginForm"> 
+
+
+			<div class="loginForm" style="display: inline;">
+
 				<fieldset>
+					<div>
+						<img src="/Bears/logo/logoCircle.png" id="logo" width="100px"
+							height="100px" alt="메인로고" />
+					</div>
+					<div>
+
 					<legend>관리자 시스템 로그인</legend>
 					<dl>
 						<dt>
@@ -48,8 +60,12 @@
 							<input type="password" name="pw" class="text" id="user_passwd" />
 						</dd>
 					</dl>
+										
+					</div>
 					<div class="btn">
-						<input id="btnSubmit" type="image" src="/Bears/img/button/btn_login.gif" alt="LOGIN" title="LOGIN" onclick="loginCheck()">
+						<input id="btnSubmit" type="image"
+							src="/Bears/img/button/btn_login.gif" alt="LOGIN" title="LOGIN"
+							onclick="loginCheck()">
 					</div>
 				</fieldset>
 			</div>
