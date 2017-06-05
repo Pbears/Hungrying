@@ -10,7 +10,7 @@ public class ServiceUtil {
 	private static SqlMapClient sqlMapper;
 	static {
 		try {
-			Reader reader = Resources.getResourceAsReader("food/dao/SqlMapConfig.xml");
+			Reader reader = Resources.getResourceAsReader("food/xml/SqlMapConfig.xml");
 			sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
 			reader.close();
 		} catch (Exception e) {
