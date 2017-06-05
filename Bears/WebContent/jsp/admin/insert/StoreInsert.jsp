@@ -7,10 +7,26 @@
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
 <title>음식점 세부 정보</title>
 <style type="text/css">
+#mainDiv{
+	width: 80%;
+	height : 80%;
+	margin: 0 auto;
+}
+#innerDiv {
+	width : 20%;
+	margin : 0 auto;
+	vertical-align: middle;
+}
+#buttonDiv{
+	width : 50%;
+	margin : 0 auto;
+	vertical-align: middle;
+	text-align: center;
+}
 </style>
 </head>
 <body>
-	<h2 align="center"> 음식점 추가 </h2><br><br>
+	<h2 align="center"> 상세정보 </h2><br>
 	
 	<div id="mainDiv">
 		<div id="innerDiv">
@@ -31,9 +47,9 @@
 			<h4>음식점정보</h4> <input type="text" class="form-control"
 			placeholder="info" aria-describedby="basic-addon2">
 		</div>
-		<br><br><br>
+		<br>
 		<div id="buttonDiv">
-			<button type="button" class="btn btn-default">추가</button>
+			<button type="button" class="btn btn-default">수정</button>
 			<button type="button" class="btn btn-default">뒤로</button>
 		</div>
 	</div>
