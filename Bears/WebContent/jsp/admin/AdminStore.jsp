@@ -77,8 +77,8 @@ tr:NTH-CHILD(even) {
 		}
 	}
 
-	function StoreInsert() {
-		response.sendRedirect("/Bears/jsp/admin/insert/StoreInsert.jsp");
+	function StoreInsert(){
+		document.location.href='/Bears/jsp/admin/insert/StoreInsert.jsp';
 	}
 
 	function storeInfo() {
