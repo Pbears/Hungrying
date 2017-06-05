@@ -2,8 +2,7 @@
 <%@page import="food.dao.StoreDao"%>
 <%@page import="food.vo.StoreVo"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +15,7 @@ tr:NTH-CHILD(even) {
 }
 </style>
 <script>
-var nodeList=document.getElementsByName("cb");
+	var nodeList = document.getElementsByName("cb");
 	Date.prototype.getKorDay = function() {
 		var result = null;
 		switch (this.getDay()) {
@@ -78,46 +77,49 @@ var nodeList=document.getElementsByName("cb");
 		}
 	}
 
-	function StoreInsert(){
+	function StoreInsert() {
 		response.sendRedirect("/Bears/jsp/admin/insert/StoreInsert.jsp");
 	}
 
-	function storeInfo(){
-		window.open("/Bears/jsp/admin/information/StoreInfo.jsp","stin","left=100,top=50,width=700,height=650");
+	function storeInfo() {
+		window.open("/Bears/jsp/admin/information/StoreInfo.jsp", "stin",
+				"left=100,top=50,width=700,height=650");
 	}
-	function allStore(obj){
+	function allStore(obj) {
 		selectCb(obj.checked);
 	}
-	function selectCb(flag){
-		 for(var i=0;i<nodeList.length;i++){
-			 nodeList[i].checked=flag?true:false;		 
-		 }
+	function selectCb(flag) {
+		for (var i = 0; i < nodeList.length; i++) {
+			nodeList[i].checked = flag ? true : false;
+		}
 	}
-	function oneCheck(pt,no){
-		  pt.value=pt.checked?no:0;
-		  
-		  var all=document.getElementById('allCheck');
-		  var test=false;
-		  for(var i=0;i<nodeList.length;i++){
-			  if(!nodeList[i].checked){
-				  test=true;
-			  }  
-		  }
-		  if(test)all.checked=false;
-		  else
-	      all.checked=true; 
-	 }
-	function deleteAll(){
-		var cnt=0;
-		 for(var i=0;i<nodeList.length;i++){
-			 if(nodeList[i].checked){
-				 cnt++;
-			 }
-		 }
-		 if(cnt==0){
-			 alert('하나라도 CHECK');return false;
-		 }
-		 document.listFrm.submit();
+	function oneCheck(pt, no) {
+		pt.value = pt.checked ? no : 0;
+
+		var all = document.getElementById('allCheck');
+		var test = false;
+		for (var i = 0; i < nodeList.length; i++) {
+			if (!nodeList[i].checked) {
+				test = true;
+			}
+		}
+		if (test)
+			all.checked = false;
+		else
+			all.checked = true;
+	}
+	function deleteAll() {
+		var cnt = 0;
+		for (var i = 0; i < nodeList.length; i++) {
+			if (nodeList[i].checked) {
+				cnt++;
+			}
+		}
+		if (cnt == 0) {
+			alert('하나라도 CHECK');
+			return false;
+		}
+		document.listFrm.submit();
 	}
 </script>
 </head>
@@ -130,21 +132,21 @@ var nodeList=document.getElementsByName("cb");
 
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
-		
-		int pageScale = 8;
-		
+
+		int pageScale = 10;
+
 		map.put("Q", query);
 		map.put("D", data);
 		int totalRow = StoreDao.getTotalRow(map);
 
 		int currentPage = 0;
-		
+
 		try {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		} catch (Exception e) {
 			currentPage = 1;
 		}
-		
+
 		int totalPage = totalRow % pageScale == 0 ? totalRow / pageScale : totalRow / pageScale + 1;
 		if (totalRow == 0)
 			totalPage = 1;
@@ -159,7 +161,7 @@ var nodeList=document.getElementsByName("cb");
 
 		map.put("start", start);
 		map.put("end", end);
-		
+
 		if (query != null && data != null) {
 			map.put("query", query);
 			map.put("data", data);
@@ -170,38 +172,43 @@ var nodeList=document.getElementsByName("cb");
 	%>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container" align="right" style="padding-right: 10px;
-								margin-right: 10px;">
-								<img src="/Bears/logo/logoLong.png" style="width:200px;height:50px;margin-right:600px;" alt="배고팡" />
-		<span id="clock"></span> <span id="time" style="margin-right:10px;"></span>
-		<p class="navbar-text" style="
-					position: absolute;
-					right: 0px; 
-					top: 0px;
-					margin-bottom: 5px;
-					margin-top: 26px;
-					margin-right:100px;">"<%=session.getAttribute("name") %>"님 환영합니다.</p>
-		<button type="button" class="btn btn-default" style="margin-top:10px;" onclick="sendOut()">Logout</button>
+	<div class="container" align="right"
+		style="padding-right: 10px; margin-right: 10px;">
+		<img src="/Bears/logo/logoLong.png"
+			style="width: 200px; height: 50px; margin-right: 600px;" alt="배고팡" />
+		<span id="clock"></span> <span id="time" style="margin-right: 10px;"></span>
+		<p class="navbar-text"
+			style="position: absolute; right: 0px; top: 0px; margin-bottom: 5px; margin-top: 26px; margin-right: 100px;">
+			"<%=session.getAttribute("name")%>"님 환영합니다.
+		</p>
+		<button type="button" class="btn btn-default"
+			style="margin-top: 10px;" onclick="sendOut()">Logout</button>
 	</div>
 	</nav>
 
 	<!-- 네이게이션바 -->
 	<div id="top-menu">
 		<ul class="nav nav-pills">
-			<li role="presentation" id="home"><a href="/Bears/jsp/admin/AdminMain.jsp">홈 </a></li>
-			<li role="presentation" id="brand"><a href="/Bears/jsp/admin/AdminBrand.jsp">브랜드</a></li>
-			<li role="presentation" id="store" class="active"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
-			<li role="presentation" id="menu"><a href="/Bears/jsp/admin/AdminMenu.jsp">메뉴</a></li>
-			<li role="presentation" id="order"><a href="/Bears/jsp/admin/AdminOrder.jsp">주문</a></li>
-			<li role="presentation" id="member"><a href="/Bears/jsp/admin/AdminMember.jsp">회원</a></li>
-			<li role="presentation" id="master"><a href="/Bears/jsp/admin/AdminMaster.jsp">사장</a></li>
+			<li role="presentation" id="home"><a
+				href="/Bears/jsp/admin/AdminMain.jsp">홈 </a></li>
+			<li role="presentation" id="brand"><a
+				href="/Bears/jsp/admin/AdminBrand.jsp">브랜드</a></li>
+			<li role="presentation" id="store" class="active"><a
+				href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
+			<li role="presentation" id="menu"><a
+				href="/Bears/jsp/admin/AdminMenu.jsp">메뉴</a></li>
+			<li role="presentation" id="order"><a
+				href="/Bears/jsp/admin/AdminOrder.jsp">주문</a></li>
+			<li role="presentation" id="member"><a
+				href="/Bears/jsp/admin/AdminMember.jsp">회원</a></li>
+			<li role="presentation" id="master"><a
+				href="/Bears/jsp/admin/AdminMaster.jsp">사장</a></li>
 		</ul>
 	</div>
 
 	<!-- 검색바 -->
 	<div id="searcher" class="row">
 		<div class="input-group">
-
 			<form action="AdminStore.jsp" name="ast" method="post">
 				<table class="bbsWrite mgb35" align="center">
 					<colgroup>
@@ -211,33 +218,30 @@ var nodeList=document.getElementsByName("cb");
 					</colgroup>
 					<tbody>
 						<tr>
-							<td height="50">
-								<select name="query" size="1" style="height: 34px;">
+							<td height="50"><select name="query" size="1"
+								style="height: 34px;">
 									<option value="empty" selected="selected">선택하세요</option>
 									<option value="storename">음식점명</option>
 									<option value="brandno">브랜드번호</option>
 									<option value="location">위치</option>
-								</select>
-							</td>
-							<td>
-								<input type="text" class="form-control"	placeholder="Search for..." name="data">
-							</td>
-							<td>
-								<span class="input-group-btn">
+							</select></td>
+							<td><input type="text" class="form-control"
+								placeholder="Search for..." name="data"></td>
+							<td><span class="input-group-btn">
 									<button class="btn btn-default" type="button">
 										<a href="javascript:sendCheck()"> Search</a>
 									</button>
-								</span>
-							</td>
-							<div style=" postion:relative; left: 100px;">
+							</span></td>
+							<div style="postion: relative; left: 100px;">
+								<td><a href="AdminStore.jsp?page=1"><button
+											type="button" class="btn btn-default">새로고침</button></a></td>
 								<td>
-									<a href="AdminStore.jsp?page=1"><button type="button" class="btn btn-default" >새로고침</button></a>
+									<button type="button" class="btn btn-default"
+										onclick="StoreInsert()">추가</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-default" onclick="StoreInsert()">추가</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-default" onclick="deleteAll()">삭제</button>
+									<button type="button" class="btn btn-default"
+										onclick="deleteAll()">삭제</button>
 								</td>
 							</div>
 						</tr>
@@ -250,59 +254,74 @@ var nodeList=document.getElementsByName("cb");
 
 	<!-- /.row -->
 
-
-
 	<div id="data_table">
-	<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all" method="post" name="listFrm">
-		<table class="bbsList" style="border-collapse: collapse;"
-			border="1px solid black">
-			<colgroup>
-				<col width="50" />
-				<col width="200" />
-				<col width="150" />
-				<col width="60" />
-				<col width="350" />
-				<col width="150" />
-				<col width="250" />
-				<col width="180" />
-				<col width="350" />
-			</colgroup>
-			<tr>
-				<th scope="col" style="text-align: center;"><input type="checkbox" id="allCheck" name="allCheck" onclick="allStore(this)"></th>
-				<th scope="col" style="text-align: center;">음식점명</th>
-				<th scope="col" style="text-align: center;">브랜드번호</th>
-				<th scope="col" style="text-align: center; padding-left: 5px;">평점</th>
-				<th scope="col" style="text-align: center;">위치</th>
-				<th scope="col" style="text-align: center;">영업시간</th>
-				<th scope="col" style="text-align: center;">전화번호</th>
-				<th scope="col" style="text-align: center;">배달최저가격</th>
-				<th scope="col" style="text-align: center;">소개</th>
-			</tr>
-			<tbody>
-				<%
-					for (int i = 0; i < list.size(); i++) {
-						StoreVo vo = list.get(i);
-				%>
-				
-				<tr>
-					<div id="select">
-						<td><input type="checkbox" name="cb" id="cb" value="<%=vo.getStorename()%>" onclick="oneCheck(this,'<%=vo.getStorename()%>')"></td>
-						<td style="padding-bottom: 10px;"><a href="javascript:storeInfo()"><%=vo.getStorename()%></a></td>
-						<td><%=vo.getBrandno()%></td>
-						<td><%=vo.getGpa()%></td>
-						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
-						<td><%=vo.getHours()%></td>
-						<td><%=vo.getTel()%></td>
-						<td><%=vo.getMinprice()%></td>
-						<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
-					</div>
+		<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all"
+			method="post" name="listFrm">
+			<table class="table">
+				<colgroup>
+					<col width="50" />
+					<col width="200" />
+					<col width="150" />
+					<col width="60" />
+					<col width="350" />
+					<col width="150" />
+					<col width="250" />
+					<col width="180" />
+					<col width="350" />
+				</colgroup>
+				<tr id="tableHead">
+					<th style="text-align: center; vertical-align: middle;"><input type="checkbox"
+						id="allCheck" name="allCheck" onclick="allStore(this)"></th>
+					<th style="text-align: center; vertical-align: middle;">음식점명</th>
+					<th style="text-align: center; vertical-align: middle;">브랜드번호</th>
+					<th style="text-align: center; vertical-align: middle;">평점</th>
+					<th style="text-align: center; vertical-align: middle;">위치</th>
+					<th style="text-align: center; vertical-align: middle;">영업시간</th>
+					<th style="text-align: center; vertical-align: middle;">전화번호</th>
+					<th style="text-align: center; vertical-align: middle;">배달최저가격</th>
+					<th style="text-align: center; vertical-align: middle;">소개</th>
 				</tr>
-				
-				<%
-					}
-				%>
-			</tbody>
-		</table>
+				<tbody>
+					<%
+						for (int i = 0; i < list.size(); i++) {
+							StoreVo vo = list.get(i);
+					%>
+					<tr height="50px">
+						<div id="select">
+							<td style="text-align: center; vertical-align: middle;">
+								<input type="checkbox" name="cb" id="cb" value="<%=vo.getStorename()%>" onclick="oneCheck(this,'<%=vo.getStorename()%>')">
+							</td>
+							<td style="text-align: center; vertical-align: middle;">
+								<a href="javascript:storeInfo()"><%=vo.getStorename()%></a>
+							</td>
+							<td style="text-align: center; vertical-align: middle;">
+							<%=vo.getBrandno()%>
+								</td>
+							<td style="text-align: center; vertical-align: middle;">
+								<%=vo.getGpa()%>
+							</td>
+							<td style="text-align: center; vertical-align: middle;">
+								<%=vo.getLocation()%>
+							</td>
+							<td style="text-align: center; vertical-align: middle;">
+								<%=vo.getHours()%>
+							</td>
+							<td style="text-align: center; vertical-align: middle;">
+								<%=vo.getTel()%>
+							</td>
+							<td style="text-align: center; vertical-align: middle;">
+								<%=vo.getMinprice()%>
+							</td>
+							<td style="text-align: center; vertical-align: middle;">
+								<%=vo.getInfo()%>
+							</td>
+						</div>
+					</tr>
+					<%
+						}
+					%>
+				</tbody>
+			</table>
 		</form>
 	</div>
 
@@ -310,16 +329,16 @@ var nodeList=document.getElementsByName("cb");
 	<nav>
 	<ul class="pager">
 		<%
-		if(currentBlock>1){
+			if (currentBlock > 1) {
 		%>
-		<li><a href="AdminStore.jsp?page=<%=startPage-1%>">Previous</a></li>
+		<li><a href="AdminStore.jsp?page=<%=startPage - 1%>">Previous</a></li>
 		<%
-		}
-		if(totalPage>endPage){
+			}
+			if (totalPage > endPage) {
 		%>
-		<li><a href="AdminStore.jsp?page=<%=endPage+1%>">Next</a></li>
+		<li><a href="AdminStore.jsp?page=<%=endPage + 1%>">Next</a></li>
 		<%
-		}
+			}
 		%>
 	</ul>
 	</nav>
@@ -332,15 +351,15 @@ var nodeList=document.getElementsByName("cb");
 					aria-hidden="true">&laquo;</span>
 			</a></li>
 			<%
-				for(int i = startPage; i <= endPage; i++ ){
-				
+				for (int i = startPage; i <= endPage; i++) {
 			%>
-			<li><a href="AdminStore.jsp?page=<%=i%>"><%=i %></a></li>
+			<li><a href="AdminStore.jsp?page=<%=i%>"><%=i%></a></li>
 			<%
 				}
 			%>
-			
-			<li><a href="AdminStore.jsp?page=<%=totalPage%>" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+
+			<li><a href="AdminStore.jsp?page=<%=totalPage%>"
+				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
 		</nav>
