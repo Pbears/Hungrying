@@ -253,7 +253,7 @@ var nodeList=document.getElementsByName("cb");
 
 
 	<div id="data_table">
-	<form action="/Bears/jsp/delete/StoreDelete.jsp?state=all" method="post" name="listFrm">
+	<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all" method="post" name="listFrm">
 		<table class="bbsList" style="border-collapse: collapse;"
 			border="1px solid black">
 			<colgroup>
