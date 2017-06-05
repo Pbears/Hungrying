@@ -43,4 +43,13 @@
 		DELETE FROM STORE WHERE STORENAME = #storename#
    </delete>
    
+   <insert id="insertStore" parameterClass="store">
+   		INSERT INTO STORE VALUES(
+   		#storename#,#brandno#,#location#,#gpa#,#hours#,#tel#,#minprice#,#info#)
+   </insert>
+   
+   <select id="selectOneStore" parameterClass="java.lang.String" resultClass="store">
+    SELECT * FROM STORE WHERE STORENAME = #storename#
+   </select>
+   
 </sqlMap>
