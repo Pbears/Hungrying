@@ -79,7 +79,7 @@ var nodeList=document.getElementsByName("cb");
 	}
 
 	function StoreInsert(){
-		response.sendRedirect("/Bears/jsp/admin/insert/StoreInsert.jsp");
+		document.location.href='/Bears/jsp/admin/insert/StoreInsert.jsp';
 	}
 
 	function storeInfo(){
