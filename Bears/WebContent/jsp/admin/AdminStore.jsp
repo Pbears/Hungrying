@@ -16,6 +16,7 @@ tr:NTH-CHILD(even) {
 }
 </style>
 <script>
+var nodeList=document.getElementsByName("cb");
 	Date.prototype.getKorDay = function() {
 		var result = null;
 		switch (this.getDay()) {
@@ -78,11 +79,45 @@ tr:NTH-CHILD(even) {
 	}
 
 	function StoreInsert(){
-		response.sendRedirect("/Bears/jsp/admin/Insert/StoreInsert.jsp");
+		response.sendRedirect("/Bears/jsp/admin/insert/StoreInsert.jsp");
 	}
 
 	function storeInfo(){
-		window.open("/Bears/jsp/admin/Information/StoreInfo.jsp","stin","left=100,top=50,width=700,height=650");
+		window.open("/Bears/jsp/admin/information/StoreInfo.jsp","stin","left=100,top=50,width=700,height=650");
+	}
+	function allStore(obj){
+		selectCb(obj.checked);
+	}
+	function selectCb(flag){
+		 for(var i=0;i<nodeList.length;i++){
+			 nodeList[i].checked=flag?true:false;		 
+		 }
+	}
+	function oneCheck(pt,no){
+		  pt.value=pt.checked?no:0;
+		  
+		  var all=document.getElementById('allCheck');
+		  var test=false;
+		  for(var i=0;i<nodeList.length;i++){
+			  if(!nodeList[i].checked){
+				  test=true;
+			  }  
+		  }
+		  if(test)all.checked=false;
+		  else
+	      all.checked=true; 
+	 }
+	function deleteAll(){
+		var cnt=0;
+		 for(var i=0;i<nodeList.length;i++){
+			 if(nodeList[i].checked){
+				 cnt++;
+			 }
+		 }
+		 if(cnt==0){
+			 alert('하나라도 CHECK');return false;
+		 }
+		 document.listFrm.submit();
 	}
 </script>
 </head>
@@ -202,7 +237,7 @@ tr:NTH-CHILD(even) {
 									<button type="button" class="btn btn-default" onclick="StoreInsert()">추가</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-default">삭제</button>
+									<button type="button" class="btn btn-default" onclick="deleteAll()">삭제</button>
 								</td>
 							</div>
 						</tr>
@@ -218,6 +253,7 @@ tr:NTH-CHILD(even) {
 
 
 	<div id="data_table">
+	<form action="/Bears/jsp/delete/StoreDelete.jsp?state=all" method="post" name="listFrm">
 		<table class="bbsList" style="border-collapse: collapse;"
 			border="1px solid black">
 			<colgroup>
@@ -232,7 +268,7 @@ tr:NTH-CHILD(even) {
 				<col width="350" />
 			</colgroup>
 			<tr>
-				<th scope="col" style="text-align: center;"></th>
+				<th scope="col" style="text-align: center;"><input type="checkbox" id="allCheck" name="allCheck" onclick="allStore(this)"></th>
 				<th scope="col" style="text-align: center;">음식점명</th>
 				<th scope="col" style="text-align: center;">브랜드번호</th>
 				<th scope="col" style="text-align: center; padding-left: 5px;">평점</th>
@@ -250,7 +286,7 @@ tr:NTH-CHILD(even) {
 				
 				<tr>
 					<div id="select">
-						<td><input type="checkbox" onclick="selectStore(this)"></td>
+						<td><input type="checkbox" name="cb" id="cb" value="<%=vo.getStorename()%>" onclick="oneCheck(this,'<%=vo.getStorename()%>')"></td>
 						<td style="padding-bottom: 10px;"><a href="javascript:storeInfo()"><%=vo.getStorename()%></a></td>
 						<td><%=vo.getBrandno()%></td>
 						<td><%=vo.getGpa()%></td>
@@ -267,6 +303,7 @@ tr:NTH-CHILD(even) {
 				%>
 			</tbody>
 		</table>
+		</form>
 	</div>
 
 	<!-- 블럭이동페이징 -->

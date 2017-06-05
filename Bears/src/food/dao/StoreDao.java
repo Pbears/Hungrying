@@ -23,4 +23,7 @@ public class StoreDao {
 	public static int getTotalRow(HashMap<String, Object>map) throws Exception{
 	      return (Integer)sqlMapper.queryForObject("store.getTotalRow", map);
 	   }
+	public static void deleteStore(String storename) throws Exception{
+		sqlMapper.delete("store.deleteStore",storename);
+	}
 }

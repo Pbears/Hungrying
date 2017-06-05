@@ -38,4 +38,9 @@
        </isNotNull>     
      </dynamic>
    </select>
+   
+   <delete id="deleteStore" parameterClass="java.lang.String">
+		DELETE FROM STORE WHERE STORENAME = #storename#
+   </delete>
+   
 </sqlMap>
