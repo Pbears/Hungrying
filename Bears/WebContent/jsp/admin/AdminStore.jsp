@@ -254,7 +254,6 @@ tr:NTH-CHILD(even) {
 	<!-- /.row -->
 
 	<div id="data_table">
-<<<<<<< HEAD
 	<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all" method="post" name="listFrm">
 		<table class="bbsList" style="border-collapse: collapse;"
 			border="1px solid black">
@@ -285,10 +284,12 @@ tr:NTH-CHILD(even) {
 					for (int i = 0; i < list.size(); i++) {
 						StoreVo vo = list.get(i);
 				%>
-				<tr onclick="storeInfo('<%=vo.getStorename()%>')" value="<%=vo.getStorename()%>">
+				<tr >
 					<div id="select">
 						<td><input type="checkbox" name="cb" id="cb" value="<%=vo.getStorename()%>" onclick="oneCheck(this,'<%=vo.getStorename()%>')"></td>
-						<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
+						<td style="padding-bottom: 10px;">
+						<a href="javascript:storeInfo('<%=vo.getStorename()%>')"><%=vo.getStorename()%></a>
+						</td>
 						<td><%=vo.getBrandno()%></td>
 						<td><%=vo.getGpa()%></td>
 						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
@@ -297,83 +298,11 @@ tr:NTH-CHILD(even) {
 						<td><%=vo.getMinprice()%></td>
 						<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
 					</div>
-=======
-		<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all"
-			method="post" name="listFrm">
-			<table class="table">
-				<colgroup>
-					<col width="50" />
-					<col width="200" />
-					<col width="150" />
-					<col width="60" />
-					<col width="350" />
-					<col width="150" />
-					<col width="250" />
-					<col width="180" />
-					<col width="350" />
-				</colgroup>
-				<tr id="tableHead">
-					<th style="text-align: center; vertical-align: middle;"><input type="checkbox"
-						id="allCheck" name="allCheck" onclick="allStore(this)"></th>
-					<th style="text-align: center; vertical-align: middle;">음식점명</th>
-					<th style="text-align: center; vertical-align: middle;">브랜드번호</th>
-					<th style="text-align: center; vertical-align: middle;">평점</th>
-					<th style="text-align: center; vertical-align: middle;">위치</th>
-					<th style="text-align: center; vertical-align: middle;">영업시간</th>
-					<th style="text-align: center; vertical-align: middle;">전화번호</th>
-					<th style="text-align: center; vertical-align: middle;">배달최저가격</th>
-					<th style="text-align: center; vertical-align: middle;">소개</th>
->>>>>>> branch 'master' of https://github.com/Pbears/Hungrying.git
-				</tr>
-<<<<<<< HEAD
 				<%
 					}
 				%>
 			</tbody>
 		</table>
-=======
-				<tbody>
-					<%
-						for (int i = 0; i < list.size(); i++) {
-							StoreVo vo = list.get(i);
-					%>
-					<tr height="50px">
-						<div id="select">
-							<td style="text-align: center; vertical-align: middle;">
-								<input type="checkbox" name="cb" id="cb" value="<%=vo.getStorename()%>" onclick="oneCheck(this,'<%=vo.getStorename()%>')">
-							</td>
-							<td style="text-align: center; vertical-align: middle;">
-								<a href="javascript:storeInfo()"><%=vo.getStorename()%></a>
-							</td>
-							<td style="text-align: center; vertical-align: middle;">
-							<%=vo.getBrandno()%>
-								</td>
-							<td style="text-align: center; vertical-align: middle;">
-								<%=vo.getGpa()%>
-							</td>
-							<td style="text-align: center; vertical-align: middle;">
-								<%=vo.getLocation()%>
-							</td>
-							<td style="text-align: center; vertical-align: middle;">
-								<%=vo.getHours()%>
-							</td>
-							<td style="text-align: center; vertical-align: middle;">
-								<%=vo.getTel()%>
-							</td>
-							<td style="text-align: center; vertical-align: middle;">
-								<%=vo.getMinprice()%>
-							</td>
-							<td style="text-align: center; vertical-align: middle;">
-								<%=vo.getInfo()%>
-							</td>
-						</div>
-					</tr>
-					<%
-						}
-					%>
-				</tbody>
-			</table>
->>>>>>> branch 'master' of https://github.com/Pbears/Hungrying.git
 		</form>
 	</div>
 
