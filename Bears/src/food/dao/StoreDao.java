@@ -36,4 +36,9 @@ public class StoreDao {
 		sqlMapper.insert("store.insertStore",storevo);
 	}
 	
+	//update
+	public static void updateStore(StoreVo storeVo) throws Exception{
+		sqlMapper.update("store.updateStore", storeVo);
+	}
+	
 }
