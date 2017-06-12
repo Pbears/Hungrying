@@ -52,4 +52,9 @@
     SELECT * FROM STORE WHERE STORENAME = #storename#
    </select>
    
+   <update id="updateStore" parameterClass="store">
+   	UPDATE STORE SET HOURS=#hours#,TEL=#tel#, MINPRICE=#minprice#, INFO=#info#
+   	WHERE STORENAME=#storename#
+   </update>
+   
 </sqlMap>
