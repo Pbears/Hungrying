@@ -80,10 +80,7 @@
 %>
 	<h2 align="center">음식점 상세 정보 </h2><br>
 	<div id="mainDiv">
-		<div id="leftDiv">
-			<img src="/Bears/img/wait.gif" style="vertical-align: middle;">
-		</div>
-		 <div id="rightDiv">
+		 <div id="leftDiv">
 		 	<h2 align="center"> 상세정보 </h2><br>
 		 <!-- Store에 대한 정보 -->
 		 <form action="StoreUpdate.jsp" method="post" name="storeInfo">
@@ -117,6 +114,9 @@
 			</div>
 			</form>
 		</div> 
+		<div id="rightDiv">
+			<img src="/Bears/img/wait.gif" style="vertical-align: middle;">
+		</div>
 		<br>
 	</div>
 	
