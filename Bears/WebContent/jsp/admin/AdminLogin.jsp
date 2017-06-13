@@ -34,6 +34,7 @@ body {
 	margin: 0 auto;
 }
 
+
 #inDiv {
 	background-color: rgba(255, 255, 255, 0.5);
 	display: inline-block;
