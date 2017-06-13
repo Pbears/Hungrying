@@ -1,73 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<title>관리자</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=7" />
-<meta http-equiv="imagetoolbar" content="no" />
-<meta name="copyright"
-	content="Copyright 2009 @ high1 all rights reserved" />
-<link href="/Bears/css/contents.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/Bears/css/bootstrap.css" />
+<title>Insert title here</title>
 <script>
-	// 로그인체크
 	function loginCheck() {
 		var obj = document.login;
-		if (!obj.user_id.value || !obj.user_passwd.value) {
+		if (!obj.id.value || !obj.pw.value) {
 			alert('ID or PW CHECK!');
-			obj.user_id.value = '';
-			obj.user_passwd.value = '';
-			obj.user_id.focus();
+			obj.id.value = '';
+			obj.pw.value = '';
+			obj.id.focus();
 		} else {
 			obj.submit();
 		}
 	}
 </script>
-<style>
-.logo {
-	padding-right: 30px;
+<style>  
+body {
+	width: 100%;
+	background-image: url('/Bears/img/background/login.jpg');
+	opacity: 1;
+	text-align: center;
+}
+
+#mainDiv {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 300px;
+	margin: 0 auto;
+}
+
+#inDiv {
+	background-color: rgba(255, 255, 255, 0.5);
+	display: inline-block;
+	vertical-align: middle;
+	padding: 50px;
+	margin: 0 auto;
 }
 </style>
 </head>
 <body>
-	<form name="login" method="post"
-		action="/Bears/jsp/admin/AdminLoginProcess.jsp">
-		<div id="loginWrapper">
-
-
-			<div class="loginForm" style="display: inline;">
-
-				<fieldset>
-					<div>
-						<img src="/Bears/logo/logoCircle.png" id="logo" width="100px"
-							height="100px" alt="메인로고" />
-					</div>
-					<div>
-
-					<legend>관리자 시스템 로그인</legend>
-					<dl>
-						<dt>
-							<img src="/Bears/img/common/th_id.gif" alt="아이디" />
-						</dt>
-						<dd>
-							<input type="text" name="id" class="text" id="user_id" />
-						</dd>
-						<dt>
-							<img src="/Bears/img/common/th_pw.gif" alt="비밀번호" />
-						</dt>
-						<dd>
-							<input type="password" name="pw" class="text" id="user_passwd" />
-						</dd>
-					</dl>
-										
-					</div>
-					<div class="btn">
-						<input id="btnSubmit" type="image"
-							src="/Bears/img/button/btn_login.gif" alt="LOGIN" title="LOGIN"
-							onclick="loginCheck()">
-					</div>
-				</fieldset>
+	<form action="/Bears/jsp/admin/AdminLoginProcess.jsp" method="post" name="login">
+		<div id="mainDiv" class="input-group">
+			<div id="inDiv" class="input-group">
+				<input type="text" name="id" id="id" class="form-control" placeholder="User ID"> 
+				<input type="password" name="pw" id="pw" class="form-control" placeholder="User PW"> 
+				<input type="button" class="form-control" value="Login" onclick="loginCheck()">
 			</div>
 		</div>
 	</form>

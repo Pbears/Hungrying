@@ -1,3 +1,5 @@
+<%@page import="food.dao.MenuDao"%>
+<%@page import="food.vo.MenuVo"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="food.dao.StoreDao"%>
 <%@page import="food.vo.StoreVo"%>
@@ -76,15 +78,13 @@ tr:NTH-CHILD(even) {
 			obj.submit();
 		}
 	}
-	function selectStore(obj) {
 
-	}
 </script>
 </head>
 <body onload="datePro()">
 	<%
 		request.setCharacterEncoding("EUC-KR");
-		List<StoreVo> list = null;
+		List<MenuVo> list = MenuDao.selectMenu();
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -120,13 +120,13 @@ tr:NTH-CHILD(even) {
 		map.put("start", start);
 		map.put("end", end);
 		
-		if (query != null && data != null) {
+	/* 	if (query != null && data != null) {
 			map.put("query", query);
 			map.put("data", data);
 			list = StoreDao.searchStore(map);
 		} else {
 			list = StoreDao.searchStore(map);
-		}
+		} */
 	%>
 	<!-- Top ¸Þ´º -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -237,20 +237,17 @@ tr:NTH-CHILD(even) {
 			<tbody>
 				<%
 					for (int i = 0; i < list.size(); i++) {
-						StoreVo vo = list.get(i);
+						MenuVo vo = list.get(i);
 				%>
 				<tr>
 					<div id="select">
 						<td><input type="checkbox" aria-label="..."
 							onclick="selectStore(this)"></td>
-						<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
+						<td style="padding-bottom: 10px;"><%=vo.getMenuname()%></td>
 						<td><%=vo.getBrandno()%></td>
-						<td><%=vo.getGpa()%></td>
-						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
-						<td><%=vo.getHours()%></td>
-						<td><%=vo.getTel()%></td>
-						<td><%=vo.getMinprice()%></td>
-						<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
+						<td><%=vo.getPrice()%></td>
+						<td><%=vo.getInfo()%></td>
+						<td><img src="<%=vo.getPicture()%>"></td>
 					</div>
 				</tr>
 				<%
