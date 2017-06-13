@@ -1,4 +1,3 @@
-<%@page import="food.dao.MenuDao"%>
 <%@page import="food.vo.MenuVo"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="food.dao.StoreDao"%>
@@ -84,7 +83,6 @@ tr:NTH-CHILD(even) {
 <body onload="datePro()">
 	<%
 		request.setCharacterEncoding("EUC-KR");
-		List<MenuVo> list = MenuDao.selectMenu();
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -235,24 +233,17 @@ tr:NTH-CHILD(even) {
 				<th scope="col" style="text-align: center;">¼Ò°³</th>
 			</tr>
 			<tbody>
-				<%
-					for (int i = 0; i < list.size(); i++) {
-						MenuVo vo = list.get(i);
-				%>
 				<tr>
 					<div id="select">
 						<td><input type="checkbox" aria-label="..."
 							onclick="selectStore(this)"></td>
-						<td style="padding-bottom: 10px;"><%=vo.getMenuname()%></td>
-						<td><%=vo.getBrandno()%></td>
-						<td><%=vo.getPrice()%></td>
-						<td><%=vo.getInfo()%></td>
-						<td><img src="<%=vo.getPicture()%>"></td>
+						<td style="padding-bottom: 10px;"></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</div>
 				</tr>
-				<%
-					}
-				%>
 			</tbody>
 		</table>
 	</div>
