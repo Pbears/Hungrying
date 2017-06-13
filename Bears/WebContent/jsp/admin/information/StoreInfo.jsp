@@ -83,7 +83,7 @@
 		 <div id="leftDiv">
 		 	<h2 align="center"> 상세정보 </h2><br>
 		 <!-- Store에 대한 정보 -->
-		 <form action="StoreUpdate.jsp" method="post" name="storeInfo">
+		 <form action="/Bears/jsp/admin/update/StoreUpdate.jsp" method="post" name="storeInfo">
 			<h4>음식점이름</h4> 
 				<input type="text" value="<%=bean.getStorename() %>"class="form-control" placeholder="storename" aria-describedby="basic-addon2" disabled="disabled">
 				<input type="hidden" value="<%=bean.getStorename() %>" name="storename" class="form-control">
