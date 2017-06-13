@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
-<title>음식점 세부 정보</title>
+<title>음식점 상세 정보</title>
 <style type="text/css">
 #mainDiv{
 	width: 80%;
@@ -67,7 +67,7 @@
 	String storename = java.net.URLDecoder.decode(request.getParameter("storename"), "UTF-8");
 	StoreVo bean = StoreDao.selectOneStore(storename);
 %>
-	<h2 align="center"> 상세정보 </h2><br>
+	<h2 align="center">음식점 상세 정보 </h2><br>
 	
 	<div id="mainDiv">
 		 <div id="innerDiv">
@@ -101,7 +101,7 @@
 		</div> 
 		<br>
 		<div id="buttonDiv">
-			<button type="button" class="btn btn-default" onclick="updateConfirm()">수정완료</button>
+			<button type="button" class="btn btn-default" onclick="updateConfirm()">수정</button>
 			<button type="button" class="btn btn-default" onclick="backAdminStore()">취소</button>
 		</div>
 	</div>

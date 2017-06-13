@@ -4,12 +4,33 @@
     PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
     
-<sqlMap namespace="admin">
-	<typeAlias alias="vo" type="food.vo.AdminVo"/>
-	<select id="idCheck" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT PW FROM admins WHERE ID=#value#
+<sqlMap namespace="member">
+	<typeAlias alias="memberVo" type="food.vo.MemberVo"/>
+	<select id="selectMember" resultClass="memberVo">
+		SELECT ID,PW,NAME,ADDRESS,TEL,GENDER,TO_CHAR(BIRTH,'YY/MM/DD')BIRTH FROM MEMBER
 	</select>
-	<select id="getName" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT NAME FROM admins WHERE ID=#value#
+	<select id="searchMember" resultClass="memberVo" parameterClass="java.util.HashMap">
+		<!-- SELECT STORENAME,BRANDNO,LOCATION,GPA,HOURS,TEL,MINPRICE,INFO
+		FROM STORE -->
+		SELECT RM, ID,PW,NAME,ADDRESS,TEL,GENDER,BIRTH
+		FROM(
+			SELECT ROW_NUMBER( ) OVER(ORDER BY ID
+		DESC)RM,ID,PW,NAME,ADDRESS,TEL,GENDER,BIRTH
+		FROM STORE	
+		<dynamic prepend="where">
+			<isNotNull property="query">
+				$query$ LIKE '%'||#data#||'%'
+			</isNotNull>
+		</dynamic> 
+		)
+		WHERE RM BETWEEN #start# AND #end#
+		ORDER BY ID
+		
 	</select>
+	
+	<select id="selectOneMember" parameterClass="java.lang.String" resultClass="memberVo">
+		SELECT ID,PW,NAME,ADDRESS,TEL,GENDER,TO_CHAR(BIRTH,'YY/MM/DD')BIRTH FROM MEMBER
+		WHERE ID=#memberid#
+	</select>
+	
 </sqlMap>

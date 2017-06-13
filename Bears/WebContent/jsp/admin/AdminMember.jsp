@@ -1,3 +1,5 @@
+<%@page import="food.dao.MemberDao"%>
+<%@page import="food.vo.MemberVo"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="food.dao.StoreDao"%>
 <%@page import="food.vo.StoreVo"%>
@@ -76,15 +78,15 @@ tr:NTH-CHILD(even) {
 			obj.submit();
 		}
 	}
-	function selectStore(obj) {
-
+	function memberInfo(membername) {
+		window.open("/Bears/jsp/admin/information/MemberInfo.jsp?membername="+encodeURI(membername,"UTF-8"),"stin","left=150,top=70,width=1600,height=850");
 	}
 </script>
 </head>
 <body onload="datePro()">
 	<%
 		request.setCharacterEncoding("EUC-KR");
-		List<StoreVo> list = null;
+		List<MemberVo> list = null;
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -120,13 +122,13 @@ tr:NTH-CHILD(even) {
 		map.put("start", start);
 		map.put("end", end);
 		
-		if (query != null && data != null) {
+		/* if (query != null && data != null) {
 			map.put("query", query);
 			map.put("data", data);
-			list = StoreDao.searchStore(map);
+			list = MemberDao.searchMember(map);
 		} else {
-			list = StoreDao.searchStore(map);
-		}
+			list = MemberDao.searchMember(map);
+		}  */
 	%>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -174,9 +176,9 @@ tr:NTH-CHILD(even) {
 							<td height="50">
 								<select name="query" size="1" style="height: 34px;">
 									<option value="empty" selected="selected">선택하세요</option>
-									<option value="storename">음식점명</option>
-									<option value="brandno">브랜드번호</option>
-									<option value="location">위치</option>
+									<option value="id">아이디</option>
+									<option value="name">이름</option>
+									<option value="address">주소</option>
 								</select>
 							</td>
 							<td>
@@ -216,41 +218,37 @@ tr:NTH-CHILD(even) {
 				<col width="50" />
 				<col width="200" />
 				<col width="150" />
-				<col width="60" />
-				<col width="350" />
+				<col width="70" />
 				<col width="150" />
-				<col width="250" />
-				<col width="180" />
-				<col width="350" />
+				<col width="700" />
+				<col width="200" />
 			</colgroup>
 			<tr>
 				<th scope="col" style="text-align: center;"></th>
-				<th scope="col" style="text-align: center;">음식점명</th>
-				<th scope="col" style="text-align: center;">브랜드번호</th>
-				<th scope="col" style="text-align: center; padding-left: 5px;">평점</th>
-				<th scope="col" style="text-align: center;">위치</th>
-				<th scope="col" style="text-align: center;">영업시간</th>
-				<th scope="col" style="text-align: center;">전화번호</th>
-				<th scope="col" style="text-align: center;">배달최저가격</th>
-				<th scope="col" style="text-align: center;">소개</th>
+				<th scope="col" style="text-align: center;">아이디</th>
+				<th scope="col" style="text-align: center; padding-left: 5px;">이름</th>
+				<th scope="col" style="text-align: center;">성별</th>
+				<th scope="col" style="text-align: center;">생년월일</th>
+				<th scope="col" style="text-align: center;">주소</th>
+				<th scope="col" style="text-align: center;">핸드폰번호</th>
 			</tr>
 			<tbody>
 				<%
+					list = MemberDao.selectMember();
 					for (int i = 0; i < list.size(); i++) {
-						StoreVo vo = list.get(i);
+						MemberVo vo = list.get(i);
 				%>
 				<tr>
 					<div id="select">
 						<td><input type="checkbox" aria-label="..."
 							onclick="selectStore(this)"></td>
-						<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
-						<td><%=vo.getBrandno()%></td>
-						<td><%=vo.getGpa()%></td>
-						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
-						<td><%=vo.getHours()%></td>
+						<td style="padding-bottom: 10px;">
+							<a href="javascript:memberInfo('<%=vo.getId()%>')"><%=vo.getId()%></a></td>
+						<td><%=vo.getName()%></td>
+						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getGender()%></td>
+						<td><%=vo.getBirth()%></td>
+						<td><%=vo.getAddress()%></td>
 						<td><%=vo.getTel()%></td>
-						<td><%=vo.getMinprice()%></td>
-						<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
 					</div>
 				</tr>
 				<%
