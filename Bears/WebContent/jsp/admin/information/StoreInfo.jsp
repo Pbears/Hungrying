@@ -10,14 +10,24 @@
 <title>음식점 상세 정보</title>
 <style type="text/css">
 #mainDiv{
-	width: 80%;
-	height : 80%;
+	width: 100%;
+	height : 100%;
 	margin: 0 auto;
 }
-#innerDiv {
-	width : 40%;
+#rightDiv, #leftDiv {
+	width : 50%;
 	margin : 0 auto;
 	vertical-align: middle;
+}
+#leftDiv{
+	float:left;
+	padding:30px;
+	margin: 0 auto;
+}
+#rightDiv{
+	display:inline-block;
+	padding:30px;
+	margin: 0 auto;
 }
 #buttonDiv{
 	width : 50%;
@@ -60,6 +70,7 @@
 			return 0;
 		}
 	}
+	
 </script>
 <body>
 <%
@@ -68,9 +79,12 @@
 	StoreVo bean = StoreDao.selectOneStore(storename);
 %>
 	<h2 align="center">음식점 상세 정보 </h2><br>
-	
 	<div id="mainDiv">
-		 <div id="innerDiv">
+		<div id="leftDiv">
+			<img src="/Bears/img/wait.gif" style="vertical-align: middle;">
+		</div>
+		 <div id="rightDiv">
+		 	<h2 align="center"> 상세정보 </h2><br>
 		 <!-- Store에 대한 정보 -->
 		 <form action="StoreUpdate.jsp" method="post" name="storeInfo">
 			<h4>음식점이름</h4> 
@@ -96,14 +110,14 @@
 				<input type="hidden" value="<%=bean.getMinprice() %>" name="minprice" class="form-control">
 			<h4>음식점정보</h4> 
 				<input type="text" value="<%=bean.getInfo() %>" name="info1" class="form-control" placeholder="info" aria-describedby="basic-addon2" onchange="setInfo()">
-				<input type="hidden" value="<%=bean.getInfo() %>" name="info" class="form-control">
+				<input type="hidden" value="<%=bean.getInfo() %>" name="info" class="form-control"><br><br>
+			<div id="buttonDiv">
+				<button type="button" class="btn btn-default" onclick="updateConfirm()">수정</button>
+				<button type="button" class="btn btn-default" onclick="backAdminStore()">취소</button>
+			</div>
 			</form>
 		</div> 
 		<br>
-		<div id="buttonDiv">
-			<button type="button" class="btn btn-default" onclick="updateConfirm()">수정</button>
-			<button type="button" class="btn btn-default" onclick="backAdminStore()">취소</button>
-		</div>
 	</div>
 	
 	
