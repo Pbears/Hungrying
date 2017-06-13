@@ -15,6 +15,10 @@ public class StoreDao {
 	public static List<StoreVo> selectStore() throws Exception{
 		return sqlMapper.queryForList("store.selectStore");
 	}
+	// select * from store where storename=#storename#
+	public static StoreVo selectOneStore(String storename) throws Exception{
+		return (StoreVo)sqlMapper.queryForObject("store.selectOneStore", storename);
+	}
 	
 	public static List<StoreVo> searchStore(HashMap<String,Object>map)throws Exception{
         return sqlMapper.queryForList("store.searchStore",map);
@@ -26,4 +30,15 @@ public class StoreDao {
 	public static void deleteStore(String storename) throws Exception{
 		sqlMapper.delete("store.deleteStore",storename);
 	}
+	
+	//insert 
+	public static void insertStore(StoreVo storevo) throws Exception{
+		sqlMapper.insert("store.insertStore",storevo);
+	}
+	
+	//update
+	public static void updateStore(StoreVo storeVo) throws Exception{
+		sqlMapper.update("store.updateStore", storeVo);
+	}
+	
 }
