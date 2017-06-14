@@ -2,7 +2,8 @@
 <%@page import="food.dao.StoreDao"%>
 <%@page import="food.vo.StoreVo"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -77,12 +78,14 @@ tr:NTH-CHILD(even) {
 		}
 	}
 
-	function StoreInsert(){
-		document.location.href='/Bears/jsp/admin/insert/StoreInsert.jsp';
+	function StoreInsert() {
+		document.location.href = '/Bears/jsp/admin/insert/StoreInsert.jsp';
 	}
 
-	function storeInfo(storename){
-		window.open("/Bears/jsp/admin/information/StoreInfo.jsp?storename="+encodeURI(storename,"UTF-8"),"stin","left=150,top=50,width=1600,height=850");
+	function storeInfo(storename) {
+		window.open("/Bears/jsp/admin/information/StoreInfo.jsp?storename="
+				+ encodeURI(storename, "UTF-8"), "stin",
+				"left=150,top=50,width=1600,height=850");
 	}
 	function allStore(obj) {
 		selectCb(obj.checked);
@@ -126,38 +129,32 @@ tr:NTH-CHILD(even) {
 	<%
 		request.setCharacterEncoding("EUC-KR");
 		List<StoreVo> list = null;
-
-		HashMap<String, Object> map = new HashMap<String, Object>();
-
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
-
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		int pageScale = 10;
-
 		map.put("Q", query);
 		map.put("D", data);
 		int totalRow = StoreDao.getTotalRow(map);
 
 		int currentPage = 0;
-
 		try {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		} catch (Exception e) {
 			currentPage = 1;
 		}
-
 		int totalPage = totalRow % pageScale == 0 ? totalRow / pageScale : totalRow / pageScale + 1;
 		if (totalRow == 0)
 			totalPage = 1;
 		int start = 1 + (currentPage - 1) * pageScale;
 		int end = pageScale + (currentPage - 1) * pageScale;
-
-		int currentBlock = currentPage % pageScale == 0 ? (currentPage / pageScale) : (currentPage / pageScale) + 1;
+		//out.print(query+"   "+data ); //출력확인
+		int currentBlock = currentPage % pageScale == 0 ? (currentPage / pageScale) : (currentPage / pageScale + 1);
 		int startPage = 1 + (currentBlock - 1) * pageScale;
 		int endPage = pageScale + (currentBlock - 1) * pageScale;
+		//   out.println(startPage+" "+endPage+ " "+currentBlock+" "+totalPage);
 		if (totalPage <= endPage)
 			endPage = totalPage;
-
 		map.put("start", start);
 		map.put("end", end);
 
@@ -254,96 +251,161 @@ tr:NTH-CHILD(even) {
 	<!-- /.row -->
 
 	<div id="data_table">
-	<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all" method="post" name="listFrm">
-		<table class="bbsList" style="border-collapse: collapse;"
-			border="1px solid black">
-			<colgroup>
-				<col width="50" />
-				<col width="200" />
-				<col width="150" />
-				<col width="60" />
-				<col width="350" />
-				<col width="150" />
-				<col width="250" />
-				<col width="180" />
-				<col width="350" />
-			</colgroup>
-			<tr>
-				<th scope="col" style="text-align: center;"><input type="checkbox" id="allCheck" name="allCheck" onclick="allStore(this)"></th>
-				<th scope="col" style="text-align: center;">음식점명</th>
-				<th scope="col" style="text-align: center;">브랜드번호</th>
-				<th scope="col" style="text-align: center; padding-left: 5px;">평점</th>
-				<th scope="col" style="text-align: center;">위치</th>
-				<th scope="col" style="text-align: center;">영업시간</th>
-				<th scope="col" style="text-align: center;">전화번호</th>
-				<th scope="col" style="text-align: center;">배달최저가격</th>
-				<th scope="col" style="text-align: center;">소개</th>
-			</tr>
-			<tbody>
-				<%
-					for (int i = 0; i < list.size(); i++) {
-						StoreVo vo = list.get(i);
-				%>
-				<tr >
-					<div id="select">
-						<td><input type="checkbox" name="cb" id="cb" value="<%=vo.getStorename()%>" onclick="oneCheck(this,'<%=vo.getStorename()%>')"></td>
-						<td style="padding-bottom: 10px;">
-						<a href="javascript:storeInfo('<%=vo.getStorename()%>')"><%=vo.getStorename()%></a>
-						</td>
-						<td><%=vo.getBrandno()%></td>
-						<td><%=vo.getGpa()%></td>
-						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
-						<td><%=vo.getHours()%></td>
-						<td><%=vo.getTel()%></td>
-						<td><%=vo.getMinprice()%></td>
-						<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
-					</div>
-				<%
-					}
-				%>
-			</tbody>
-		</table>
+		<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all"
+			method="post" name="listFrm">
+			<table class="bbsList" style="border-collapse: collapse;"
+				border="1px solid black">
+				<colgroup>
+					<col width="50" />
+					<col width="200" />
+					<col width="150" />
+					<col width="60" />
+					<col width="350" />
+					<col width="150" />
+					<col width="250" />
+					<col width="180" />
+					<col width="350" />
+				</colgroup>
+				<tr>
+					<th scope="col" style="text-align: center;"><input
+						type="checkbox" id="allCheck" name="allCheck"
+						onclick="allStore(this)"></th>
+					<th scope="col" style="text-align: center;">음식점명</th>
+					<th scope="col" style="text-align: center;">브랜드번호</th>
+					<th scope="col" style="text-align: center; padding-left: 5px;">평점</th>
+					<th scope="col" style="text-align: center;">위치</th>
+					<th scope="col" style="text-align: center;">영업시간</th>
+					<th scope="col" style="text-align: center;">전화번호</th>
+					<th scope="col" style="text-align: center;">배달최저가격</th>
+					<th scope="col" style="text-align: center;">소개</th>
+				</tr>
+				<tbody>
+					<%
+						for (int i = 0; i < list.size(); i++) {
+							StoreVo vo = list.get(i);
+					%>
+					<tr>
+						<div id="select">
+							<td><input type="checkbox" name="cb" id="cb"
+								value="<%=vo.getStorename()%>"
+								onclick="oneCheck(this,'<%=vo.getStorename()%>')"></td>
+							<td style="padding-bottom: 10px;"><a
+								href="javascript:storeInfo('<%=vo.getStorename()%>')"><%=vo.getStorename()%></a>
+							</td>
+							<td><%=vo.getBrandno()%></td>
+							<td><%=vo.getGpa()%></td>
+							<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
+							<td><%=vo.getHours()%></td>
+							<td><%=vo.getTel()%></td>
+							<td><%=vo.getMinprice()%></td>
+							<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
+						</div>
+						<%
+							}
+						%>
+					
+				</tbody>
+			</table>
 		</form>
 	</div>
 
-	<!-- 블럭이동페이징 -->
-	<nav>
-	<ul class="pager">
-		<%
-			if (currentBlock > 1) {
-		%>
-		<li><a href="AdminStore.jsp?page=<%=startPage - 1%>">Previous</a></li>
-		<%
-			}
-			if (totalPage > endPage) {
-		%>
-		<li><a href="AdminStore.jsp?page=<%=endPage + 1%>">Next</a></li>
-		<%
-			}
-		%>
-	</ul>
-	</nav>
-
 	<!-- 페이지이동페이징 -->
-	<div style="text-align: center;">
-		<nav>
+	<div class="paging" style="text-align: center;">
 		<ul class="pagination">
-			<li><a href="AdminStore.jsp?page=1" aria-label="Previous"> <span
-					aria-hidden="true">&laquo;</span>
-			</a></li>
+			<ul class="pager">
+   			<li>
+				<a href="AdminStore.jsp?page=1" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			<li>
+			<li>
+			
 			<%
-				for (int i = startPage; i <= endPage; i++) {
+				if (currentBlock > 1) {
+					if (currentPage != startPage) {
 			%>
-			<li><a href="AdminStore.jsp?page=<%=i%>"><%=i%></a></li>
+					<a href="AdminStore.jsp?page=<%=startPage - 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+						Previous
+					</a>
 			<%
+					}else{
+			%>
+						<a href="#">Previous</a>
+			<% 
+					}
+				}else {
+					if (currentPage != startPage) {
+			%>
+						<a href="AdminStore.jsp?page=<%=currentPage - 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+							Previous
+						</a>
+			<%
+					}else{
+			%>
+						<a href="#">Previous</a>
+			<%
+					}
 				}
 			%>
-
-			<li><a href="AdminStore.jsp?page=<%=totalPage%>"
-				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
+			</li>
+		<span> 
+			<%
+ 				for (int i = startPage; i <= endPage; i++) {
+ 					if (i == currentPage) {
+ 			%> 
+ 					<li>
+ 						<a href="#"><strong><%=i %></strong></a>
+ 					</li> 
+ 			<%
+ 					} else {
+ 			%> 
+ 					<li>
+ 						<a href="AdminStore.jsp?page=<%=i%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+ 							<%=i %>
+						</a>
+					</li>
+			<%
+ 					}
+ 				}
+ 			%>
+		</span>
+		<li>
+		<%
+			if (totalPage > endPage) {
+				if (currentPage != endPage) {
+		%>
+					<a href="AdminStore.jsp?page=<%=currentPage + 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+						Next
+					</a>
+		<%
+				} else {
+		%>
+					<a href="#">Next</a>
+		<%
+				}
+			}else{
+				if (currentPage != endPage) {
+		%>
+					<a href="AdminStore.jsp?page=<%=currentPage + 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+						Next
+					</a>
+		<%
+				}else{
+		%>
+					<a href="#">Next</a>
+		<%
+				}
+			}
+		%>
+		</li>
+		
+		<li>
+			<a href="editList.jsp?page=<%=totalPage%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
 		</ul>
-		</nav>
 	</div>
 </body>
 </html>
