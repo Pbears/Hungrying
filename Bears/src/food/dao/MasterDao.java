@@ -4,23 +4,42 @@ import java.util.HashMap;
 import java.util.List;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import food.util.ServiceUtil;
-import food.vo.StoreVo;
+import food.vo.MasterVo;
+import food.vo.MasterVo;
 
 public class MasterDao {
 	private static SqlMapClient sqlMapper;
 	static {
 		sqlMapper = ServiceUtil.getSqlMap();
 	}
-	// select * from store;
-	public static List<StoreVo> selectStore() throws Exception{
-		return sqlMapper.queryForList("store.selectStore");
+
+	public static List<MasterVo> selectMaster() throws Exception {
+		return sqlMapper.queryForList("master.selectMaster");
 	}
-	
-	public static List<StoreVo> searchStore(HashMap<String,Object>map)throws Exception{
-        return sqlMapper.queryForList("store.searchStore",map);
+
+	public static MasterVo selectOneMaster(String storename) throws Exception {
+		return (MasterVo) sqlMapper.queryForObject("master.selectOneMaster", storename);
 	}
-	
-	public static int getTotalRow(HashMap<String, Object>map) throws Exception{
-	      return (Integer)sqlMapper.queryForObject("store.getTotalRow", map);
-	   }
+
+	public static List<MasterVo> searchMaster(HashMap<String, Object> map) throws Exception {
+		return sqlMapper.queryForList("master.searchMaster", map);
+	}
+
+	public static int getTotalRow(HashMap<String, Object> map) throws Exception {
+		return (Integer) sqlMapper.queryForObject("master.getTotalRow", map);
+	}
+
+	public static void deleteMaster(String storename) throws Exception {
+		sqlMapper.delete("master.deleteMaster", storename);
+	}
+
+	// insert
+	public static void insertMaster(MasterVo Mastervo) throws Exception {
+		sqlMapper.insert("master.insertMaster", Mastervo);
+	}
+
+	// update
+	public static void updateMaster(MasterVo MasterVo) throws Exception {
+		sqlMapper.update("master.updateMaster", MasterVo);
+	}
 }

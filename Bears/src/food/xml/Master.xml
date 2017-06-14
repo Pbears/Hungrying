@@ -3,13 +3,53 @@
 <!DOCTYPE sqlMap      
     PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-    
-<sqlMap namespace="admin">
-	<typeAlias alias="vo" type="food.vo.AdminVo"/>
-	<select id="idCheck" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT PW FROM admins WHERE ID=#value#
+
+<sqlMap namespace="master">
+	<typeAlias alias="master" type="food.vo.MasterVo"/>
+	<select id="selectMaster" resultClass="master">
+		SELECT ID,PW,NAME,ADDRESS,TEL,TO_CHAR(BIRTH,'YYYY/MM/DD')BIRTH,STORENAME FROM MASTER
 	</select>
-	<select id="getName" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT NAME FROM admins WHERE ID=#value#
+	<select id="searchMaster" resultClass="master" parameterClass="java.util.HashMap">
+		SELECT RM,ID,NAME,ADDRESS,TEL,BIRTH,STORENAME
+		FROM(
+			SELECT ROW_NUMBER() OVER(ORDER BY STORENAME
+		DESC)RM,ID,NAME,ADDRESS,TEL,TO_CHAR(BIRTH,'YYYY/MM/DD')BIRTH,STORENAME
+		FROM MASTER
+		<dynamic prepend="where">
+			<isNotNull property="query">
+				$query$ LIKE '%'||#data#||'%'
+			</isNotNull>
+		</dynamic> 
+		)
+		WHERE RM BETWEEN #start# AND #end#
+		ORDER BY STORENAME
+		
 	</select>
+	
+	<select id="getTotalRow"  resultClass="java.lang.Integer" parameterClass="java.util.HashMap">
+      SELECT COUNT(*) FROM MASTER
+      <dynamic prepend="where">
+       <isNotNull property="Q">
+         $Q$ LIKE '%'||#D#||'%'
+       </isNotNull>     
+     </dynamic>
+   </select>
+   
+   <delete id="deleteMaster" parameterClass="java.lang.String">
+		DELETE FROM MASTER WHERE STORENAME = #storename#
+   </delete>
+   
+   <insert id="insertMaster" parameterClass="master">
+   		INSERT INTO MASTER VALUES(
+   		#id#,#pw#,#name#,#address#,#tel#,#birth#,#storename#)
+   </insert>
+   
+   <select id="selectOneMaster" parameterClass="java.lang.String" resultClass="master">
+    	SELECT ID,PW,NAME,ADDRESS,TEL,TO_CHAR(BIRTH,'YY/MM/DD')BIRTH,STORENAME FROM MASTER WHERE STORENAME = #storename#
+   </select>
+   
+   <update id="updateMaster" parameterClass="master">
+	   	UPDATE MASTER SET NAME=#name#,ADDRESS=#address#,TEL=#tel#,BIRTH=#birth#
+	   	WHERE STORENAME=#storename#
+   </update>
 </sqlMap>

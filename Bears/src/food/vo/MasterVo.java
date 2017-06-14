@@ -6,7 +6,7 @@ public class MasterVo {
 	private String name;
 	private String address;
 	private String tel;
-	private String date;
+	private String birth;
 	private String storename;
 
 	public String getId() {
@@ -49,12 +49,14 @@ public class MasterVo {
 		this.tel = tel;
 	}
 
-	public String getDate() {
-		return date;
+	
+
+	public String getBirth() {
+		return birth;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 
 	public String getStorename() {
@@ -68,6 +70,6 @@ public class MasterVo {
 	@Override
 	public String toString() {
 		return "MasterVo [id=" + id + ", pw=" + pw + ", name=" + name + ", address=" + address + ", tel=" + tel
-				+ ", date=" + date + ", storename=" + storename + "]";
+				+ ", birth=" + birth + ", storename=" + storename + "]";
 	}
 }

@@ -18,5 +18,6 @@
 	<sqlMap resource="food/xml/Admin.xml" />
 	<sqlMap resource="food/xml/Store.xml"/>
 	<sqlMap resource="food/xml/Member.xml"/>
+	<sqlMap resource="food/xml/Master.xml"/>
 	
 </sqlMapConfig>
