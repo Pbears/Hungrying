@@ -9,111 +9,140 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
-<title>È¸¿ø »ó¼¼ Á¤º¸</title>
+<title>íšŒì› ì •ë³´</title>
 <style type="text/css">
-#mainDiv{
+ #mainDiv {
 	width: 80%;
-	height : 80%;
-	margin: 0 auto;
+	height: 80%;
+	margin: 0 auto; 
+	text-align:center; 
 }
+
 #rightDiv, #leftDiv {
-	width : 50%;
-	margin : 0 auto;
-	vertical-align: middle;
-}
-#leftDiv{
-	float:left;
-	padding:30px;
+	width: 50%;
+	height: 500px;
 	margin: 0 auto;
+	vertical-align: middle; 
+	display:inline-block; 
+	margin:125px 0;
 }
-#rightDiv{
-	display:inline-block;
-	padding:30px;
-	margin: 0 auto;
+
+#leftDiv {
+	float: left; 
+	padding: 30 px;
+	margin: 0 auto; 
 }
-#buttonDiv{
-	width : 50%;
-	margin : 0 auto;
-	vertical-align: middle;
-	text-align: center;
+
+#rightDiv {
+	float: right; 
+	display: inline-block; 
+ 	margin: 0 auto; 
+}
+
+#buttonDiv {
+	position:absolute;
+    bottom:0;
+    width:100%;
+    height:150px;  
+    text-align: center;
 }
 </style>
 </head>
 <script type="text/javascript">
-	function backAdminMenu(){
-		self.close();		
+	function backAdminMenu() {
+		self.close();
 	}
-	
+
 	function setHours() {
 		var obj = document.storeInfo.hours;
 		obj.value = document.storeInfo.hours1.value;
 	}
-	
+
 	function setTel() {
 		var obj = document.storeInfo.tel;
 		obj.value = document.storeInfo.tel1.value;
 	}
-	
+
 	function setMinPrice() {
 		var obj = document.storeInfo.minprice;
 		obj.value = document.storeInfo.minprice1.value;
 	}
-	
+
 	function setInfo() {
 		var obj = document.storeInfo.info;
 		obj.value = document.storeInfo.info1.value;
 	}
-	
+
 	function updateConfirm() {
 		var info = document.storeInfo;
-		if(confirm('¼öÁ¤ÇÏ½Ã°Ú½À´Ï±î?') == true){
-			info.submit();	
-		}else{
+		if (confirm('ìˆ˜ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ?') == true) {
+			info.submit();
+		} else {
 			return 0;
 		}
 	}
 </script>
 <body>
-<%
-	request.setCharacterEncoding("EUC-KR");
-	String membername = java.net.URLDecoder.decode(request.getParameter("membername"), "UTF-8");
-	MemberVo bean = (MemberVo)MemberDao.selectOneMember(membername);
-%>
-	<h2 align="center"> È¸¿ø»ó¼¼Á¤º¸ </h2><br>
-	
-	 <div id="mainDiv">
-		 <div id="leftDiv">
-		 <form action="StoreUpdate.jsp" method="post" name="storeInfo">
-			<h4>¾ÆÀÌµğ</h4> 
-				<input type="text" value="<%=bean.getId() %>"class="form-control" placeholder="storename" aria-describedby="basic-addon2" disabled="disabled">
-				<input type="hidden" value="<%=bean.getId() %>" name="storename" class="form-control">
-			<h4>ÀÌ¸§</h4> 
-				<input type="text" value="<%=bean.getName() %>" class="form-control" placeholder="brandno" aria-describedby="basic-addon2" disabled="disabled">
-				<input type="hidden" value="<%=bean.getName() %>" name="brandno" class="form-control">
-			<h4>¼ºº°</h4> 
-				<input type="text" value="<%=bean.getGender() %>" class="form-control" placeholder="location" aria-describedby="basic-addon2" disabled="disabled">
-				<input type="hidden" value="<%=bean.getGender() %>" name="location" class="form-control">
-			<h4>»ı³â¿ùÀÏ</h4> 
-				<input type="text" value="<%=bean.getBirth() %>" class="form-control" placeholder="gpa" aria-describedby="basic-addon2" disabled="disabled">
-				<input type="hidden" value="<%=bean.getBirth() %>" name="gpa" class="form-control">
-			<h4>ÁÖ¼Ò</h4> 
-				<input type="text" value="<%=bean.getAddress() %>" name="hours1" class="form-control" placeholder="hours" aria-describedby="basic-addon2" onchange="setHours()">
-				<input type="hidden" value="<%=bean.getAddress() %>" name="hours" class="form-control">
-			<h4>ÇÚµåÆù¹øÈ£</h4> 
-				<input type="text" value="<%=bean.getTel() %>"  name="tel1" class="form-control" placeholder="tel" aria-describedby="basic-addon2" onchange="setTel()">
-				<input type="hidden" value="<%=bean.getTel() %>" name="tel" class="form-control">
-			</form>
-		</div> 
-		<br>
-		<div id="rightDiv">
-			<img src="/Bears/img/wait.gif" style="vertical-align: middle;">
-		</div>
-	</div> 
-	<div id="buttonDiv">
-		<button type="button" class="btn btn-default" onclick="updateConfirm()">¼öÁ¤</button>
-		<button type="button" class="btn btn-default" onclick="backAdminMenu()">Ãë¼Ò</button>
+	<%
+		request.setCharacterEncoding("EUC-KR");
+		String membername = java.net.URLDecoder.decode(request.getParameter("membername"), "UTF-8");
+		MemberVo bean = (MemberVo) MemberDao.selectOneMember(membername);
+	%>
+	<h1 align="center">íšŒì›ì •ë³´</h1>
+	<br>
+	<div id="mainDiv">
+			<div id="leftDiv" >
+				<h3 align="center">íšŒì›ìƒì„¸ì •ë³´</h3><br>
+					<form action="StoreUpdate.jsp" method="post" name="storeInfo">
+						<h4>ì•„ì´ë””</h4>
+						<input type="text" value="<%=bean.getId()%>" class="form-control"
+							placeholder="storename" aria-describedby="basic-addon2"
+							disabled="disabled"> <input type="hidden"
+							value="<%=bean.getId()%>" name="storename" class="form-control">
+						<h4>ì´ë¦„</h4>
+						<input type="text" value="<%=bean.getName()%>"
+							class="form-control" placeholder="brandno"
+							aria-describedby="basic-addon2" disabled="disabled"> <input
+							type="hidden" value="<%=bean.getName()%>" name="brandno"
+							class="form-control">
+						<h4>ì„±ë³„</h4>
+						<input type="text" value="<%=bean.getGender()%>"
+							class="form-control" placeholder="location"
+							aria-describedby="basic-addon2" disabled="disabled"> <input
+							type="hidden" value="<%=bean.getGender()%>" name="location"
+							class="form-control">
+						<h4>ìƒë…„ì›”ì¼</h4>
+						<input type="text" value="<%=bean.getBirth()%>"
+							class="form-control" placeholder="gpa"
+							aria-describedby="basic-addon2" disabled="disabled"> <input
+							type="hidden" value="<%=bean.getBirth()%>" name="gpa"
+							class="form-control">
+						<h4>ì£¼ì†Œ</h4>
+						<input type="text" value="<%=bean.getAddress()%>" name="hours1"
+							class="form-control" placeholder="hours"
+							aria-describedby="basic-addon2" onchange="setHours()"> <input
+							type="hidden" value="<%=bean.getAddress()%>" name="hours"
+							class="form-control">
+						<h4>í•¸ë“œí°ë²ˆí˜¸</h4>
+						<input type="text" value="<%=bean.getTel()%>" name="tel1"
+							class="form-control" placeholder="tel"
+							aria-describedby="basic-addon2" onchange="setTel()"> <input
+							type="hidden" value="<%=bean.getTel()%>" name="tel"
+							class="form-control">
+					</form>
+			</div>
+			<div id="rightDiv">
+				<h3 align="center">íšŒì›ì£¼ë¬¸ì •ë³´</h3><br>
+					<img src="/Bears/img/wait.gif" style="vertical-align: middle;">
+			</div>
+	<br><br><br><br><br><br><br><br>
+</div>
+
+	<div id="buttonDiv" >
+		<button type="button" class="btn btn-default"
+			onclick="updateConfirm()">ìˆ˜ì •</button>
+		<button type="button" class="btn btn-default"
+			onclick="backAdminMenu()">ì·¨ì†Œ</button>
 	</div>
-	
-	
 </body>
 </html>
