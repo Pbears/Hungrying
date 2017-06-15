@@ -4,12 +4,61 @@
     PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
     
-<sqlMap namespace="admin">
-	<typeAlias alias="vo" type="food.vo.AdminVo"/>
-	<select id="idCheck" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT PW FROM admins WHERE ID=#value#
+<sqlMap namespace="brand">
+	<typeAlias alias="brand" type="food.vo.BrandVo"/>
+	
+	<select id="selectBrand" resultClass="brand">
+		SELECT B.BRANDNO,B.BRANDNAME ,COUNT(*) COUNT 
+        FROM STORE S, BRAND B
+        GROUP BY S.BRANDNO,B.BRANDNO,B.BRANDNAME
+        HAVING S.BRANDNO=B.BRANDNO
+        ORDER BY B.BRANDNO
 	</select>
-	<select id="getName" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT NAME FROM admins WHERE ID=#value#
+	
+	<select id="searchBrand" resultClass="brand" parameterClass="java.util.HashMap">
+		<!-- SELECT STORENAME,BRANDNO,LOCATION,GPA,HOURS,TEL,MINPRICE,INFO
+		FROM STORE -->
+		SELECT RM, BRANDNAME,BRANDNO,COUNT
+		FROM(
+			SELECT ROW_NUMBER( ) OVER(ORDER BY B.BRANDNO)RM,B.BRANDNO,B.BRANDNAME ,COUNT(S.BRANDNO) COUNT 
+            FROM STORE S, BRAND B
+            WHERE S.BRANDNO(+)=B.BRANDNO
+		<dynamic prepend="and">
+			<isNotNull property="query">
+				B.$query$ LIKE '%'||#data#||'%'
+			</isNotNull>
+		</dynamic> 
+            GROUP BY S.BRANDNO,B.BRANDNO,B.BRANDNAME
+          
+		)
+		WHERE RM BETWEEN #start# AND #end#
+		ORDER BY BRANDNO		
 	</select>
+	
+	<select id="getTotalRow"  resultClass="java.lang.Integer" parameterClass="java.util.HashMap">
+      SELECT COUNT(*) FROM BRAND
+      <dynamic prepend="where">
+       <isNotNull property="Q">
+         $Q$ LIKE '%'||#D#||'%'
+       </isNotNull>     
+     </dynamic>
+   </select>
+   
+   <insert id="insertBrand" parameterClass="brand">
+   		INSERT INTO BRAND VALUES(
+   		#brandno#,#brandname#)
+   </insert>
+   
+    <delete id="deleteBrand" parameterClass="java.lang.String">
+		DELETE FROM BRAND WHERE BRANDNAME = #brandname#
+   </delete>
+   <select id="selectOneBrand" parameterClass="java.lang.String" resultClass="brand">
+    SELECT * FROM BRAND WHERE BRANDNAME = #brandname#
+   </select>
+   
+    <update id="updateBrand" parameterClass="brand">
+   	UPDATE BRAND SET BRANDNAME=#brandname#
+   	WHERE BRANDNO=#brandno#
+   </update>
+   
 </sqlMap>
