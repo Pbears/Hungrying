@@ -17,6 +17,7 @@
 }
 </style>
 <script>
+	var nodeList = document.getElementsByName("cb");
 	Date.prototype.getKorDay = function() {
 		var result = null;
 		switch (this.getDay()) {
@@ -80,20 +81,52 @@
 	function memberInfo(membername) {
 		window.open("/Bears/jsp/admin/information/MemberInfo.jsp?membername="+encodeURI(membername,"UTF-8"),"stin","left=150,top=70,width=1600,height=850");
 	}
+	function allStore(obj) {
+		selectCb(obj.checked);
+	}
+	function selectCb(flag) {
+		for (var i = 0; i < nodeList.length; i++) {
+			nodeList[i].checked = flag ? true : false;
+		}
+	}
+	function oneCheck(pt, no) {
+		pt.value = pt.checked ? no : 0;
+
+		var all = document.getElementById('allCheck');
+		var test = false;
+		for (var i = 0; i < nodeList.length; i++) {
+			if (!nodeList[i].checked) {
+				test = true;
+			}
+		}
+		if (test)
+			all.checked = false;
+		else
+			all.checked = true;
+	}
+	function deleteAll() {
+		var cnt = 0;
+		for (var i = 0; i < nodeList.length; i++) {
+			if (nodeList[i].checked) {
+				cnt++;
+			}
+		}
+		if (cnt == 0) {
+			alert('하나라도 CHECK');
+			return false;
+		}
+		document.listFrm.submit();
+	}
 </script>
 </head>
 <body onload="datePro()">
 	<%
 		request.setCharacterEncoding("EUC-KR");
 		List<MemberVo> list = null;
-
-		HashMap<String, Object> map = new HashMap<String, Object>();
-
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
-		
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		int pageScale = 5;
-		
 		map.put("Q", query);
 		map.put("D", data);
 		int totalRow = StoreDao.getTotalRow(map);
@@ -121,13 +154,13 @@
 		map.put("start", start);
 		map.put("end", end);
 		
-		/* if (query != null && data != null) {
+		if (query != null && data != null) {
 			map.put("query", query);
 			map.put("data", data);
 			list = MemberDao.searchMember(map);
 		} else {
 			list = MemberDao.searchMember(map);
-		}  */
+		}  
 	%>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -163,7 +196,7 @@
 	<div id="searcher" class="row">
 		<div class="input-group">
 
-			<form action="AdminStore.jsp" name="ast" method="post">
+			<form action="AdminMember.jsp" name="ast" method="post">
 				<table class="bbsWrite mgb35" align="center">
 					<colgroup>
 						<col width="30" />
@@ -191,11 +224,11 @@
 								</span>
 							</td>
 							<div style=" postion:relative; left: 100px;">
-								<td>
+								<!-- <td>
 									<button type="button" class="btn btn-default">추가</button>
-								</td>
+								</td> -->
 								<td>
-									<button type="button" class="btn btn-default">삭제</button>
+									<button type="button" class="btn btn-default" onclick="deleteAll()">삭제</button>
 								</td>
 							</div>
 						</tr>
@@ -210,7 +243,8 @@
 
 
 
-	<div id="data_table">
+<div id="data_table">
+	<form action="/Bears/jsp/admin/delete/MemberDelete.jsp?state=all" method="post" name="listFrm">
 		<table class="bbsList" style="border-collapse: collapse;"
 			border="1px solid black">
 			<colgroup>
@@ -223,7 +257,8 @@
 				<col width="200" />
 			</colgroup>
 			<tr>
-				<th scope="col" style="text-align: center;"></th>
+				<th scope="col" style="text-align: center;">
+					<input type="checkbox" id="allCheck" name="allCheck" onclick="allStore(this)"></th>
 				<th scope="col" style="text-align: center;">아이디</th>
 				<th scope="col" style="text-align: center; padding-left: 5px;">이름</th>
 				<th scope="col" style="text-align: center;">성별</th>
@@ -239,10 +274,8 @@
 				%>
 				<tr>
 					<div id="select">
-						<td><input type="checkbox" aria-label="..."
-							onclick="selectStore(this)"></td>
-						<td style="padding-bottom: 10px;">
-							<a href="javascript:memberInfo('<%=vo.getId()%>')"><%=vo.getId()%></a></td>
+						<td><input type="checkbox" name="cb" id="cb" value ="<%=vo.getId()%>" onclick="oneCheck(this,'<%=vo.getId()%>')"></td>
+						<td style="padding-bottom: 10px;"> <a href="javascript:memberInfo('<%=vo.getId()%>')"><%=vo.getId()%></a></td>
 						<td><%=vo.getName()%></td>
 						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getGender()%></td>
 						<td><%=vo.getBirth()%></td>
@@ -255,6 +288,7 @@
 				%>
 			</tbody>
 		</table>
+		</form>
 	</div>
 
 	<!-- 블럭이동페이징 -->

@@ -1,3 +1,6 @@
+<%@page import="food.vo.OrderVo"%>
+<%@page import="java.util.List"%>
+<%@page import="food.dao.OrderDao"%>
 <%@page import="food.dao.MemberDao"%>
 <%@page import="food.vo.MemberVo"%>
 <%@page import="food.vo.StoreVo"%>
@@ -11,14 +14,14 @@
 <title>회원 정보</title>
 <style type="text/css">
  #mainDiv {
-	width: 80%;
+	width: 90%;
 	height: 80%;
 	margin: 0 auto; 
 	text-align:center; 
 }
 
 #rightDiv, #leftDiv {
-	width: 40%;
+	width: 48%;
 	height: 500px;
 	margin: 0 auto;
 	vertical-align: middle; 
@@ -83,6 +86,7 @@
 		request.setCharacterEncoding("UTF-8");
 		String membername = java.net.URLDecoder.decode(request.getParameter("membername"), "UTF-8");
 		MemberVo bean = (MemberVo) MemberDao.selectOneMember(membername);
+		List<OrderVo> list = OrderDao.selectMemberOrder(membername);
 	%>
 	<h1 align="center">회원정보</h1>
 	<br>
@@ -135,23 +139,27 @@
 						<th>음식점명</th>
 						<th>주문금액</th>
 						<th>진행상태</th>
+				<%	
+						for(OrderVo vo : list){
+				%>
  						<tr>
- 							<td></td>
- 							<td></td>
- 							<td></td>
- 							<td></td>
- 							<td></td>
- 						</tr>
+ 							<td><%=vo.getOrdertime()%></td>
+ 							<td><%=vo.getOrdernumber()%></td>
+ 							<td><%=vo.getStorename()%></td>
+ 							<td><%=vo.getPrice()%></td>
+ 							<td><%=vo.getState()%></td>
+ 						</tr> 
+ 				<%
+				}
+				%>
 					</table>
 			</div>
 	<br><br><br><br><br><br><br><br>
 </div>
 
 	<div id="buttonDiv" >
-		<button type="button" class="btn btn-default"
-			onclick="updateConfirm()">수정</button>
-		<button type="button" class="btn btn-default"
-			onclick="backAdminMenu()">취소</button>
+		<!-- <button type="button" class="btn btn-default" onclick="updateConfirm()">수정</button> -->
+		<button type="button" class="btn btn-default" onclick="backAdminMenu()">확인</button>
 	</div>
 </body>
 </html>

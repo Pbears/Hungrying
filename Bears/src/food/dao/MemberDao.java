@@ -22,4 +22,7 @@ public class MemberDao {
 	public static Object selectOneMember(String membername) throws Exception{
 		return sqlMapper.queryForObject("member.selectOneMember", membername);
 	}
+	public static void deleteMember(String memberid) throws Exception{
+		sqlMapper.delete("member.deleteMember", memberid);
+	}
 }

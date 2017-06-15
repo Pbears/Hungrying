@@ -10,13 +10,11 @@
 		SELECT ID,PW,NAME,ADDRESS,TEL,GENDER,TO_CHAR(BIRTH,'YY/MM/DD')BIRTH FROM MEMBER
 	</select>
 	<select id="searchMember" resultClass="memberVo" parameterClass="java.util.HashMap">
-		<!-- SELECT STORENAME,BRANDNO,LOCATION,GPA,HOURS,TEL,MINPRICE,INFO
-		FROM STORE -->
 		SELECT RM, ID,PW,NAME,ADDRESS,TEL,GENDER,BIRTH
 		FROM(
 			SELECT ROW_NUMBER( ) OVER(ORDER BY ID
 		DESC)RM,ID,PW,NAME,ADDRESS,TEL,GENDER,BIRTH
-		FROM STORE	
+		FROM MEMBER	
 		<dynamic prepend="where">
 			<isNotNull property="query">
 				$query$ LIKE '%'||#data#||'%'
@@ -27,10 +25,12 @@
 		ORDER BY ID
 		
 	</select>
-	
 	<select id="selectOneMember" parameterClass="java.lang.String" resultClass="memberVo">
 		SELECT ID,PW,NAME,ADDRESS,TEL,GENDER,TO_CHAR(BIRTH,'YY/MM/DD')BIRTH FROM MEMBER
 		WHERE ID=#memberid#
 	</select>
+	<delete id="deleteMember" parameterClass="java.lang.String">
+		DELETE FROM MEMBER WHERE ID = #memberid#	
+	</delete>	
 	
 </sqlMap>
