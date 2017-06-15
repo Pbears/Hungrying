@@ -1,9 +1,11 @@
+<%@page import="food.vo.OrderVo"%>
+<%@page import="java.util.List"%>
+<%@page import="food.dao.OrderDao"%>
 <%@page import="food.dao.MemberDao"%>
 <%@page import="food.vo.MemberVo"%>
 <%@page import="food.vo.StoreVo"%>
 <%@page import="food.dao.StoreDao"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,31 +14,28 @@
 <title>회원 정보</title>
 <style type="text/css">
  #mainDiv {
-	width: 80%;
+	width: 90%;
 	height: 80%;
 	margin: 0 auto; 
 	text-align:center; 
 }
 
 #rightDiv, #leftDiv {
-	width: 50%;
+	width: 48%;
 	height: 500px;
 	margin: 0 auto;
 	vertical-align: middle; 
 	display:inline-block; 
-	margin:125px 0;
 }
 
 #leftDiv {
 	float: left; 
 	padding: 30 px;
-	margin: 0 auto; 
 }
 
 #rightDiv {
 	float: right; 
 	display: inline-block; 
- 	margin: 0 auto; 
 }
 
 #buttonDiv {
@@ -84,9 +83,10 @@
 </script>
 <body>
 	<%
-		request.setCharacterEncoding("EUC-KR");
+		request.setCharacterEncoding("UTF-8");
 		String membername = java.net.URLDecoder.decode(request.getParameter("membername"), "UTF-8");
 		MemberVo bean = (MemberVo) MemberDao.selectOneMember(membername);
+		List<OrderVo> list = OrderDao.selectMemberOrder(membername);
 	%>
 	<h1 align="center">회원정보</h1>
 	<br>
@@ -133,16 +133,33 @@
 			</div>
 			<div id="rightDiv">
 				<h3 align="center">회원주문정보</h3><br>
-					<img src="/Bears/img/wait.gif" style="vertical-align: middle;">
+					<table class="table">
+						<th>주문일자</th>
+						<th>주문번호</th>
+						<th>음식점명</th>
+						<th>주문금액</th>
+						<th>진행상태</th>
+				<%	
+						for(OrderVo vo : list){
+				%>
+ 						<tr>
+ 							<td><%=vo.getOrdertime()%></td>
+ 							<td><%=vo.getOrdernumber()%></td>
+ 							<td><%=vo.getStorename()%></td>
+ 							<td><%=vo.getPrice()%></td>
+ 							<td><%=vo.getState()%></td>
+ 						</tr> 
+ 				<%
+				}
+				%>
+					</table>
 			</div>
 	<br><br><br><br><br><br><br><br>
 </div>
 
 	<div id="buttonDiv" >
-		<button type="button" class="btn btn-default"
-			onclick="updateConfirm()">수정</button>
-		<button type="button" class="btn btn-default"
-			onclick="backAdminMenu()">취소</button>
+		<!-- <button type="button" class="btn btn-default" onclick="updateConfirm()">수정</button> -->
+		<button type="button" class="btn btn-default" onclick="backAdminMenu()">확인</button>
 	</div>
 </body>
 </html>

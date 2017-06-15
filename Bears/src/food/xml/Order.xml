@@ -4,12 +4,12 @@
     PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
     
-<sqlMap namespace="admin">
-	<typeAlias alias="vo" type="food.vo.AdminVo"/>
-	<select id="idCheck" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT PW FROM admins WHERE ID=#value#
+<sqlMap namespace="order">
+	<typeAlias alias="orderVo" type="food.vo.OrderVo"/>
+	<select id="selectAllOrder" resultClass="orderVo">
+		SELECT * FROM FOODORDER
 	</select>
-	<select id="getName" parameterClass="java.lang.String" resultClass="java.lang.String" >
-		SELECT NAME FROM admins WHERE ID=#value#
+	<select id="selectMemberOrder" parameterClass="java.lang.String" resultClass="orderVo">
+		SELECT ORDERTIME,ORDERNUMBER,STORENAME,PRICE,STATE FROM FOODORDER WHERE MEMBERID = #memberid#
 	</select>
 </sqlMap>
