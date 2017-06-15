@@ -19,7 +19,6 @@
 	<sqlMap resource="food/xml/Store.xml"/>
 	<sqlMap resource="food/xml/Member.xml"/>
 	<sqlMap resource="food/xml/Master.xml"/>
-	<sqlMap resource="food/xml/Menu.xml"/>
 	<sqlMap resource="food/xml/Brand.xml" />
 	<sqlMap resource="food/xml/Order.xml"/>
 
