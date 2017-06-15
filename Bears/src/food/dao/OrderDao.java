@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import food.util.ServiceUtil;
+import food.vo.OrderVo;
 import food.vo.StoreVo;
 
 public class OrderDao {
@@ -11,16 +12,15 @@ public class OrderDao {
 	static {
 		sqlMapper = ServiceUtil.getSqlMap();
 	}
-	// select * from store;
-	public static List<StoreVo> selectStore() throws Exception{
-		return sqlMapper.queryForList("store.selectStore");
+	
+	//select * from foodorder
+	public static List<OrderVo> selectAllOrder() throws Exception{
+		return sqlMapper.queryForList("order.selectAllOrder");
 	}
 	
-	public static List<StoreVo> searchStore(HashMap<String,Object>map)throws Exception{
-        return sqlMapper.queryForList("store.searchStore",map);
+	//한사람이 주문한 주문정보
+	public static List<OrderVo> selectMemberOrder(String memberid) throws Exception{
+		return sqlMapper.queryForList("order.selectMemberOrder",memberid);
 	}
 	
-	public static int getTotalRow(HashMap<String, Object>map) throws Exception{
-	      return (Integer)sqlMapper.queryForObject("store.getTotalRow", map);
-	   }
 }

@@ -221,8 +221,7 @@ tr:NTH-CHILD(even) {
 									<option value="brandno">브랜드번호</option>
 									<option value="location">위치</option>
 							</select></td>
-							<td><input type="text" class="form-control"
-								placeholder="Search for..." name="data"></td>
+							<td><input type="text" class="form-control" placeholder="Search for..." name="data"></td>
 							<td><span class="input-group-btn">
 									<button class="btn btn-default" type="button">
 										<a href="javascript:sendCheck()"> Search</a>
@@ -232,12 +231,10 @@ tr:NTH-CHILD(even) {
 								<td><a href="AdminStore.jsp?page=1"><button
 											type="button" class="btn btn-default">새로고침</button></a></td>
 								<td>
-									<button type="button" class="btn btn-default"
-										onclick="StoreInsert()">추가</button>
+									<button type="button" class="btn btn-default" onclick="StoreInsert()">추가</button>
 								</td>
 								<td>
-									<button type="button" class="btn btn-default"
-										onclick="deleteAll()">삭제</button>
+									<button type="button" class="btn btn-default" onclick="deleteAll()">삭제</button>
 								</td>
 							</div>
 						</tr>
@@ -251,8 +248,7 @@ tr:NTH-CHILD(even) {
 	<!-- /.row -->
 
 	<div id="data_table">
-		<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all"
-			method="post" name="listFrm">
+		<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all" method="post" name="listFrm">
 			<table class="bbsList" style="border-collapse: collapse;"
 				border="1px solid black">
 				<colgroup>
@@ -267,9 +263,8 @@ tr:NTH-CHILD(even) {
 					<col width="350" />
 				</colgroup>
 				<tr>
-					<th scope="col" style="text-align: center;"><input
-						type="checkbox" id="allCheck" name="allCheck"
-						onclick="allStore(this)"></th>
+					<th scope="col" style="text-align: center;">
+					<input type="checkbox" id="allCheck" name="allCheck" onclick="allStore(this)"></th>
 					<th scope="col" style="text-align: center;">음식점명</th>
 					<th scope="col" style="text-align: center;">브랜드번호</th>
 					<th scope="col" style="text-align: center; padding-left: 5px;">평점</th>
@@ -286,12 +281,9 @@ tr:NTH-CHILD(even) {
 					%>
 					<tr>
 						<div id="select">
-							<td><input type="checkbox" name="cb" id="cb"
-								value="<%=vo.getStorename()%>"
-								onclick="oneCheck(this,'<%=vo.getStorename()%>')"></td>
-							<td style="padding-bottom: 10px;"><a
-								href="javascript:storeInfo('<%=vo.getStorename()%>')"><%=vo.getStorename()%></a>
-							</td>
+							<td><input type="checkbox" name="cb" id="cb" value="<%=vo.getStorename()%>" onclick="oneCheck(this,'<%=vo.getStorename()%>')"></td>
+							<td style="padding-bottom: 10px;">
+							<a href="javascript:storeInfo('<%=vo.getStorename()%>')"><%=vo.getStorename()%></a></td>
 							<td><%=vo.getBrandno()%></td>
 							<td><%=vo.getGpa()%></td>
 							<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>

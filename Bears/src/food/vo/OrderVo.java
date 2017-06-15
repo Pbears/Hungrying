@@ -1,110 +1,110 @@
 package food.vo;
 
 public class OrderVo {
-	private int orderno;
-	private String storename;
+	private String ordernumber;
+	private String menuid;
+	private String membername;
+	private String membertel;
+	private String memberaddress;
+	private String price;
+	private String orderinfo;
 	private String menuname;
-	private int price;
-	private int quantity;
-	private int mbsno;
-	private String id;
-	private String address;
-	private String tel;
-	private String name;
-	private String info;
-
-	public int getOrderno() {
-		return orderno;
+	private String amount;
+	private String storename;
+	private String storeaddress;
+	private String storetel;
+	private String ordertime;
+	private String state;
+	public String getOrdernumber() {
+		return ordernumber;
 	}
-
-	public void setOrderno(int orderno) {
-		this.orderno = orderno;
+	public void setOrdernumber(String ordernumber) {
+		this.ordernumber = ordernumber;
 	}
-
-	public String getStorename() {
-		return storename;
+	public String getMenuid() {
+		return menuid;
 	}
-
-	public void setStorename(String storename) {
-		this.storename = storename;
+	public void setMenuid(String menuid) {
+		this.menuid = menuid;
 	}
-
+	public String getMembername() {
+		return membername;
+	}
+	public void setMembername(String membername) {
+		this.membername = membername;
+	}
+	public String getMembertel() {
+		return membertel;
+	}
+	public void setMembertel(String membertel) {
+		this.membertel = membertel;
+	}
+	public String getMemberaddress() {
+		return memberaddress;
+	}
+	public void setMemberaddress(String memberaddress) {
+		this.memberaddress = memberaddress;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getOrderinfo() {
+		return orderinfo;
+	}
+	public void setOrderinfo(String orderinfo) {
+		this.orderinfo = orderinfo;
+	}
 	public String getMenuname() {
 		return menuname;
 	}
-
 	public void setMenuname(String menuname) {
 		this.menuname = menuname;
 	}
-
-	public int getPrice() {
-		return price;
+	public String getAmount() {
+		return amount;
 	}
-
-	public void setPrice(int price) {
-		this.price = price;
+	public void setAmount(String amount) {
+		this.amount = amount;
 	}
-
-	public int getQuantity() {
-		return quantity;
+	public String getStorename() {
+		return storename;
 	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setStorename(String storename) {
+		this.storename = storename;
 	}
-
-	public int getMbsno() {
-		return mbsno;
+	public String getStoreaddress() {
+		return storeaddress;
 	}
-
-	public void setMbsno(int mbsno) {
-		this.mbsno = mbsno;
+	public void setStoreaddress(String storeaddress) {
+		this.storeaddress = storeaddress;
 	}
-
-	public String getId() {
-		return id;
+	public String getStoretel() {
+		return storetel;
 	}
-
-	public void setId(String id) {
-		this.id = id;
+	public void setStoretel(String storetel) {
+		this.storetel = storetel;
 	}
-
-	public String getAddress() {
-		return address;
+	public String getOrdertime() {
+		return ordertime;
 	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	public void setOrdertime(String ordertime) {
+		this.ordertime = ordertime;
 	}
-
-	public String getTel() {
-		return tel;
+	public String getState() {
+		return state;
 	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setState(String state) {
+		this.state = state;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getInfo() {
-		return info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
-	}
-
 	@Override
 	public String toString() {
-		return "OrderVo [orderno=" + orderno + ", storename=" + storename + ", menuname=" + menuname + ", price="
-				+ price + ", quantity=" + quantity + ", mbsno=" + mbsno + ", id=" + id + ", address=" + address
-				+ ", tel=" + tel + ", name=" + name + ", info=" + info + "]";
+		return "OrderVo [ordernumber=" + ordernumber + ", menuid=" + menuid + ", membername=" + membername
+				+ ", membertel=" + membertel + ", memberaddress=" + memberaddress + ", price=" + price + ", orderinfo="
+				+ orderinfo + ", menuname=" + menuname + ", amount=" + amount + ", storename=" + storename
+				+ ", storeaddress=" + storeaddress + ", storetel=" + storetel + ", ordertime=" + ordertime + ", state="
+				+ state + "]";
 	}
 }
