@@ -1,3 +1,5 @@
+<%@page import="food.dao.OrderDao"%>
+<%@page import="food.vo.OrderVo"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="food.dao.StoreDao"%>
 <%@page import="food.vo.StoreVo"%>
@@ -76,15 +78,56 @@ tr:NTH-CHILD(even) {
 			obj.submit();
 		}
 	}
-	function selectStore(obj) {
 
+	function orderInfo(storename) {
+		window.open("/Bears/jsp/admin/information/StoreInfo.jsp?storename="
+				+ encodeURI(storename, "UTF-8"), "stin",
+				"left=150,top=50,width=1600,height=850");
 	}
+	function allOrder(obj) {
+		selectCb(obj.checked);
+	}
+	function selectCb(flag) {
+		for (var i = 0; i < nodeList.length; i++) {
+			nodeList[i].checked = flag ? true : false;
+		}
+	}
+	function oneCheck(pt, no) {
+		pt.value = pt.checked ? no : 0;
+
+		var all = document.getElementById('allCheck');
+		var test = false;
+		for (var i = 0; i < nodeList.length; i++) {
+			if (!nodeList[i].checked) {
+				test = true;
+			}
+		}
+		if (test)
+			all.checked = false;
+		else
+			all.checked = true;
+	}
+	
+	function deleteAll() {
+		var cnt = 0;
+		for (var i = 0; i < nodeList.length; i++) {
+			if (nodeList[i].checked) {
+				cnt++;
+			}
+		}
+		if (cnt == 0) {
+			alert('하나라도 CHECK');
+			return false;
+		}
+		document.listFrm.submit();
+	}
+
 </script>
 </head>
 <body onload="datePro()">
 	<%
 		request.setCharacterEncoding("EUC-KR");
-		List<StoreVo> list = null;
+		List<OrderVo> list = null;
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -95,7 +138,7 @@ tr:NTH-CHILD(even) {
 		
 		map.put("Q", query);
 		map.put("D", data);
-		int totalRow = StoreDao.getTotalRow(map);
+		int totalRow = OrderDao.getTotalRow(map);
 
 		int currentPage = 0;
 		
@@ -123,9 +166,9 @@ tr:NTH-CHILD(even) {
 		if (query != null && data != null) {
 			map.put("query", query);
 			map.put("data", data);
-			list = StoreDao.searchStore(map);
+			list = OrderDao.searchOrder(map);
 		} else {
-			list = StoreDao.searchStore(map);
+			list = OrderDao.searchOrder(map);
 		}
 	%>
 	<!-- Top 메뉴 -->
@@ -161,8 +204,7 @@ tr:NTH-CHILD(even) {
 	<!-- 검색바 -->
 	<div id="searcher" class="row">
 		<div class="input-group">
-
-			<form action="AdminStore.jsp" name="ast" method="post">
+			<form action="AdminOrder.jsp" name="ast" method="post">
 				<table class="bbsWrite mgb35" align="center">
 					<colgroup>
 						<col width="30" />
@@ -174,9 +216,12 @@ tr:NTH-CHILD(even) {
 							<td height="50">
 								<select name="query" size="1" style="height: 34px;">
 									<option value="empty" selected="selected">선택하세요</option>
-									<option value="storename">음식점명</option>
-									<option value="brandno">브랜드번호</option>
-									<option value="location">위치</option>
+									<option value="memberid">회원ID</option>
+									<option value="membername">회원이름</option>
+									<option value="menuname">음식이름</option>
+									<option value="storename">음식점이름</option>
+									<option value="ordertime">주문일</option>
+									<option value="state">배달상태</option>
 								</select>
 							</td>
 							<td>
@@ -191,10 +236,7 @@ tr:NTH-CHILD(even) {
 							</td>
 							<div style=" postion:relative; left: 100px;">
 								<td>
-									<button type="button" class="btn btn-default">추가</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-default">삭제</button>
+									<button type="button" class="btn btn-default" onclick="deleteAll()">삭제</button>
 								</td>
 							</div>
 						</tr>
@@ -209,48 +251,44 @@ tr:NTH-CHILD(even) {
 
 
 
-	<div id="data_table">
-		<table class="bbsList" style="border-collapse: collapse;"
-			border="1px solid black">
-			<colgroup>
-				<col width="50" />
-				<col width="200" />
-				<col width="150" />
-				<col width="60" />
-				<col width="350" />
-				<col width="150" />
-				<col width="250" />
-				<col width="180" />
-				<col width="350" />
-			</colgroup>
+	<div style="width:90%; text-align: center; vertical-align: middle; margin: 0 auto;">
+		<table class="table" border="1px solid black">
 			<tr>
 				<th scope="col" style="text-align: center;"></th>
-				<th scope="col" style="text-align: center;">음식점명</th>
-				<th scope="col" style="text-align: center;">브랜드번호</th>
-				<th scope="col" style="text-align: center; padding-left: 5px;">평점</th>
-				<th scope="col" style="text-align: center;">위치</th>
-				<th scope="col" style="text-align: center;">영업시간</th>
-				<th scope="col" style="text-align: center;">전화번호</th>
-				<th scope="col" style="text-align: center;">배달최저가격</th>
-				<th scope="col" style="text-align: center;">소개</th>
+				<th scope="col" style="text-align: center;">주문번호</th>
+				<th scope="col" style="text-align: center;">주문자ID</th>
+				<th scope="col" style="text-align: center;">주문자이름</th>
+				<th scope="col" style="text-align: center;">주문자전화번호</th>
+				<th scope="col" style="text-align: center;">가격</th>
+				<th scope="col" style="text-align: center;">메뉴이름</th>
+				<th scope="col" style="text-align: center;">개수</th>
+				<th scope="col" style="text-align: center;">음식점이름</th>
+				<th scope="col" style="text-align: center;">음식점전화번호</th>
+				<th scope="col" style="text-align: center;">주문시간</th>
+				<th scope="col" style="text-align: center;">주문상태</th>
 			</tr>
 			<tbody>
 				<%
 					for (int i = 0; i < list.size(); i++) {
-						StoreVo vo = list.get(i);
+						OrderVo vo = list.get(i);
+						String date = vo.getOrdertime();
+						String temp1 = date.substring(0, 4)+'/'+date.substring(4, 6)+'/'+date.substring(6, 8);
+						String temp2 = date.substring(8, 10)+'시'+date.substring(10, 12)+'분'+date.substring(12, 14)+'초';
 				%>
 				<tr>
 					<div id="select">
-						<td><input type="checkbox" aria-label="..."
-							onclick="selectStore(this)"></td>
-						<td style="padding-bottom: 10px;"><%=vo.getStorename()%></td>
-						<td><%=vo.getBrandno()%></td>
-						<td><%=vo.getGpa()%></td>
-						<td style="padding-left: 5px; padding-right: 5px;"><%=vo.getLocation()%></td>
-						<td><%=vo.getHours()%></td>
-						<td><%=vo.getTel()%></td>
-						<td><%=vo.getMinprice()%></td>
-						<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
+						<td><input type="checkbox" onclick="selectStore(this)"></td>
+						<td><a href="/Bears/jsp/admin/information/OrderInfo.jsp?ordernumber=<%=vo.getOrdernumber()%>"><%=vo.getOrdernumber()%></a></td>
+						<td><%=vo.getMemberid()%></td>
+						<td><%=vo.getMembername()%></td>
+						<td><%=vo.getMembertel()%></td>
+						<td><%=vo.getPrice()%></td>
+						<td><%=vo.getMenuname()%></td>
+						<td><%=vo.getAmount()%></td>
+						<td><%=vo.getStorename()%></td>
+						<td><%=vo.getStoretel()%></td>
+						<td><%=temp1+"  "+temp2%></td>
+						<td><%=vo.getState()%></td>
 					</div>
 				</tr>
 				<%
@@ -266,12 +304,12 @@ tr:NTH-CHILD(even) {
 		<%
 		if(currentBlock>1){
 		%>
-		<li><a href="AdminStore.jsp?page=<%=startPage-1%>">Previous</a></li>
+		<li><a href="AdminOrder.jsp?page=<%=startPage-1%>">Previous</a></li>
 		<%
 		}
 		if(totalPage>endPage){
 		%>
-		<li><a href="AdminStore.jsp?page=<%=endPage+1%>">Next</a></li>
+		<li><a href="AdminOrder.jsp?page=<%=endPage+1%>">Next</a></li>
 		<%
 		}
 		%>
@@ -282,19 +320,19 @@ tr:NTH-CHILD(even) {
 	<div style="text-align: center;">
 		<nav>
 		<ul class="pagination">
-			<li><a href="AdminStore.jsp?page=1" aria-label="Previous"> <span
+			<li><a href="AdminOrder.jsp?page=1" aria-label="Previous"> <span
 					aria-hidden="true">&laquo;</span>
 			</a></li>
 			<%
 				for(int i = startPage; i <= endPage; i++ ){
 				
 			%>
-			<li><a href="AdminStore.jsp?page=<%=i%>"><%=i %></a></li>
+			<li><a href="AdminOrder.jsp?page=<%=i%>"><%=i %></a></li>
 			<%
 				}
 			%>
 			
-			<li><a href="AdminStore.jsp?page=<%=totalPage%>" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			<li><a href="AdminOrder.jsp?page=<%=totalPage%>" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
 		</nav>

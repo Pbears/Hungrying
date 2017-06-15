@@ -214,8 +214,8 @@ tr:NTH-CHILD(even) {
 					</colgroup>
 					<tbody>
 						<tr>
-							<td height="50"><select name="query" size="1"
-								style="height: 34px;">
+							<td height="50">
+							<select name="query" size="1" style="height: 34px;">
 									<option value="empty" selected="selected">선택하세요</option>
 									<option value="storename">음식점명</option>
 									<option value="brandno">브랜드번호</option>

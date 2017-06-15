@@ -3,13 +3,60 @@
 <!DOCTYPE sqlMap      
     PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-    
+
 <sqlMap namespace="order">
-	<typeAlias alias="orderVo" type="food.vo.OrderVo"/>
+	<typeAlias alias="orderVo" type="food.vo.OrderVo" />
+	
 	<select id="selectAllOrder" resultClass="orderVo">
-		SELECT * FROM FOODORDER
+		SELECT ORDERNUMBER,MEMBERID,MEMBERNAME,MEMBERTEL,MEMBERADDRESS,PRICE,ORDERINFO,MENUNAME,AMOUNT,STORENAME,
+		STOREADDRESS,STORETEL,ORDERTIME,STATE FROM FOODORDER
 	</select>
-	<select id="selectMemberOrder" parameterClass="java.lang.String" resultClass="orderVo">
-		SELECT ORDERTIME,ORDERNUMBER,STORENAME,PRICE,STATE FROM FOODORDER WHERE MEMBERID = #memberid#
+	
+	<select id="selectMemberOrder" parameterClass="java.lang.String"
+		resultClass="orderVo">
+		SELECT ORDERTIME,ORDERNUMBER,STORENAME,PRICE,STATE FROM
+		FOODORDER WHERE MEMBERNAME = #membername#
 	</select>
+	
+	<select id="selectOrder" parameterClass="java.lang.String" resultClass="orderVo">
+		SELECT ORDERNUMBER,MEMBERID,MEMBERNAME,MEMBERTEL,MEMBERADDRESS,PRICE,ORDERINFO,MENUNAME,AMOUNT,STORENAME,
+		STOREADDRESS,STORETEL,ORDERTIME,STATE
+		FROM FOODORDER
+		WHERE ORDERNUMBER = #ordernumber#
+	</select>
+	
+	<select id="searchOrder" resultClass="orderVo" parameterClass="java.util.HashMap">
+		SELECT RM, ORDERNUMBER,MEMBERID,MEMBERNAME,MEMBERTEL,MEMBERADDRESS,PRICE,ORDERINFO,MENUNAME,AMOUNT,STORENAME,
+		STOREADDRESS,STORETEL,ORDERTIME,STATE
+		FROM(
+		SELECT ROW_NUMBER( ) OVER(ORDER BY ORDERNUMBER
+		DESC)RM,ORDERNUMBER,MEMBERID,MEMBERNAME,MEMBERTEL,MEMBERADDRESS,PRICE,ORDERINFO,MENUNAME,AMOUNT,STORENAME,
+		STOREADDRESS,STORETEL,ORDERTIME,STATE
+		FROM
+		FOODORDER
+		<dynamic prepend="where">
+			<isNotNull property="query">
+				$query$ LIKE '%'||#data#||'%'
+			</isNotNull>
+		</dynamic>
+		)
+		WHERE RM BETWEEN #start# AND #end#
+		ORDER BY ORDERNUMBER
+
+	</select>
+
+	<select id="getTotalRow" resultClass="java.lang.Integer"
+		parameterClass="java.util.HashMap">
+		SELECT COUNT(*) FROM FOODORDER
+		<dynamic prepend="where">
+			<isNotNull property="Q">
+				$Q$ LIKE '%'||#D#||'%'
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<delete id="deleteOrder" parameterClass="java.lang.String">
+		DELETE FROM FOODORDER WHERE
+		ORDERNUMBER = #ordernumber#
+	</delete>
 </sqlMap>
