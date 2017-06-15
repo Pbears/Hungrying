@@ -19,14 +19,9 @@
 	<sqlMap resource="food/xml/Store.xml"/>
 	<sqlMap resource="food/xml/Member.xml"/>
 	<sqlMap resource="food/xml/Master.xml"/>
-<<<<<<< HEAD
 	<sqlMap resource="food/xml/Menu.xml"/>
-=======
-<<<<<<< HEAD
 	<sqlMap resource="food/xml/Brand.xml" />
-=======
 	<sqlMap resource="food/xml/Order.xml"/>
->>>>>>> branch 'master' of https://github.com/Pbears/Hungrying.git
->>>>>>> branch 'master' of https://github.com/Pbears/Hungrying.git
+
 	
 </sqlMapConfig>
