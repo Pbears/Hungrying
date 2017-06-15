@@ -2,8 +2,7 @@
 <%@page import="food.vo.MemberVo"%>
 <%@page import="food.vo.StoreVo"%>
 <%@page import="food.dao.StoreDao"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,24 +18,21 @@
 }
 
 #rightDiv, #leftDiv {
-	width: 50%;
+	width: 40%;
 	height: 500px;
 	margin: 0 auto;
 	vertical-align: middle; 
 	display:inline-block; 
-	margin:125px 0;
 }
 
 #leftDiv {
 	float: left; 
 	padding: 30 px;
-	margin: 0 auto; 
 }
 
 #rightDiv {
 	float: right; 
 	display: inline-block; 
- 	margin: 0 auto; 
 }
 
 #buttonDiv {
@@ -84,7 +80,7 @@
 </script>
 <body>
 	<%
-		request.setCharacterEncoding("EUC-KR");
+		request.setCharacterEncoding("UTF-8");
 		String membername = java.net.URLDecoder.decode(request.getParameter("membername"), "UTF-8");
 		MemberVo bean = (MemberVo) MemberDao.selectOneMember(membername);
 	%>
@@ -133,7 +129,20 @@
 			</div>
 			<div id="rightDiv">
 				<h3 align="center">회원주문정보</h3><br>
-					<img src="/Bears/img/wait.gif" style="vertical-align: middle;">
+					<table class="table">
+						<th>주문일자</th>
+						<th>주문번호</th>
+						<th>음식점명</th>
+						<th>주문금액</th>
+						<th>진행상태</th>
+ 						<tr>
+ 							<td></td>
+ 							<td></td>
+ 							<td></td>
+ 							<td></td>
+ 							<td></td>
+ 						</tr>
+					</table>
 			</div>
 	<br><br><br><br><br><br><br><br>
 </div>

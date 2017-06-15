@@ -4,8 +4,7 @@
 <%@page import="food.dao.StoreDao"%>
 <%@page import="food.vo.StoreVo"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,7 +12,7 @@
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
 <title>관리자-회원</title>
 <style>
-tr:NTH-CHILD(even) {
+ tr:NTH-CHILD(even) {
 	background-color: #f2f2f2;
 }
 </style>
