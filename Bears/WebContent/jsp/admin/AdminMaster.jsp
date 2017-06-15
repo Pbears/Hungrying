@@ -1,3 +1,5 @@
+<%@page import="java.net.URLDecoder"%>
+<%@page import="java.net.URLEncoder"%>
 <%@page import="food.dao.MasterDao"%>
 <%@page import="food.vo.MasterVo"%>
 <%@page import="java.util.HashMap"%>
@@ -83,8 +85,8 @@ tr:NTH-CHILD(even) {
 	}
 
 	function masterInfo(storename) {
-		window.open("/Bears/jsp/admin/information/MasterInfo.jsp?mastername="
-				+ encodeURI(mastername, "UTF-8"), "stin",
+		window.open("/Bears/jsp/admin/information/MasterInfo.jsp?storename="
+				+storename, "stin",
 				"left=150,top=50,width=1600,height=850");
 	}
 	function allMaster(obj) {
@@ -131,6 +133,7 @@ tr:NTH-CHILD(even) {
 		List<MasterVo> list = null;
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int pageScale = 10;
 		map.put("Q", query);
@@ -349,6 +352,11 @@ tr:NTH-CHILD(even) {
 			</li>
 		<span> 
 			<%
+				
+ 				if(data != null){
+					data =  URLEncoder.encode(request.getParameter("data"), "EUC-KR");	
+				} 
+		
  				for (int i = startPage; i <= endPage; i++) {
  					if (i == currentPage) {
  			%> 
@@ -359,7 +367,7 @@ tr:NTH-CHILD(even) {
  					} else {
  			%> 
  					<li>
- 						<a href="AdminMaster.jsp?page=<%=i%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+ 						<a href="AdminMaster.jsp?page=<%=i%>&query=<%=query!=null?query:0%>&data=<%=data!=null?data:0%>">
  							<%=i %>
 						</a>
 					</li>
