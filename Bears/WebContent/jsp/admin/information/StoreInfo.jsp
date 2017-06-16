@@ -74,7 +74,7 @@
 <body>
 <%
 	request.setCharacterEncoding("EUC-KR");
-	String storename = java.net.URLDecoder.decode(request.getParameter("storename"), "UTF-8");
+	String storename = request.getParameter("storename");
 	StoreVo bean = StoreDao.selectOneStore(storename);
 %>
 	<h2 align="center">음식점 상세 정보 </h2><br>

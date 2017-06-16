@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="food.dao.MemberDao"%>
 <%@page import="food.vo.MemberVo"%>
 <%@page import="java.util.HashMap"%>
@@ -68,7 +69,7 @@
 
 	function sendCheck() {
 		var obj = document.ast; //form까지의 주소
-		if (obj.query.name == 'empty' || !obj.data.value) {
+		if (obj.query.value == 'empty' || !obj.data.value) {
 			alert('Not Search!');
 			obj.query.selectedIndex = 0;
 
@@ -79,7 +80,7 @@
 		}
 	}
 	function memberInfo(membername) {
-		window.open("/Bears/jsp/admin/information/MemberInfo.jsp?membername="+encodeURI(membername,"UTF-8"),"stin","left=150,top=70,width=1600,height=850");
+		window.open("/Bears/jsp/admin/information/MemberInfo.jsp?membername="+membername,"stin","left=150,top=70,width=1600,height=850");
 	}
 	function allStore(obj) {
 		selectCb(obj.checked);
@@ -121,46 +122,45 @@
 </head>
 <body onload="datePro()">
 	<%
-		request.setCharacterEncoding("EUC-KR");
-		List<MemberVo> list = null;
-		String query = request.getParameter("query");
-		String data = request.getParameter("data");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		int pageScale = 5;
-		map.put("Q", query);
-		map.put("D", data);
-		int totalRow = StoreDao.getTotalRow(map);
+	request.setCharacterEncoding("EUC-KR");
+	List<MemberVo> list = null;
+	String query = request.getParameter("query");
+	String data = request.getParameter("data");
+	
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	int pageScale = 20;
+	map.put("Q", query);
+	map.put("D", data);
+	int totalRow = MemberDao.getTotalRow(map);
 
-		int currentPage = 0;
-		
-		try {
-			currentPage = Integer.parseInt(request.getParameter("page"));
-		} catch (Exception e) {
-			currentPage = 1;
-		}
-		
-		int totalPage = totalRow % pageScale == 0 ? totalRow / pageScale : totalRow / pageScale + 1;
-		if (totalRow == 0)
-			totalPage = 1;
-		int start = 1 + (currentPage - 1) * pageScale;
-		int end = pageScale + (currentPage - 1) * pageScale;
+	int currentPage = 0;
+	try {
+		currentPage = Integer.parseInt(request.getParameter("page"));
+	} catch (Exception e) {
+		currentPage = 1;
+	}
+	int totalPage = totalRow % pageScale == 0 ? totalRow / pageScale : totalRow / pageScale + 1;
+	if (totalRow == 0)
+		totalPage = 1;
+	int start = 1 + (currentPage - 1) * pageScale;
+	int end = pageScale + (currentPage - 1) * pageScale;
+	//out.print(query+"   "+data ); //출력확인
+	int currentBlock = currentPage % pageScale == 0 ? (currentPage / pageScale) : (currentPage / pageScale + 1);
+	int startPage = 1 + (currentBlock - 1) * pageScale;
+	int endPage = pageScale + (currentBlock - 1) * pageScale;
+	//   out.println(startPage+" "+endPage+ " "+currentBlock+" "+totalPage);
+	if (totalPage <= endPage)
+		endPage = totalPage;
+	map.put("start", start);
+	map.put("end", end);
 
-		int currentBlock = currentPage % pageScale == 0 ? (currentPage / pageScale) : (currentPage / pageScale) + 1;
-		int startPage = 1 + (currentBlock - 1) * pageScale;
-		int endPage = pageScale + (currentBlock - 1) * pageScale;
-		if (totalPage <= endPage)
-			endPage = totalPage;
-
-		map.put("start", start);
-		map.put("end", end);
-		
-		if (query != null && data != null) {
-			map.put("query", query);
-			map.put("data", data);
-			list = MemberDao.searchMember(map);
-		} else {
-			list = MemberDao.searchMember(map);
-		}  
+	if (query != null && data != null) {
+		map.put("query", query);
+		map.put("data", data);
+		list = MemberDao.searchMember(map);
+	} else {
+		list = MemberDao.searchMember(map);
+	}
 	%>
 	<!-- Top 메뉴 -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -291,44 +291,108 @@
 		</form>
 	</div>
 
-	<!-- 블럭이동페이징 -->
-	<nav>
-	<ul class="pager">
-		<%
-		if(currentBlock>1){
-		%>
-		<li><a href="AdminStore.jsp?page=<%=startPage-1%>">Previous</a></li>
-		<%
-		}
-		if(totalPage>endPage){
-		%>
-		<li><a href="AdminStore.jsp?page=<%=endPage+1%>">Next</a></li>
-		<%
-		}
-		%>
-	</ul>
-	</nav>
-
 	<!-- 페이지이동페이징 -->
-	<div style="text-align: center;">
-		<nav>
+	<div class="paging" style="text-align: center;">
 		<ul class="pagination">
-			<li><a href="AdminStore.jsp?page=1" aria-label="Previous"> <span
-					aria-hidden="true">&laquo;</span>
-			</a></li>
+			<ul class="pager">
+   			<li>
+				<a href="AdminMaster.jsp?page=1" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			<li>
+			<li>
+			
 			<%
-				for(int i = startPage; i <= endPage; i++ ){
-				
+				if (currentBlock > 1) {
+					if (currentPage != startPage) {
 			%>
-			<li><a href="AdminStore.jsp?page=<%=i%>"><%=i %></a></li>
+					<a href="AdminMember.jsp?page=<%=startPage - 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+						Previous
+					</a>
 			<%
+					}else{
+			%>
+						<a href="#">Previous</a>
+			<% 
+					}
+				}else {
+					if (currentPage != startPage) {
+			%>
+						<a href="AdminMember.jsp?page=<%=currentPage - 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+							Previous
+						</a>
+			<%
+					}else{
+			%>
+						<a href="#">Previous</a>
+			<%
+					}
 				}
 			%>
-			
-			<li><a href="AdminStore.jsp?page=<%=totalPage%>" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
+			</li>
+		<span> 
+			<%
+				
+ 				if(data != null){
+					data =  URLEncoder.encode(request.getParameter("data"), "EUC-KR");	
+				} 
+		
+ 				for (int i = startPage; i <= endPage; i++) {
+ 					if (i == currentPage) {
+ 			%> 
+ 					<li>
+ 						<a href="#"><strong><%=i %></strong></a>
+ 					</li> 
+ 			<%
+ 					} else {
+ 			%> 
+ 					<li>
+ 						<a href="AdminMember.jsp?page=<%=i%>&query=<%=query!=null?query:0%>&data=<%=data!=null?data:0%>">
+ 							<%=i %>
+						</a>
+					</li>
+			<%
+ 					}
+ 				}
+ 			%>
+		</span>
+		<li>
+		<%
+			if (totalPage > endPage) {
+				if (currentPage != endPage) {
+		%>
+					<a href="AdminMember.jsp?page=<%=currentPage + 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+						Next
+					</a>
+		<%
+				} else {
+		%>
+					<a href="#">Next</a>
+		<%
+				}
+			}else{
+				if (currentPage != endPage) {
+		%>
+					<a href="AdminMember.jsp?page=<%=currentPage + 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+						Next
+					</a>
+		<%
+				}else{
+		%>
+					<a href="#">Next</a>
+		<%
+				}
+			}
+		%>
+		</li>
+		
+		<li>
+			<a href="AdminMember.jsp?page=<%=totalPage%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
 		</ul>
-		</nav>
 	</div>
 </body>
 </html>

@@ -25,4 +25,7 @@ public class MemberDao {
 	public static void deleteMember(String memberid) throws Exception{
 		sqlMapper.delete("member.deleteMember", memberid);
 	}
+	public static int getTotalRow(HashMap<String, Object>map) throws Exception{
+	      return (Integer)sqlMapper.queryForObject("member.getTotalRow", map);
+	   }
 }

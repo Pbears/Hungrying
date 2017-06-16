@@ -62,7 +62,7 @@
 <body>
 <%
 	request.setCharacterEncoding("EUC-KR");
-	String brandname = java.net.URLDecoder.decode(request.getParameter("brandname"), "UTF-8");
+	String brandname = request.getParameter("brandname");
 	BrandVo bean = BrandDao.selectOneBrand(brandname);
 %>
 	<h2 align="center">브랜드 상세 정보 </h2><br>
@@ -74,7 +74,7 @@
 			<h4>브랜드번호</h4> 
 				<input type="text" value="<%=bean.getBrandno() %>" class="form-control" placeholder="brandno" aria-describedby="basic-addon2" disabled="disabled">
 				<input type="hidden" value="<%=bean.getBrandno() %>" name="brandno" class="form-control">
-			<h4>브래드이름</h4> 
+			<h4>브랜드이름</h4> 
 				<input type="text" value="<%=bean.getBrandname()%>"name="brandname1" class="form-control" placeholder="brandname" aria-describedby="basic-addon2">
 				<input type="hidden" value="<%=bean.getBrandname()%>" name="brandname" class="form-control" onchange="setBrandname()">
 			<br><br>

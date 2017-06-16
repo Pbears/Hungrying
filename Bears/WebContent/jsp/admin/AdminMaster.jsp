@@ -232,7 +232,7 @@ tr:NTH-CHILD(even) {
 									</button>
 							</span></td>
 							<div style="postion: relative; left: 100px;">
-								<td><a href="AdminStore.jsp?page=1"><button
+								<td><a href="AdminMaster.jsp?page=1"><button
 											type="button" class="btn btn-default">새로고침</button></a></td>
 								<td>
 									<button type="button" class="btn btn-default"

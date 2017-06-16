@@ -84,7 +84,7 @@ tr:NTH-CHILD(even) {
 
 	function storeInfo(storename) {
 		window.open("/Bears/jsp/admin/information/StoreInfo.jsp?storename="
-				+ encodeURI(storename, "UTF-8"), "stin",
+				+storename, "stin",
 				"left=150,top=50,width=1600,height=850");
 	}
 	function allStore(obj) {

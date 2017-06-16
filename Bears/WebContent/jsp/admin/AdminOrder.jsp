@@ -69,7 +69,7 @@ tr:NTH-CHILD(even) {
 
 	function sendCheck() {
 		var obj = document.ast; //form까지의 주소
-		if (obj.query.name == 'empty' || !obj.data.value) {
+		if (obj.query.value == 'empty' || !obj.data.value) {
 			alert('Not Search!');
 			obj.query.selectedIndex = 0;
 
@@ -135,7 +135,7 @@ tr:NTH-CHILD(even) {
 		String query = request.getParameter("query");
 		String data = request.getParameter("data");
 		
-		int pageScale = 5;
+		int pageScale = 10;
 		
 		map.put("Q", query);
 		map.put("D", data);

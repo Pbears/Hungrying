@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="food.dao.MenuDao"%>
 <%@page import="food.vo.MenuVo"%>
 <%@page import="java.util.HashMap"%>
@@ -290,44 +291,108 @@ tr:NTH-CHILD(even) {
         </form>
     </div>
 
-    <!-- 블럭이동페이징 -->
-    <nav>
-    <ul class="pager">
-        <%
-            if (currentBlock > 1) {
-        %>
-        <li><a href="AdminMenu.jsp?page=<%=startPage - 1%>">Previous</a></li>
-        <%
-            }
-            if (totalPage > endPage) {
-        %>
-        <li><a href="AdminMenu.jsp?page=<%=endPage + 1%>">Next</a></li>
-        <%
-            }
-        %>
-    </ul>
-    </nav>
-
-    <!-- 페이지이동페이징 -->
-    <div style="text-align: center;">
-        <nav>
-        <ul class="pagination">
-            <li><a href="AdminMenu.jsp?page=1" aria-label="Previous"> <span
-                    aria-hidden="true">&laquo;</span>
-            </a></li>
-            <%
-                for (int i = startPage; i <= endPage; i++) {
-            %>
-            <li><a href="AdminMenu.jsp?page=<%=i%>"><%=i%></a></li>
-            <%
-                }
-            %>
-
-            <li><a href="AdminMenu.jsp?page=<%=totalPage%>"
-                aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-            </a></li>
-        </ul>
-        </nav>
-    </div>
+ <!-- 페이지이동페이징 -->
+	<div class="paging" style="text-align: center;">
+		<ul class="pagination">
+			<ul class="pager">
+   			<li>
+				<a href="AdminMenu.jsp?page=1" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			<li>
+			<li>
+			
+			<%
+				if (currentBlock > 1) {
+					if (currentPage != startPage) {
+			%>
+					<a href="AdminMenu.jsp?page=<%=startPage - 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+						Previous
+					</a>
+			<%
+					}else{
+			%>
+						<a href="#">Previous</a>
+			<% 
+					}
+				}else {
+					if (currentPage != startPage) {
+			%>
+						<a href="AdminMenu.jsp?page=<%=currentPage - 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+							Previous
+						</a>
+			<%
+					}else{
+			%>
+						<a href="#">Previous</a>
+			<%
+					}
+				}
+			%>
+			</li>
+		<span> 
+			<%
+				
+ 				if(data != null){
+					data =  URLEncoder.encode(request.getParameter("data"), "EUC-KR");	
+				} 
+		
+ 				for (int i = startPage; i <= endPage; i++) {
+ 					if (i == currentPage) {
+ 			%> 
+ 					<li>
+ 						<a href="#"><strong><%=i %></strong></a>
+ 					</li> 
+ 			<%
+ 					} else {
+ 			%> 
+ 					<li>
+ 						<a href="AdminMenu.jsp?page=<%=i%>&query=<%=query!=null?query:0%>&data=<%=data!=null?data:0%>">
+ 							<%=i %>
+						</a>
+					</li>
+			<%
+ 					}
+ 				}
+ 			%>
+		</span>
+		<li>
+		<%
+			if (totalPage > endPage) {
+				if (currentPage != endPage) {
+		%>
+					<a href="AdminMenu.jsp?page=<%=currentPage + 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+						Next
+					</a>
+		<%
+				} else {
+		%>
+					<a href="#">Next</a>
+		<%
+				}
+			}else{
+				if (currentPage != endPage) {
+		%>
+					<a href="AdminMenu.jsp?page=<%=currentPage + 1%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>">
+						Next
+					</a>
+		<%
+				}else{
+		%>
+					<a href="#">Next</a>
+		<%
+				}
+			}
+		%>
+		</li>
+		
+		<li>
+			<a href="AdminMenu.jsp?page=<%=totalPage%>&query=<%=query != null ? query : 0%>&data=<%=data != null ? data : 0%>" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+		</ul>
+	</div>
 </body>
 </html>

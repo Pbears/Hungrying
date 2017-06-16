@@ -83,8 +83,8 @@ https://github.com/Pbears/Hungrying.git<%@page import="food.vo.OrderVo"%>
 </script>
 <body>
 	<%
-		request.setCharacterEncoding("UTF-8");
-		String membername = java.net.URLDecoder.decode(request.getParameter("membername"), "UTF-8");
+		request.setCharacterEncoding("EUC-KR");
+		String membername = request.getParameter("membername");
 		MemberVo bean = (MemberVo) MemberDao.selectOneMember(membername);
 		List<OrderVo> list = OrderDao.selectMemberOrder(membername);
 	%>

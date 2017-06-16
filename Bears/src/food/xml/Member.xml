@@ -3,7 +3,7 @@
 <!DOCTYPE sqlMap      
     PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
-    
+
 <sqlMap namespace="member">
 	<typeAlias alias="memberVo" type="food.vo.MemberVo"/>
 	<select id="selectMember" resultClass="memberVo">
@@ -25,6 +25,16 @@
 		ORDER BY ID
 		
 	</select>
+	
+	<select id="getTotalRow"  resultClass="java.lang.Integer" parameterClass="java.util.HashMap">
+      SELECT COUNT(*) FROM MEMBER
+      <dynamic prepend="where">
+       <isNotNull property="Q">
+         $Q$ LIKE '%'||#D#||'%'
+       </isNotNull>     
+     </dynamic>
+   </select>
+	
 	<select id="selectOneMember" parameterClass="java.lang.String" resultClass="memberVo">
 		SELECT ID,PW,NAME,ADDRESS,TEL,GENDER,TO_CHAR(BIRTH,'YY/MM/DD')BIRTH FROM MEMBER
 		WHERE ID=#memberid#
