@@ -69,10 +69,9 @@ tr:NTH-CHILD(even) {
 
 	function sendCheck() {
 		var obj = document.ast; //form까지의 주소
-		if (obj.query.name == 'empty' || !obj.data.value) {
+		if (obj.query.value == 'empty' || !obj.data.value) {
 			alert('Not Search!');
 			obj.query.selectedIndex = 0;
-
 			obj.data.value = '';
 			obj.data.focus();
 		} else {
