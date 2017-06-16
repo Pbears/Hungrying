@@ -11,85 +11,83 @@
 <title>음식점 상세 정보</title>
 <style type="text/css">
 #mainDiv{
-	width: 100%;
-	height : 100%;
-	margin: 0 auto;
+   width: 100%;
+   height : 100%;
+   margin: 0 auto;
 }
 #rightDiv, #leftDiv {
-	width : 50%;
-	margin : 0 auto;
-	vertical-align: middle;
+   width : 50%;
+   margin : 0 auto;
+   vertical-align: middle;
 }
 #leftDiv{
-	float:left;
-	padding:30px;
-	margin: 0 auto;
+   float:left;
+   padding:30px;
+   margin: 0 auto;
 }
 #rightDiv{
-	display:inline-block;
-	padding:30px;
-	margin: 0 auto;
+   display:inline-block;
+   padding:30px;
+   margin: 0 auto;
 }
 #buttonDiv{
-	width : 50%;
-	margin : 0 auto;
-	vertical-align: middle;
-	text-align: center;
+   width : 50%;
+   margin : 0 auto;
+   vertical-align: middle;
+   text-align: center;
 }
 </style>
 </head>
 <script type="text/javascript">
-	function backAdminStore(){
-		self.close();		
-	}
-	
-	function setBrandname() {
-		var obj = document.brandInfo.brandname;
-		obj.value = document.brandInfo.brandname1.value;
-	}
-	
-		
-	function updateConfirm() {
-		var info = document.brandInfo;
-		if(confirm('수정하시겠습니까?') == true){
-			info.submit();	
-		}else{
-			return 0;
-		}
-	}
-	
+   function backAdminStore(){
+      self.close();      
+   }
+   
+   function setBrandname() {
+      var obj = document.brandInfo.brandname;
+      obj.value = document.brandInfo.brandname1.value;
+   }
+   
+      
+   function updateConfirm() {
+      var info = document.brandInfo;
+      if(confirm('수정하시겠습니까?') == true){
+         info.submit();   
+      }else{
+         return 0;
+      }
+   }
+   
 </script>
 <body>
 <%
-	request.setCharacterEncoding("EUC-KR");
-	String brandname = request.getParameter("brandname");
-	BrandVo bean = BrandDao.selectOneBrand(brandname);
+   request.setCharacterEncoding("EUC-KR");
+   String brandname = request.getParameter("brandname");
+   BrandVo bean = BrandDao.selectOneBrand(brandname);
 %>
-	<h2 align="center">브랜드 상세 정보 </h2><br>
-	<div id="mainDiv">
-		 <div id="leftDiv">
-		 	<h2 align="center"> 상세정보 </h2><br>
-		 <!-- Store에 대한 정보 -->
-		 <form action="/Bears/jsp/admin/update/BrandUpdate.jsp" method="post" name="brandInfo">
-			<h4>브랜드번호</h4> 
-				<input type="text" value="<%=bean.getBrandno() %>" class="form-control" placeholder="brandno" aria-describedby="basic-addon2" disabled="disabled">
-				<input type="hidden" value="<%=bean.getBrandno() %>" name="brandno" class="form-control">
-			<h4>브랜드이름</h4> 
-				<input type="text" value="<%=bean.getBrandname()%>"name="brandname1" class="form-control" placeholder="brandname" aria-describedby="basic-addon2">
-				<input type="hidden" value="<%=bean.getBrandname()%>" name="brandname" class="form-control" onchange="setBrandname()">
-			<br><br>
-			<div id="buttonDiv">
-				<button type="button" class="btn btn-default" onclick="updateConfirm()">수정</button>
-				<button type="button" class="btn btn-default" onclick="backAdminStore()">취소</button>
-			</div>
-			</form>
-		</div> 
-		<div id="rightDiv">
-			<img src="/Bears/img/wait.gif" style="vertical-align: middle;">
-		</div>
-		<br>
-	</div>
-	
-	
+   <h2 align="center">브랜드 상세 정보 </h2><br>
+   <div id="mainDiv">
+       <div id="leftDiv">
+          <h2 align="center"> 상세정보 </h2><br>
+       <!-- Store에 대한 정보 -->
+       <form action="/Bears/jsp/admin/update/BrandUpdate.jsp" method="post" name="brandInfo">
+         <h4>브랜드번호</h4> 
+            <input type="text" value="<%=bean.getBrandno() %>" class="form-control" placeholder="brandno" aria-describedby="basic-addon2" disabled="disabled">
+            <input type="hidden" value="<%=bean.getBrandno() %>" name="brandno" class="form-control">
+         <h4>브랜드이름</h4> 
+            <input type="text" value="<%=bean.getBrandname()%>"name="brandname1" class="form-control" placeholder="brandname" aria-describedby="basic-addon2" onchange="setBrandname()">
+            <input type="hidden" value="<%=bean.getBrandname()%>" name="brandname" class="form-control" >
+         <br><br>
+         <div id="buttonDiv">
+            <button type="button" class="btn btn-default" onclick="updateConfirm()">수정</button>
+            <button type="button" class="btn btn-default" onclick="backAdminStore()">취소</button>
+         </div>
+         </form>
+      </div> 
+      <div id="rightDiv">
+         <img src="/Bears/img/wait.gif" style="vertical-align: middle;">
+      </div>
+      <br>
+   </div>
 </body>
 </html>
