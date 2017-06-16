@@ -92,13 +92,6 @@
 				<h4>메뉴이름</h4> 
 				<input type="text" name="menuname" onblur="checkMenuname(this)" class="form-control" placeholder="menuname" aria-describedby="basic-addon2" >
 				<h4>브랜드번호</h4> 
-				<select id="query" name="query" size="1" style="height: 34px;" onchange="getValue()">
-                        <option value="empty" selected="selected">선택하세요</option>
-                        
-                </select>
-                <select name="data" size="1" style="height: 34px;">
-                    <option value="empty" selected="selected">선택하세요</option>
-                </select>
 				<input type="text" name="brandno" onblur="checkBrandno(this)" class="form-control" placeholder="brandno" aria-describedby="basic-addon2">
 				<h4>가격</h4> 
 				<input type="text" name="price" onblur="checkPrice(this)" class="form-control" placeholder="price" aria-describedby="basic-addon2">

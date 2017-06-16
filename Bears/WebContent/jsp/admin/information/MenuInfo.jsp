@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
-<title>음식점 상세 정보</title>
+<title>메뉴 상세 정보</title>
 <style type="text/css">
 #mainDiv{
 	width: 100%;
@@ -67,14 +67,13 @@
 <body>
 <%
 	request.setCharacterEncoding("EUC-KR");
-	String menuname = java.net.URLDecoder.decode(request.getParameter("menuname"), "UTF-8");
+	String menuname =request.getParameter("menuname");
 	MenuVo bean = MenuDao.selectOneMenu(menuname);
 %>
 	<h2 align="center">메뉴 상세 정보 </h2><br>
 	<div id="mainDiv">
 		 <div id="leftDiv">
 		 	<h2 align="center"> 상세정보 </h2><br>
-		 <!-- Store에 대한 정보 -->
 		 <form action="/Bears/jsp/admin/update/MenuUpdate.jsp" method="post" name="menuInfo">
 			<h4>메뉴 이름</h4> 
 				<input type="text" value="<%=bean.getMenuname() %>" name="menuname1" class="form-control" placeholder="menuname" aria-describedby="basic-addon2" disabled="disabled">

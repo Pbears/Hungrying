@@ -84,7 +84,7 @@ tr:NTH-CHILD(even) {
     }
 
     function MenuInfo(menuname){
-        window.open("/Bears/jsp/admin/information/MenuInfo.jsp?menuname="+encodeURI(menuname,"UTF-8"),"stin","left=600,top=50,width=800,height=850");
+        window.open("/Bears/jsp/admin/information/MenuInfo.jsp?menuname="+menuname,"stin","left=600,top=50,width=800,height=850");
     }
     function allStore(obj) {
         selectCb(obj.checked);

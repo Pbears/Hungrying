@@ -21,6 +21,7 @@
 	<sqlMap resource="food/xml/Master.xml"/>
 	<sqlMap resource="food/xml/Brand.xml" />
 	<sqlMap resource="food/xml/Order.xml"/>
+	<sqlMap resource="food/xml/Menu.xml"/>
 
 	
 </sqlMapConfig>
