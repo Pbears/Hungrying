@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap     
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"     
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+   
+<sqlMap namespace="menu">
+     <typeAlias alias="menu" type="food.vo.MenuVo"/>
+     <select id="idCheck" parameterClass="java.lang.String" resultClass="java.lang.String" >
+           SELECT PW FROM MENU WHERE ID=#value#
+     </select>
+     
+     <select id="getName" parameterClass="java.lang.String" resultClass="java.lang.String" >
+           SELECT NAME FROM MENU WHERE ID=#value#
+     </select>
+     
+     <delete id="deleteMenu" parameterClass="java.lang.String">
+		DELETE FROM MENU WHERE MENUNAME=#menuname#
+     </delete>
+     
+     <select id="selectOneMenu" parameterClass="java.lang.String" resultClass="menu">
+        SELECT * FROM MENU WHERE MENUNAME = #menuname#
+     </select>
+     
+       <insert id="insertMenu" parameterClass="menu">
+   		INSERT INTO MENU(MENUNAME,BRANDNO,PRICE,INFO) VALUES(
+   		#menuname#,#brandno#,#price#,#info#)
+    </insert>
+    
+    <update id="updateMenu" parameterClass="menu">
+     	UPDATE MENU SET MENUNAME=#menuname#,BRANDNO=#brandno#, 
+     					PRICE=#price#,INFO=#info#
+    	WHERE MENUNAME=#menuname#
+    </update>
+    <select id="searchBrandNo" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    	  SELECT MENUNAME FROM MENU
+    	  WHERE BRANDNO LIKE 'data%' 
+    </select>
+     <select id="searchMenu" resultClass="menu" parameterClass="java.util.HashMap">
+
+           SELECT RM, MENUNAME,BRANDNO,PRICE,INFO
+           FROM(
+                SELECT ROW_NUMBER()OVER(ORDER BY BRANDNO)
+                RM,MENUNAME,BRANDNO,PRICE,INFO
+           FROM MENU
+           <dynamic prepend="where">
+                <isNotNull property="query">
+                     $query$ LIKE '%'||#data#||'%'
+                </isNotNull>
+           </dynamic>
+           )
+           WHERE RM BETWEEN #start# AND #end#
+     </select>  
+     <select id="getTotalRow"  resultClass="java.lang.Integer" parameterClass="java.util.HashMap">
+      SELECT COUNT(*) FROM MENU
+      <dynamic prepend="where">
+       <isNotNull property="Q">
+         $Q$ LIKE '%'||#D#||'%'
+       </isNotNull>    
+     </dynamic>
+   </select>
+</sqlMap>
