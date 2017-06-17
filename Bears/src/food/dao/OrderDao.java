@@ -39,14 +39,4 @@ public class OrderDao {
 		sqlMapper.delete("order.deleteOrder", ordernumber);
 	}
 
-	// insert
-	public static void insertOrder(OrderVo ordervo) throws Exception {
-		sqlMapper.insert("order.insertOrder", ordervo);
-	}
-
-	// update
-	public static void updateOrder(OrderVo ordervo) throws Exception {
-		sqlMapper.update("order.updateOrder", ordervo);
-	}
-
 }
