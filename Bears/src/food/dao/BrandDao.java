@@ -47,12 +47,24 @@ public class BrandDao {
          } catch (Exception e) {
             // TODO: handle exception
          return (Integer)sqlMapper.queryForObject("brand.getTotalRow", map);
-         }
-         
-            
-         
+         }         
          return (Integer)sqlMapper.queryForObject("brand.getTotalRow", map);
-         }
+      }
+      
+      
+      public static int subGetTotalRow(HashMap<String, Object>map) throws Exception{
+	      return (Integer)sqlMapper.queryForObject("brand.subGetTotalRow", map);
+	   }
+      
+      public static List<StoreVo> searchStore(HashMap<String,Object>map)throws Exception{
+          return sqlMapper.queryForList("brand.searchStore",map);
+  	  }
+      
+      
+      
+      public static List<StoreVo> selectStore(HashMap<String,Object>map) throws Exception{
+  		return sqlMapper.queryForList("brand.selectStore",map);
+  	  }      
       //insert 
       public static void insertBrand(BrandVo brandVo) throws Exception{
          sqlMapper.insert("brand.insertBrand",brandVo);

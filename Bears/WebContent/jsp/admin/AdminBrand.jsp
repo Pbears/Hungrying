@@ -124,6 +124,7 @@ var nodeList = document.getElementsByName("cb");
    }
    
    function brandInfo(brandname) {
+	  
       window.open("/Bears/jsp/admin/information/BrandInfo.jsp?brandname="
             +brandname, "stin","left=150,top=50,width=1600,height=850");
    }
@@ -236,6 +237,9 @@ var nodeList = document.getElementsByName("cb");
                            </button>
                      </span></td>
                      <div style="postion: relative; left: 100px;">
+                        <td><a href="AdminBrand.jsp?page=1"><button
+                                            type="button" class="btn btn-default">새로고침</button></a></td>
+                        <td>
                         <td>
                            <button type="button" class="btn btn-default"
                               onclick="BrandInsert()">추가</button>
