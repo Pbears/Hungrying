@@ -203,7 +203,7 @@
 									</button>
 							</span></td>
 							<div style="postion: relative; left: 100px;">
-								<td><a href="BrandInfo.jsp?page=1"><button
+								<td><a href="BrandInfo.jsp?brandname=<%=request.getParameter("brandname")%>&page=1"><button
 											type="button" class="btn btn-default">새로고침</button></a></td>
 								
 								
