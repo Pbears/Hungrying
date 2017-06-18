@@ -21,6 +21,7 @@
 </script>
 <style>  
 body {
+	
 	width: 100%;
 	background-image: url('/Bears/img/background/login.jpg');
 	opacity: 1;

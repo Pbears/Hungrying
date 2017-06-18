@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
-<title>음식점 상세 정보</title>
+<title>브랜드 상세 정보</title>
 <style type="text/css">
 #mainDiv{
    width: 100%;
@@ -109,11 +109,7 @@
    String brandname = request.getParameter("brandname");
    BrandVo bean=BrandDao.selectOneBrand(brandname);
    
-   
-   
    //브랜드별 점포 게시판
-   
-   
    
    List<StoreVo> list = null;
 		String query = request.getParameter("query");

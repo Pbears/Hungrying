@@ -12,13 +12,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
-<title>관리자-음식점</title>
+<title>관리자-주문</title>
 <style>
 tr:NTH-CHILD(even) {
 	background-color: #f2f2f2;
 }
 </style>
 <script>
+	var nodeList = document.getElementsByName("cb");
 	Date.prototype.getKorDay = function() {
 		var result = null;
 		switch (this.getDay()) {
@@ -80,9 +81,9 @@ tr:NTH-CHILD(even) {
 		}
 	}
 
-	function orderInfo(storename) {
-		window.open("/Bears/jsp/admin/information/StoreInfo.jsp?storename="
-				+ encodeURI(storename, "UTF-8"), "stin",
+	function orderInfo(ordernumber) {
+		window.open("/Bears/jsp/admin/information/OrderInfo.jsp?ordernumber="
+				+ encodeURI(ordernumber, "UTF-8"), "stin",
 				"left=150,top=50,width=1600,height=850");
 	}
 	function allOrder(obj) {
@@ -255,7 +256,8 @@ tr:NTH-CHILD(even) {
 	<div style="width:90%; text-align: center; vertical-align: middle; margin: 0 auto;">
 		<table class="table" border="1px solid black">
 			<tr>
-				<th scope="col" style="text-align: center;"></th>
+				<th scope="col" style="text-align: center;">
+				<input type="checkbox" id="allCheck" name="allCheck" onclick="allOrder(this)"></th>
 				<th scope="col" style="text-align: center;">주문번호</th>
 				<th scope="col" style="text-align: center;">주문자ID</th>
 				<th scope="col" style="text-align: center;">주문자이름</th>
@@ -278,8 +280,8 @@ tr:NTH-CHILD(even) {
 				%>
 				<tr>
 					<div id="select">
-						<td><input type="checkbox" onclick="selectStore(this)"></td>
-						<td><a href="/Bears/jsp/admin/information/OrderInfo.jsp?ordernumber=<%=vo.getOrdernumber()%>"><%=vo.getOrdernumber()%></a></td>
+						<td><input type="checkbox" name="cb" id="cb" value="<%=vo.getOrdernumber() %>" onclick="oneCheck(this,'<%=vo.getOrdernumber()%>')"></td>
+						<td><a href="javascript:orderInfo('<%=vo.getOrdernumber()%>')"><%=vo.getOrdernumber()%></a></td>
 						<td><%=vo.getMemberid()%></td>
 						<td><%=vo.getMembername()%></td>
 						<td><%=vo.getMembertel()%></td>
