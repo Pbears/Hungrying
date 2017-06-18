@@ -1,4 +1,4 @@
-https://github.com/Pbears/Hungrying.git<%@page import="food.vo.OrderVo"%>
+<%@page import="food.vo.OrderVo"%>
 <%@page import="java.util.List"%>
 <%@page import="food.dao.OrderDao"%>
 <%@page import="food.dao.MemberDao"%>
@@ -84,9 +84,9 @@ https://github.com/Pbears/Hungrying.git<%@page import="food.vo.OrderVo"%>
 <body>
 	<%
 		request.setCharacterEncoding("EUC-KR");
-		String membername = request.getParameter("membername");
-		MemberVo bean = (MemberVo) MemberDao.selectOneMember(membername);
-		List<OrderVo> list = OrderDao.selectMemberOrder(membername);
+		String memberid = request.getParameter("memberid");
+		MemberVo bean = (MemberVo) MemberDao.selectOneMember(memberid);
+		List<OrderVo> list = OrderDao.selectMemberOrder(memberid);
 	%>
 	<h1 align="center">회원정보</h1>
 	<br>
@@ -134,11 +134,11 @@ https://github.com/Pbears/Hungrying.git<%@page import="food.vo.OrderVo"%>
 			<div id="rightDiv">
 				<h3 align="center">회원주문정보</h3><br>
 					<table class="table">
-						<th>주문일자</th>
-						<th>주문번호</th>
-						<th>음식점명</th>
-						<th>주문금액</th>
-						<th>진행상태</th>
+						<th style="text-align: center;">주문일자</th>
+						<th style="text-align: center;">주문번호</th>
+						<th style="text-align: center;">음식점명</th>
+						<th style="text-align: center;">주문금액</th>
+						<th style="text-align: center;">진행상태</th>
 				<%	
 						for(OrderVo vo : list){
 				%>

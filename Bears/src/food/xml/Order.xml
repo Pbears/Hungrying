@@ -14,8 +14,9 @@
 	
 	<select id="selectMemberOrder" parameterClass="java.lang.String"
 		resultClass="orderVo">
-		SELECT ORDERTIME,ORDERNUMBER,STORENAME,PRICE,STATE FROM
-		FOODORDER WHERE MEMBERNAME = #membername#
+		SELECT ORDERNUMBER,PRICE,STORENAME,ORDERTIME,STATE
+		FROM FOODORDER
+		WHERE MEMBERID = #memberid#
 	</select>
 	
 	<select id="selectOrder" parameterClass="java.lang.String" resultClass="orderVo">

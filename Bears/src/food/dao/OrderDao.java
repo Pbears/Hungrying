@@ -17,14 +17,13 @@ public class OrderDao {
 	public static List<OrderVo> selectAllOrder() throws Exception {
 		return sqlMapper.queryForList("order.selectAllOrder");
 	}
-
 	// �ѻ���� �ֹ��� �ֹ�����
 	public static OrderVo selectOrder(String ordernumber) throws Exception {
 		return (OrderVo)sqlMapper.queryForObject("order.selectOrder", ordernumber);
 	}
 	
-	public static List<OrderVo> selectMemberOrder(String membername) throws Exception {
-		return sqlMapper.queryForList("order.selectMemberOrder", membername);
+	public static List<OrderVo> selectMemberOrder(String memberid) throws Exception {
+		return sqlMapper.queryForList("order.selectMemberOrder", memberid);
 	}
 
 	public static List<OrderVo> searchOrder(HashMap<String, Object> map) throws Exception {

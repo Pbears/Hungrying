@@ -13,14 +13,14 @@ public class MemberDao {
 		sqlMapper = ServiceUtil.getSqlMap();
 	}
 	
-	public static List<MemberVo> selectMember() throws Exception{
+	/*public static List<MemberVo> selectMember() throws Exception{
 		return sqlMapper.queryForList("member.selectMember");
-	}
+	}*/
 	public static List<MemberVo> searchMember(HashMap<String,Object>map)throws Exception{
         return sqlMapper.queryForList("member.searchMember",map);
 	}
-	public static Object selectOneMember(String membername) throws Exception{
-		return sqlMapper.queryForObject("member.selectOneMember", membername);
+	public static Object selectOneMember(String memberid) throws Exception{
+		return sqlMapper.queryForObject("member.selectOneMember", memberid);
 	}
 	public static void deleteMember(String memberid) throws Exception{
 		sqlMapper.delete("member.deleteMember", memberid);

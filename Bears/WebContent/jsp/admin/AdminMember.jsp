@@ -72,15 +72,14 @@
 		if (obj.query.value == 'empty' || !obj.data.value) {
 			alert('Not Search!');
 			obj.query.selectedIndex = 0;
-
 			obj.data.value = '';
 			obj.data.focus();
 		} else {
 			obj.submit();
 		}
 	}
-	function memberInfo(membername) {
-		window.open("/Bears/jsp/admin/information/MemberInfo.jsp?membername="+membername,"stin","left=150,top=70,width=1600,height=850");
+	function memberInfo(memberid) {
+		window.open("/Bears/jsp/admin/information/MemberInfo.jsp?memberid="+memberid,"stin","left=150,top=70,width=1600,height=850");
 	}
 	function allStore(obj) {
 		selectCb(obj.checked);
@@ -124,11 +123,11 @@
 	<%
 	request.setCharacterEncoding("EUC-KR");
 	List<MemberVo> list = null;
+	HashMap<String, Object> map = new HashMap<String, Object>();
 	String query = request.getParameter("query");
 	String data = request.getParameter("data");
 	
-	HashMap<String, Object> map = new HashMap<String, Object>();
-	int pageScale = 20;
+	int pageScale = 10;
 	map.put("Q", query);
 	map.put("D", data);
 	int totalRow = MemberDao.getTotalRow(map);
@@ -161,6 +160,7 @@
 	} else {
 		list = MemberDao.searchMember(map);
 	}
+	
 	%>
 	<!-- Top ¸Þ´º -->
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -268,7 +268,7 @@
 			</tr>
 			<tbody>
 				<%
-					list = MemberDao.selectMember();
+					//list = MemberDao.selectMember();
 					for (int i = 0; i < list.size(); i++) {
 						MemberVo vo = list.get(i);
 				%>
