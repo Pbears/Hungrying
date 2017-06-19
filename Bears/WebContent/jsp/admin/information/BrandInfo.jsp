@@ -37,6 +37,10 @@
    vertical-align: middle;
    text-align: center;
 }
+#data_table1{
+   text-align: center;
+
+}
 </style>
 </head>
 <script type="text/javascript">
@@ -218,7 +222,7 @@
 
 	<!-- /.row -->
 
-	<div id="data_table">
+	<div id="data_table1">
 		<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all" method="post" name="listFrm">
 			<table class="bbsList" style="border-collapse: collapse;"
 				border="1px solid black">
