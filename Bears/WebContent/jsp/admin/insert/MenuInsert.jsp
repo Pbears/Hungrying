@@ -86,7 +86,7 @@
 	request.setCharacterEncoding("EUC-KR");
 %>
 	<h2 align="center"> 메뉴 추가 </h2><br><br>
-	<form action="/Bears/jsp/admin/insert/MenuInsertProcess.jsp" name="MenuFrm" method="post">
+	<form action="/Bears/jsp/admin/insert/MenuInsertProcess.jsp" name="MenuFrm" method="post" enctype="multipart/form-data">
 		<div id="mainDiv">
 			<div id="innerDiv">
 				<h4>메뉴이름</h4> 
@@ -96,7 +96,7 @@
 				<h4>가격</h4> 
 				<input type="text" name="price" onblur="checkPrice(this)" class="form-control" placeholder="price" aria-describedby="basic-addon2">
 				<h4>Info</h4> 
-				<input type="text" name="Info" onblur="checkInfo(this)" class="form-control" placeholder="info" aria-describedby="basic-addon2">
+				<input type="text" name="info" onblur="checkInfo(this)" class="form-control" placeholder="info" aria-describedby="basic-addon2">
 				<h4>Image</h4>
 				<input type="file" name="image" class="form-control">
 				<%

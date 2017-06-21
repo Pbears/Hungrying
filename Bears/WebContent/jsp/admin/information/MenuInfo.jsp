@@ -95,7 +95,7 @@
 			</form>
 		</div> 
 		<div id="rightDiv">
-			<img src="/Bears/img/wait.gif" style="vertical-align: middle;">
+			<img src="/Bears/upload/<%=bean.getPicture()%>" width="300" height="300" style="vertical-align: middle;">
 		</div>
 		<br>
 	</div>

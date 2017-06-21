@@ -22,8 +22,8 @@
      </select>
      
        <insert id="insertMenu" parameterClass="menu">
-   		INSERT INTO MENU(MENUNAME,BRANDNO,PRICE,INFO) VALUES(
-   		#menuname#,#brandno#,#price#,#info#)
+   		INSERT INTO MENU(MENUNAME,BRANDNO,PRICE,INFO,PICTURE) VALUES(
+   		#menuname#,#brandno#,#price#,#info#,#picture#)
     </insert>
     
     <update id="updateMenu" parameterClass="menu">
