@@ -17,7 +17,7 @@
 </head>
 <body>
 	<%	
-		String pathUpload = "C:\\Users\\Administrator\\git\\Hungrying1\\Bears\\WebContent\\upload\\";
+		String pathUpload = "C:\\Users\\sist7-22\\git\\Hungrying\\Bears\\WebContent\\upload";
 		MenuVo bean = new MenuVo();
 		try {
 			if (FileUpload.isMultipartContent(request)) {

@@ -112,6 +112,7 @@ tr:NTH-CHILD(even) {
 			all.checked = true;
 	}
 	function deleteAll() {
+		confirm("삭제하시겠습니까?");
 		var cnt = 0;
 		for (var i = 0; i < nodeList.length; i++) {
 			if (nodeList[i].checked) {
