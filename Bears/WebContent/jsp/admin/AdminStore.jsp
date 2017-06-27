@@ -14,6 +14,12 @@
 tr:NTH-CHILD(even) {
 	background-color: #f2f2f2;
 }
+#div2 {
+    white-space: nowrap; 
+    width: 350px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
 </style>
 <script>
 	var nodeList = document.getElementsByName("cb");
@@ -290,12 +296,11 @@ tr:NTH-CHILD(even) {
 							<td><%=vo.getHours()%></td>
 							<td><%=vo.getTel()%></td>
 							<td><%=vo.getMinprice()%></td>
-							<td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
+							<td style="padding-top: 10px; padding-bottom: 10px;"><div id="div2"><%=vo.getInfo()%></div></td>
 						</div>
 						<%
 							}
 						%>
-					
 				</tbody>
 			</table>
 		</form>

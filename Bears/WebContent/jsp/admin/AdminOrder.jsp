@@ -17,6 +17,7 @@
 tr:NTH-CHILD(even) {
 	background-color: #f2f2f2;
 }
+
 </style>
 <script>
 	var nodeList = document.getElementsByName("cb");

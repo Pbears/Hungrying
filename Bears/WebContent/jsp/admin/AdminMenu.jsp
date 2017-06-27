@@ -16,6 +16,12 @@
 tr:NTH-CHILD(even) {
     background-color: #f2f2f2;
 }
+#div2 {
+    white-space: nowrap; 
+    width: 700px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
 </style>
 <script>
     var nodeList = document.getElementsByName("cb");
@@ -257,7 +263,7 @@ tr:NTH-CHILD(even) {
                 <col width="200" />
                 <col width="150" />
                 <col width="60" />
-                <col width="350" />
+                <col width="300" />
             </colgroup>
             <tr>
                 <th scope="col" style="text-align: center;"><input type="checkbox" id="allCheck" name="allCheck" onclick="allStore(this)"></th>
@@ -281,7 +287,7 @@ tr:NTH-CHILD(even) {
                         </td>
                         <td><%=vo.getBrandno()%></td>
                         <td><%=vo.getPrice()%></td>
-                        <td style="padding-top: 10px; padding-bottom: 10px;"><%=vo.getInfo()%></td>
+                        <td><div id="div2" style="text-align: center;"><%=vo.getInfo()%></div></td>
                     </div>
                 <%
                     }
