@@ -39,6 +39,10 @@
 		DELETE FROM MASTER WHERE STORENAME = #storename#
    </delete>
    
+   <delete id="denyMaster" parameterClass="java.lang.String">
+   		DELETE FROM REQUESTSIGNUP WHERE ID = #id#
+   </delete>
+   
    <insert id="insertMaster" parameterClass="master">
    		INSERT INTO MASTER VALUES(
    		#id#,#pw#,#name#,#address#,#tel#,#birth#,#storename#)
@@ -52,4 +56,15 @@
 	   	UPDATE MASTER SET NAME=#name#,ADDRESS=#address#,TEL=#tel#,BIRTH=#birth#
 	   	WHERE STORENAME=#storename#
    </update>
+   
+   <select id="signUpRequest" resultClass="master">
+   		SELECT ID, PW, NAME, ADDRESS, TEL, BIRTH, STORENAME
+   		FROM REQUESTSIGNUP
+   </select>
+   
+   <select id="selectOne" parameterClass="java.lang.String" resultClass="master">
+   		SELECT ID, PW, NAME, ADDRESS, TEL, BIRTH, STORENAME
+   		FROM REQUESTSIGNUP
+   		WHERE id=#id#
+   </select>
 </sqlMap>

@@ -42,4 +42,16 @@ public class MasterDao {
 	public static void updateMaster(MasterVo MasterVo) throws Exception {
 		sqlMapper.update("master.updateMaster", MasterVo);
 	}
+	
+	public static List<MasterVo> signUpRequest() throws Exception {
+		return sqlMapper.queryForList("master.signUpRequest");
+	}
+	
+	public MasterVo selectOne(String id) throws Exception {
+		return (MasterVo)sqlMapper.queryForObject("master.selectOne",id);
+	}
+	
+	public void denyMaster(String id) throws Exception {
+		sqlMapper.delete("master.denyMaster", id);
+	}
 }
