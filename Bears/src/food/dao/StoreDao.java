@@ -41,4 +41,8 @@ public class StoreDao {
 		sqlMapper.update("store.updateStore", storeVo);
 	}
 	
+	public static List<StoreVo> unSelectedStore() throws Exception {
+		return sqlMapper.queryForList("store.unSelectedStore");
+	}
+	
 }

@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
 <title>관리자-메뉴</title>
 <style>
@@ -130,6 +131,7 @@ tr:NTH-CHILD(even) {
         document.listFrm.submit();
     }
 </script>
+
 </head>
 <body onload="datePro()">
     <%
@@ -178,34 +180,9 @@ tr:NTH-CHILD(even) {
             list = MenuDao.searchMenu(map);
         }
     %>
-    <!-- Top 메뉴 -->
-    <nav class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container" align="right"
-        style="padding-right: 10px; margin-right: 10px;">
-        <img src="/Bears/logo/logoLong.png"
-            style="width: 200px; height: 50px; margin-right: 600px;" alt="배고팡" />
-        <span id="clock"></span> <span id="time" style="margin-right: 10px;"></span>
-        <p class="navbar-text"
-            style="position: absolute; right: 0px; top: 0px; margin-bottom: 5px; margin-top: 26px; margin-right: 100px;">
-            "<%=session.getAttribute("name")%>"님 환영합니다.
-        </p>
-        <button type="button" class="btn btn-default"
-            style="margin-top: 10px;" onclick="sendOut()">Logout</button>
-    </div>
-    </nav>
+	<!-- Top 메뉴 -->
+<jsp:include page="include/top.jsp" />
 
-<!-- 네이게이션바 -->
-	<div id="top-menu">
-		<ul class="nav nav-pills">
-			<li role="presentation" id="home"><a href="/Bears/jsp/admin/AdminMain.jsp">홈 </a></li>
-			<li role="presentation" id="brand"><a href="/Bears/jsp/admin/AdminBrand.jsp">브랜드</a></li>
-			<li role="presentation" id="store"><a href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
-			<li role="presentation" id="menu" class="active"><a href="/Bears/jsp/admin/AdminMenu.jsp">메뉴</a></li>
-			<li role="presentation" id="order"><a href="/Bears/jsp/admin/AdminOrder.jsp">주문</a></li>
-			<li role="presentation" id="member"><a href="/Bears/jsp/admin/AdminMember.jsp">회원</a></li>
-			<li role="presentation" id="master"><a href="/Bears/jsp/admin/AdminMaster.jsp">사장</a></li>
-		</ul>
-	</div>
     <!-- 검색바 -->
     <div id="searcher" class="row">
         <div class="input-group">
@@ -251,11 +228,10 @@ tr:NTH-CHILD(even) {
         </div>
         <!-- /input-group -->
     </div>
-
     <!-- /.row -->
-
-    <div id="data_table">
-    <form action="/Bears/jsp/admin/delete/MenuDelete.jsp?state=all" method="post" name="listFrm">
+    
+    	<div id="data_table">
+<form action="/Bears/jsp/admin/delete/MenuDelete.jsp?state=all" method="post" name="listFrm">
         <table class="bbsList" style="border-collapse: collapse;"
             border="1px solid black">
             <colgroup>
@@ -295,9 +271,8 @@ tr:NTH-CHILD(even) {
             </tbody>
         </table>
         </form>
-    </div>
-
- <!-- 페이지이동페이징 -->
+        <br><br>
+         <!-- 페이지이동페이징 -->
 	<div class="paging" style="text-align: center;">
 		<ul class="pagination">
 			<ul class="pager">
@@ -400,5 +375,9 @@ tr:NTH-CHILD(even) {
 		</li>
 		</ul>
 	</div>
+    </div>
+
+
+
 </body>
 </html>

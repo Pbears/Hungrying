@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" href="/Bears/css/bootstrap.css" />
 <title>관리자-음식점</title>
 <style>
@@ -19,6 +20,61 @@ tr:NTH-CHILD(even) {
     width: 350px; 
     overflow: hidden;
     text-overflow: ellipsis; 
+}
+ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
+    width: 100%;
+    font-family:"dotum";
+    font-size:12px;
+}
+ul.tabs li {
+    float: left;
+    text-align:center;
+    cursor: pointer;
+    width:100px;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #eee;
+    border-left: none;
+    font-weight: bold;
+    background: #fafafa;
+    overflow: hidden;
+    position: relative;
+}
+ul.tabs li.active {
+    background: #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+}
+.tab_container {
+    border: 1px solid #eee;
+    border-top: none;
+    clear: both;
+    margin: 0 auto;
+    background: #FFFFFF;
+}
+.tab_content {
+    padding: 5px;
+    font-size: 12px;
+    display: none;
+}
+.tab_container .tab_content ul {
+    width:100%;
+    margin:0 auto;
+    padding:0px;
+}
+.tab_container .tab_content ul li {
+    padding:5px;
+    list-style:none
+}
+;
+ #container {
+    width: 100%;
 }
 </style>
 <script>
@@ -130,6 +186,22 @@ tr:NTH-CHILD(even) {
 		document.listFrm.submit();
 	}
 </script>
+<script>
+$(function () {
+
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+    $("ul.tabs li").click(function () {
+        $("ul.tabs li").removeClass("active").css("color", "#333");
+        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+        $(this).addClass("active").css("color", "darkred");
+        $(".tab_content").hide()
+        var activeTab = $(this).attr("rel");
+        $("#" + activeTab).fadeIn()
+    });
+});
+</script>
 </head>
 <body onload="datePro()">
 	<%
@@ -173,40 +245,7 @@ tr:NTH-CHILD(even) {
 		}
 	%>
 	<!-- Top 메뉴 -->
-	<nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container" align="right"
-		style="padding-right: 10px; margin-right: 10px;">
-		<img src="/Bears/logo/logoLong.png"
-			style="width: 200px; height: 50px; margin-right: 600px;" alt="배고팡" />
-		<span id="clock"></span> <span id="time" style="margin-right: 10px;"></span>
-		<p class="navbar-text"
-			style="position: absolute; right: 0px; top: 0px; margin-bottom: 5px; margin-top: 26px; margin-right: 100px;">
-			"<%=session.getAttribute("name")%>"님 환영합니다.
-		</p>
-		<button type="button" class="btn btn-default"
-			style="margin-top: 10px;" onclick="sendOut()">Logout</button>
-	</div>
-	</nav>
-
-	<!-- 네이게이션바 -->
-	<div id="top-menu">
-		<ul class="nav nav-pills">
-			<li role="presentation" id="home"><a
-				href="/Bears/jsp/admin/AdminMain.jsp">홈 </a></li>
-			<li role="presentation" id="brand"><a
-				href="/Bears/jsp/admin/AdminBrand.jsp">브랜드</a></li>
-			<li role="presentation" id="store" class="active"><a
-				href="/Bears/jsp/admin/AdminStore.jsp">음식점</a></li>
-			<li role="presentation" id="menu"><a
-				href="/Bears/jsp/admin/AdminMenu.jsp">메뉴</a></li>
-			<li role="presentation" id="order"><a
-				href="/Bears/jsp/admin/AdminOrder.jsp">주문</a></li>
-			<li role="presentation" id="member"><a
-				href="/Bears/jsp/admin/AdminMember.jsp">회원</a></li>
-			<li role="presentation" id="master"><a
-				href="/Bears/jsp/admin/AdminMaster.jsp">사장</a></li>
-		</ul>
-	</div>
+<jsp:include page="include/top.jsp" />
 
 	<!-- 검색바 -->
 	<div id="searcher" class="row">
@@ -252,8 +291,17 @@ tr:NTH-CHILD(even) {
 	</div>
 
 	<!-- /.row -->
-
-	<div id="data_table">
+	
+	
+	<div id="container">
+    <ul class="tabs">
+        <li class="active" rel="tab1">등록된 음식점 목록</li>
+        <li rel="tab2">미등록된 음식점 목록</li>
+    </ul>
+    <div class="tab_container">
+        <div id="tab1" class="tab_content">
+            
+            <div id="data_table">
 		<form action="/Bears/jsp/admin/delete/StoreDelete.jsp?state=all" method="post" name="listFrm">
 			<table class="bbsList" style="border-collapse: collapse;"
 				border="1px solid black">
@@ -404,5 +452,62 @@ tr:NTH-CHILD(even) {
 		</li>
 		</ul>
 	</div>
+            
+        </div>
+        <!-- #tab1 -->
+        <div id="tab2" class="tab_content">
+			<% List<StoreVo> unSelectedList = StoreDao.unSelectedStore();%>
+			 <div id="data_table">
+			<table class="bbsList" style="border-collapse: collapse;"
+				border="1px solid black">
+				<colgroup>
+					<col width="200" />
+					<col width="150" />
+					<col width="60" />
+					<col width="350" />
+					<col width="150" />
+					<col width="250" />
+					<col width="180" />
+					<col width="350" />
+				</colgroup>
+				<tr>
+					<th scope="col" style="text-align: center;">음식점명</th>
+					<th scope="col" style="text-align: center;">브랜드번호</th>
+					<th scope="col" style="text-align: center; padding-left: 5px;">평점</th>
+					<th scope="col" style="text-align: center;">위치</th>
+					<th scope="col" style="text-align: center;">영업시간</th>
+					<th scope="col" style="text-align: center;">전화번호</th>
+					<th scope="col" style="text-align: center;">배달최저가격</th>
+					<th scope="col" style="text-align: center;">소개</th>
+				</tr>
+				<tbody>
+					<%
+						for (int i = 0; i < unSelectedList.size(); i++) {
+							StoreVo vo2 = unSelectedList.get(i);
+					%>
+					<tr>
+						<div id="select">
+							<td style="padding-bottom: 10px;"><%=vo2.getStorename()%></td>
+							<td><%=vo2.getBrandno()%></td>
+							<td><%=vo2.getGpa()%></td>
+							<td style="padding-left: 5px; padding-right: 5px;"><%=vo2.getLocation()%></td>
+							<td><%=vo2.getHours()%></td>
+							<td><%=vo2.getTel()%></td>
+							<td><%=vo2.getMinprice()%></td>
+							<td style="padding-top: 10px; padding-bottom: 10px;"><div id="div2"><%=vo2.getInfo()%></div></td>
+						</div>
+						<%
+							}
+						%>
+				</tbody>
+			</table>
+			</div>
+		</div>
+        <!-- #tab2 -->
+    </div>
+    <!-- .tab_container -->
+</div>
+<!-- #container -->
+
 </body>
 </html>

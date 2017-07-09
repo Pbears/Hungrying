@@ -47,11 +47,12 @@ public class MasterDao {
 		return sqlMapper.queryForList("master.signUpRequest");
 	}
 	
-	public MasterVo selectOne(String id) throws Exception {
+	public static MasterVo selectOne(String id) throws Exception {
 		return (MasterVo)sqlMapper.queryForObject("master.selectOne",id);
 	}
 	
-	public void denyMaster(String id) throws Exception {
+	public static void denyMaster(String id) throws Exception {
 		sqlMapper.delete("master.denyMaster", id);
 	}
+
 }
